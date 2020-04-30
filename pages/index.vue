@@ -1,73 +1,73 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        tesla
-      </h1>
-      <h2 class="subtitle">
-        My groovy Nuxt.js project
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+  <div class="home container">
+    <form @submit.prevent="login()">
+      <div>
+        <label>Email</label>
+        <input
+          v-model="user.username"
+          type="email"
+          name="email"
+          placeholder="Email"
+        />
       </div>
-    </div>
+      <div>
+        <label>Password</label>
+        <input
+          v-model="user.password"
+          type="password"
+          name="password"
+          placeholder="Password"
+        />
+      </div>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+
+    <pre>
+      {{ error }}
+    </pre>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
 export default {
-  components: {
-    Logo
+  auth: 'guest',
+  components: {},
+  data() {
+    return {
+      user: {
+        username: '',
+        password: ''
+      },
+      error: {}
+    }
+  },
+  methods: {
+    async login() {
+      await this.$auth
+        .loginWith('password_grant', {
+          data: this.user
+        })
+        .then((response) => {
+          this.$toast.success(
+            'Hello again ' +
+              this.$auth.user.name +
+              ', you successfully logged in!'
+          )
+        })
+        .catch(() => {
+          this.$toast.error(
+            'The server encountered an error while authenticating.'
+          )
+        })
+    }
   }
 }
 </script>
 
 <style>
-/* Sample `apply` at-rules with Tailwind CSS
 .container {
   @apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>

@@ -58,7 +58,8 @@ export default {
     // Doc: #
     '@nuxtjs/auth',
     // Doc: https://www.npmjs.com/package/@nuxtjs/toast
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
+    'nuxt-svgicon'
   ],
   /*
    ** Axios module configuration
@@ -123,9 +124,18 @@ export default {
     ]
   },
   /*
+   ** Transition Settings
+   */
+  pageTransition: {
+    name: 'page',
+    mode: 'out-in',
+    duration: 500
+  },
+  /*
    ** Route configuration
    */
   router: {
-    middleware: ['auth']
+    middleware: ['auth'],
+    linkExactActiveClass: 'text-teal-600'
   }
 }

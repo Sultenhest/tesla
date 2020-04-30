@@ -1,13 +1,18 @@
 <template>
-  <div class="dashboard container">
-    <p>Welcome to the dashboard. You should be logged in.</p>
-    <p>Name: {{ $auth.user.name }}</p>
-    <p>Name: {{ $auth.user.email }}</p>
+  <div class="dashboard">
+    <Card title="Welcome to the dashboard"
+      ><template v-slot:content>There aren't any failed jobs.</template></Card
+    >
   </div>
 </template>
 
 <script>
+import Card from '~/components/UI/Card.vue'
+
 export default {
+  components: {
+    Card
+  },
   data() {
     return {
       response: {}
@@ -18,9 +23,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.container {
-  @apply min-h-screen text-center mx-auto;
-}
-</style>

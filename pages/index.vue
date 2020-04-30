@@ -1,39 +1,38 @@
 <template>
-  <div class="home container">
-    <form @submit.prevent="login()">
-      <div>
-        <label>Email</label>
-        <input
-          v-model="user.username"
-          type="email"
-          name="email"
-          placeholder="Email"
-        />
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          v-model="user.password"
-          type="password"
-          name="password"
-          placeholder="Password"
-        />
-      </div>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
-    </form>
-
-    <pre>
-      {{ error }}
-    </pre>
+  <div class="home">
+    <Card title="Login" class="w-1/2">
+      <template v-slot:content>
+        <form class="login-form" @submit.prevent="login()">
+          <InputField
+            v-model="user.username"
+            input-type="email"
+            input-name="Email"
+          />
+          <InputField
+            v-model="user.password"
+            input-type="password"
+            input-name="Password"
+          />
+          <div>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </template>
+    </Card>
   </div>
 </template>
 
 <script>
+import Card from '~/components/UI/Card.vue'
+import InputField from '~/components/UI/Form/InputField.vue'
+
 export default {
   auth: 'guest',
-  components: {},
+  layout: 'basic',
+  components: {
+    Card,
+    InputField
+  },
   data() {
     return {
       user: {
@@ -67,7 +66,11 @@ export default {
 </script>
 
 <style>
-.container {
-  @apply min-h-screen flex justify-center items-center text-center mx-auto;
+.home {
+  @apply flex items-center justify-center w-full;
+}
+
+.login-form {
+  @apply w-full;
 }
 </style>

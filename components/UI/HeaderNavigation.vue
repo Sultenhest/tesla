@@ -2,12 +2,13 @@
   <nav class="navigation shadow">
     <div class="mx-auto px-6">
       <div class="relative flex items-center justify-between h-16">
-        <nuxt-link to="/">Home</nuxt-link>
-        <div v-if="this.$auth.loggedIn">
-          <nuxt-link to="/clients">Clients</nuxt-link>
-          <nuxt-link to="/dashboard">Dashboard</nuxt-link>
-          <nuxt-link to="/logout">Logout</nuxt-link>
-        </div>
+        <nuxt-link to="/"><strong>Tesla</strong></nuxt-link>
+        <nuxt-link to="/logout"
+          ><img
+            class="inline-block h-8 w-8 rounded-full text-white shadow-solid"
+            src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+            alt=""
+        /></nuxt-link>
       </div>
     </div>
   </nav>

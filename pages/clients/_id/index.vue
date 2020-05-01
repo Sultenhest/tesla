@@ -13,6 +13,12 @@
       </Card>
     </modal>
 
+    <button class="button mb-3">
+      <nuxt-link to="/clients">
+        <Icon icon-name="arrow-thin-left" icon-text="Back" />
+      </nuxt-link>
+    </button>
+
     <Card :title="getCurrentClient.name">
       <template v-slot:button>
         <button class="button-teal" @click="$modal.show('edit-client')">

@@ -2,7 +2,7 @@
   <nav class="navigation shadow">
     <div class="mx-auto px-6">
       <div class="relative flex items-center justify-between h-16">
-        <nuxt-link to="/"><strong>Tesla</strong></nuxt-link>
+        <nuxt-link to="/">🐈<strong>Tesla</strong></nuxt-link>
         <nuxt-link to="/logout"
           ><img
             class="inline-block h-8 w-8 rounded-full text-white shadow-solid"

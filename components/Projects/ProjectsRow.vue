@@ -1,11 +1,13 @@
 <template>
   <tr>
-    <td>{{ client.name }}</td>
+    <td>{{ project.title }}</td>
     <td>
-      {{ client.projects_count }}
+      <div v-if="project.client" class="text-teal-700">
+        <nuxt-link :to="clientLink">{{ project.client.name }}</nuxt-link>
+      </div>
     </td>
     <td class="text-right button flex justify-end">
-      <nuxt-link :to="clientLink">
+      <nuxt-link :to="projectLink">
         <svgicon
           name="information-outline"
           width="18"
@@ -19,20 +21,26 @@
 
 <script>
 export default {
-  name: 'ClientRow',
+  name: 'ProjectsRow',
   props: {
     id: {
       type: Number,
       required: true
     },
-    client: {
+    project: {
       type: Object,
       required: true
     }
   },
   computed: {
+    projectLink() {
+      return '/projects/' + this.id
+    },
     clientLink() {
-      return '/clients/' + this.id
+      if (this.project.client) {
+        return '/clients/' + this.project.client.id
+      }
+      return ''
     }
   }
 }

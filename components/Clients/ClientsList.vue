@@ -1,11 +1,13 @@
 <template>
   <tbody>
+    <p v-if="!clients" class="card-content">
+      You dont seem to have any clients yet.
+    </p>
     <ClientsRow
       v-for="client in clients"
       :id="client.id"
       :key="client.id"
       :client="client"
-      @editClient="onEditClient"
     />
   </tbody>
 </template>
@@ -23,11 +25,6 @@ export default {
       type: Array,
       required: true,
       default: () => []
-    }
-  },
-  methods: {
-    onEditClient(client) {
-      this.$emit('passClientToModal', client)
     }
   }
 }

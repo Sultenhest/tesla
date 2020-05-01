@@ -1,6 +1,6 @@
 <template>
   <tbody>
-    <ClientRow
+    <ClientsRow
       v-for="client in clients"
       :id="client.id"
       :key="client.id"
@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import ClientRow from '~/components/Clients/ClientRow.vue'
+import ClientsRow from '~/components/Clients/ClientsRow.vue'
 
 export default {
   name: 'ClientsList',
   components: {
-    ClientRow
+    ClientsRow
   },
   props: {
     clients: {

@@ -15,7 +15,7 @@
 
     <button class="button mb-3">
       <nuxt-link to="/clients">
-        <Icon icon-name="arrow-thin-left" icon-text="Back" />
+        <Icon icon-name="arrow-thin-left" icon-text="Back" class="text-black" />
       </nuxt-link>
     </button>
 

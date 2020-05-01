@@ -4,13 +4,17 @@
 /* purgecss end ignore */
 @import 'tailwindcss/utilities';
 
+.vs__dropdown-menu {
+  max-height: 200px !important;
+}
+
 .page-enter-active,
 .page-leave-active {
-    transition: opacity 0.4s;
+  transition: opacity 0.4s;
 }
 .page-enter,
 .page-leave-active {
-    opacity: 0;
+  opacity: 0;
 }
 
 html,

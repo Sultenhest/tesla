@@ -1,5 +1,14 @@
 <template>
   <form class="w-full" @submit.prevent="postProjectForm">
+    <div class="input-group">
+      <label>Client</label>
+      <v-select
+        v-model="form.client_id"
+        label="name"
+        :reduce="(client) => client.id"
+        :options="getAllClients"
+      ></v-select>
+    </div>
     <InputField
       v-model="form.title"
       input-type="text"
@@ -18,6 +27,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import InputField from '~/components/UI/Form/InputField.vue'
 
 export default {
@@ -38,9 +49,16 @@ export default {
         ? { ...this.project }
         : {
             title: '',
-            description: ''
+            description: '',
+            client_id: ''
           }
     }
+  },
+  computed: {
+    ...mapGetters('clients', ['getAllClients'])
+  },
+  created() {
+    this.$store.dispatch('clients/getClients')
   },
   methods: {
     async postProjectForm() {

@@ -60,7 +60,8 @@ export default {
     // Doc: https://www.npmjs.com/package/@nuxtjs/toast
     '@nuxtjs/toast',
     'nuxt-svgicon',
-    'vue-sweetalert2/nuxt'
+    'vue-sweetalert2/nuxt',
+    'nuxt-vue-select'
   ],
   /*
    ** Axios module configuration
@@ -137,7 +138,7 @@ export default {
    */
   router: {
     middleware: ['auth'],
-    linkActiveClass: 'text-teal-600',
+    linkActiveClass: 'text-teal-700',
     linkExactActiveClass: 'opacity-100'
   }
 }

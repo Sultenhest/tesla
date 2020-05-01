@@ -2,7 +2,9 @@
   <nav class="navigation shadow">
     <div class="mx-auto px-6">
       <div class="relative flex items-center justify-between h-16">
-        <nuxt-link to="/">🐈<strong>Tesla</strong></nuxt-link>
+        <nuxt-link to="/" class="text-xl"
+          >🐈<span class="text-gray-800 ml-1">Tesla</span></nuxt-link
+        >
         <nuxt-link to="/logout" class="flex"
           ><p class="leading-8 mr-2">{{ $auth.user.name }}</p>
           <img

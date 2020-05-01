@@ -58,6 +58,7 @@ export const actions = {
       .$patch('/api/projects/' + project.id, project)
       .then((response) => {
         context.commit('updateProject', response.project)
+        context.dispatch('getProject', response.project.id)
         this.$toast.success(response.message)
       })
       .catch((error) => {

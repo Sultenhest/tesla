@@ -19,6 +19,7 @@
       <li>
         <nuxt-link to="/tasks"><Icon icon-name="checkmark" />Tasks</nuxt-link>
       </li>
+      <li class="h-1"></li>
       <li>
         <nuxt-link to="/activities"
           ><Icon icon-name="stroke-width" />Activity</nuxt-link
@@ -47,7 +48,7 @@ export default {
 
 <style scoped>
 a {
-  @apply flex items-center opacity-50;
+  @apply flex items-center opacity-75;
 }
 
 .nuxt-link-active,

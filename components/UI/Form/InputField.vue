@@ -65,7 +65,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .input-group {
   @apply flex flex-col mb-3;
 }
@@ -74,8 +74,16 @@ export default {
   @apply w-full text-sm text-gray-700;
 }
 
-.input-group input,
-.input-group textarea {
+.input-group input:not(.vs__search),
+.input-group textarea,
+.v-select {
   @apply mt-1 py-3 px-4 rounded shadow block bg-white border-gray-400 leading-6;
+}
+
+.vs__dropdown-toggle,
+.vs__selected {
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
 </style>

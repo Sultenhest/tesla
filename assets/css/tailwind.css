@@ -21,3 +21,19 @@ body {
 .container {
   @apply flex mx-auto min-h-screen;
 }
+
+.button {
+  @apply py-1 px-2 rounded text-sm text-black;
+}
+
+.button-teal {
+  @apply py-1 px-2 rounded text-sm text-white bg-teal-700;
+}
+
+.button-primary {
+  @apply py-1 px-2 rounded text-sm text-white bg-blue-500;
+}
+
+.button-danger {
+  @apply py-1 px-2 rounded text-sm text-white bg-red-500;
+}

@@ -36,7 +36,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~plugins/vue-js-modal'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -59,7 +59,8 @@ export default {
     '@nuxtjs/auth',
     // Doc: https://www.npmjs.com/package/@nuxtjs/toast
     '@nuxtjs/toast',
-    'nuxt-svgicon'
+    'nuxt-svgicon',
+    'vue-sweetalert2/nuxt'
   ],
   /*
    ** Axios module configuration
@@ -136,6 +137,7 @@ export default {
    */
   router: {
     middleware: ['auth'],
+    linkActiveClass: 'text-teal-600',
     linkExactActiveClass: 'text-teal-600'
   }
 }

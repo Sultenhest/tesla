@@ -1,9 +1,13 @@
 export const state = () => ({
   allClients: [],
-  trashedClients: []
+  trashedClients: [],
+  currentClient: {}
 })
 
 export const mutations = {
+  setCurrentClient(state, client) {
+    state.currentClient = client
+  },
   setClients(state, clients) {
     state.allClients = clients
   },
@@ -15,6 +19,7 @@ export const mutations = {
       (client) => client.id === updatedClient.id
     )
     state.allClients[clientIndex] = updatedClient
+    state.currentClient = updatedClient
   },
   trashClient(state, client) {
     const index = state.allClients.indexOf(client)
@@ -26,13 +31,15 @@ export const mutations = {
 }
 
 export const actions = {
+  getClient(context, id) {
+    return this.$axios.$get('/api/clients/' + id).then((data) => {
+      context.commit('setCurrentClient', data)
+    })
+  },
   getClients(context) {
-    return this.$axios
-      .$get('/api/clients')
-      .then((data) => {
-        context.commit('setClients', data)
-      })
-      .catch((e) => context.error(e))
+    return this.$axios.$get('/api/clients').then((data) => {
+      context.commit('setClients', data)
+    })
   },
   addClient(context, client) {
     return this.$axios
@@ -48,7 +55,7 @@ export const actions = {
   },
   updateClient(context, client) {
     return this.$axios
-      .$patch('/api/clients', client)
+      .$patch('/api/clients/' + client.id, client)
       .then((response) => {
         context.commit('updateClient', response.client)
         this.$toast.success(response.message)
@@ -92,8 +99,8 @@ export const actions = {
 }
 
 export const getters = {
-  getClientById: (state) => (id) => {
-    return state.allClients.find((client) => client.id === id)
+  getCurrentClient: (state) => {
+    return state.currentClient
   },
   getAllClients: (state) => {
     return state.allClients

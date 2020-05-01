@@ -1,7 +1,7 @@
 <template>
   <div
     id="tesla"
-    class="default-layout antialiased h-full min-h-screen flex flex-col items-stretch bg-gray-200"
+    class="default-layout antialiased h-full min-h-screen flex flex-col items-stretch bg-gray-200 pb-10"
   >
     <HeaderNavigation />
 

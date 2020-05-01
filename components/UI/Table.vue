@@ -2,12 +2,10 @@
   ><table class="table">
     <thead>
       <tr>
-        <th v-for="col in cols" v-bind:key="col">{{ col }}</th>
+        <th v-for="col in cols" :key="col">{{ col }}</th>
       </tr>
     </thead>
-    <tbody>
-      <slot name="tbody"></slot>
-    </tbody></table
+    <slot></slot></table
 ></template>
 
 <script>
@@ -15,7 +13,8 @@ export default {
   name: 'Table',
   props: {
     cols: {
-      type: Array
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -24,7 +23,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
 .table {
   @apply w-full;
 }
@@ -35,6 +34,10 @@ export default {
 
 .table tr {
   @apply flex;
+}
+
+.table tr th {
+  @apply font-normal;
 }
 
 .table tr th,

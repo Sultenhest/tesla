@@ -19,7 +19,9 @@
     "@nuxtjs/toast": "^3.3.0",
     "js-cookie": "^2.2.1",
     "nuxt": "^2.0.0",
-    "nuxt-svgicon": "^1.2.7"
+    "nuxt-svgicon": "^1.2.7",
+    "vue-js-modal": "^2.0.0-rc.3",
+    "vue-sweetalert2": "^3.0.3"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^1.0.0",

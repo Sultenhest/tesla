@@ -26,8 +26,8 @@
       v-if="inputType === 'textarea'"
       :name="inputName"
       :value="value"
-      @input="$emit('input', $event.target.value)"
       rows="5"
+      @input="$emit('input', $event.target.value)"
     ></textarea>
   </div>
 </template>

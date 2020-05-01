@@ -2,15 +2,10 @@
   <div class="card">
     <div class="card-header">
       <h5 class="text-xl">{{ title }}</h5>
-      <div v-if="this.$slots.button">
-        <slot name="button"></slot>
-      </div>
+      <slot name="button"></slot>
     </div>
-    <div v-if="this.$slots.content" class="card-content">
+    <div class="card-content">
       <slot name="content"></slot>
-    </div>
-    <div v-if="this.$slots.table">
-      <slot name="table"></slot>
     </div>
   </div>
 </template>
@@ -30,7 +25,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .card {
   @apply flex flex-col rounded shadow bg-gray-100;
 }

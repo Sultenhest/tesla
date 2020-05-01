@@ -50,7 +50,8 @@ a {
   @apply flex items-center opacity-50;
 }
 
-.nuxt-link-active {
+.nuxt-link-active,
+.text-teal-600 {
   @apply opacity-100;
 }
 </style>

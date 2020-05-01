@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Card from '~/components/UI/Card.vue'
+import Card from '~/components/UI/Cards/Card.vue'
 import InputField from '~/components/UI/Form/InputField.vue'
 
 export default {

@@ -20,7 +20,7 @@
         </button>
       </template>
       <template v-slot:content>
-        <Table :cols="['Project Title', 'Client', '']">
+        <Table :cols="['Project Title', 'Client', 'Tasks', '']">
           <ProjectsList :projects="getAllProjects" />
         </Table>
       </template>

@@ -6,6 +6,11 @@
         <nuxt-link :to="clientLink">{{ project.client.name }}</nuxt-link>
       </div>
     </td>
+    <td>
+      <div class="text-teal-700">
+        <nuxt-link :to="tasksLink">{{ project.tasks_count }}</nuxt-link>
+      </div>
+    </td>
     <td class="text-right button flex justify-end">
       <nuxt-link :to="projectLink">
         <svgicon
@@ -41,6 +46,9 @@ export default {
         return '/clients/' + this.project.client.id
       }
       return ''
+    },
+    tasksLink() {
+      return this.projectLink + '/tasks'
     }
   }
 }

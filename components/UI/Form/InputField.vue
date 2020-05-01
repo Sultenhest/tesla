@@ -29,6 +29,12 @@
       rows="5"
       @input="$emit('input', $event.target.value)"
     ></textarea>
+    <span
+      v-if="inputError"
+      class="text-red-500 text-sm italic"
+      v-text="inputError[0]"
+    >
+    </span>
   </div>
 </template>
 
@@ -47,6 +53,10 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    inputError: {
+      type: Array,
+      default: () => []
     }
   },
   data() {

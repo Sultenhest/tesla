@@ -8,7 +8,7 @@
           </button>
         </template>
         <template v-slot:content>
-          <ProjectsForm form-title="Create new Project" />
+          <ProjectsForm />
         </template>
       </Card>
     </modal>

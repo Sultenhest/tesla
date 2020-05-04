@@ -22,6 +22,13 @@
       :value="value"
       @input="$emit('input', $event.target.value)"
     />
+    <input
+      v-if="inputType === 'number'"
+      type="number"
+      :name="inputName"
+      :value="value"
+      @input="$emit('input', $event.target.value)"
+    />
     <textarea
       v-if="inputType === 'textarea'"
       :name="inputName"
@@ -51,7 +58,7 @@ export default {
       default: 'Default'
     },
     value: {
-      type: String,
+      type: [String, Number],
       default: ''
     },
     inputError: {

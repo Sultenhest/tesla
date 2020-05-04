@@ -7,6 +7,9 @@
     <div>
       <slot name="content"></slot>
     </div>
+    <div class="card-footer">
+      <slot name="footer"></slot>
+    </div>
   </div>
 </template>
 
@@ -24,13 +27,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.card {
-  @apply flex flex-col rounded shadow bg-gray-100;
-}
-
-.card-header {
-  @apply flex items-center justify-between py-3 px-5 rounded-t bg-white;
-}
-</style>

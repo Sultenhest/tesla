@@ -1,6 +1,10 @@
 <template>
   <tr>
-    <td>{{ project.title }}</td>
+    <td>
+      <nuxt-link :to="projectLink" class="text-teal-700">{{
+        project.title
+      }}</nuxt-link>
+    </td>
     <td>
       <div v-if="project.client" class="text-teal-700">
         <nuxt-link :to="clientLink">{{ project.client.name }}</nuxt-link>

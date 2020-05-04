@@ -8,10 +8,15 @@
   max-height: 200px !important;
 }
 
+.mt-05 {
+  margin-top: 0.15rem !important;
+}
+
 .page-enter-active,
 .page-leave-active {
   transition: opacity 0.4s;
 }
+
 .page-enter,
 .page-leave-active {
   opacity: 0;
@@ -24,6 +29,22 @@ body {
 
 .container {
   @apply flex mx-auto min-h-screen;
+}
+
+.card {
+  @apply flex flex-col rounded shadow bg-gray-100;
+}
+
+.card-header {
+  @apply flex items-center justify-between py-3 px-5 rounded-t bg-white;
+}
+
+.card-content {
+  @apply flex flex-col items-center justify-between p-5;
+}
+
+.card-footer {
+  @apply flex items-center justify-center py-3 px-5 rounded-b bg-white border-t;
 }
 
 .button {

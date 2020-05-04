@@ -8,20 +8,26 @@
           </button>
         </template>
         <template v-slot:content>
-          <TasksForm />
+          <TasksForm
+            :project-id="getCurrentProject.id"
+            @taskFormSubmitted="refreshProject()"
+          />
         </template>
       </Card>
     </modal>
 
-    <TableCard title="Tasks">
+    <TableCard class="mt-4" :title="tableHeader">
       <template v-slot:button>
         <button class="button-teal" @click="$modal.show('new-task')">
-          <Icon icon-name="add-outline" icon-text="Add Task" />
+          <Icon icon-name="add-outline" icon-text="Add Task to Project" />
         </button>
       </template>
       <template v-slot:content>
-        <Table :cols="['Task Title', 'Project', 'Completed', 'Billed', '']">
-          <TasksList :tasks="getAllTasks" />
+        <Table :cols="['Task Title', 'Completed', 'Billed', '']">
+          <TasksList
+            :tasks="getCurrentProject.tasks"
+            :with-project-link="false"
+          />
         </Table>
       </template>
     </TableCard>
@@ -49,11 +55,22 @@ export default {
     TasksForm,
     TasksList
   },
-  computed: {
-    ...mapGetters('tasks', ['getAllTasks'])
+  async fetch({ store, params }) {
+    await store.dispatch('projects/getProject', params.projectId)
   },
-  created() {
-    this.$store.dispatch('tasks/getTasks')
+  computed: {
+    ...mapGetters('projects', ['getCurrentProject']),
+    tableHeader() {
+      return this.getCurrentProject.title + ' tasks'
+    }
+  },
+  methods: {
+    async refreshProject() {
+      await this.$store.dispatch(
+        'projects/getProject',
+        this.getCurrentProject.id
+      )
+    }
   }
 }
 </script>

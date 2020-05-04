@@ -1,33 +1,36 @@
 <template>
   <div>
-    <modal name="edit-project" height="auto">
-      <Card title="Edit Project">
+    <modal name="edit-task" height="auto">
+      <Card title="Edit Task">
         <template v-slot:button>
-          <button class="button" @click="$modal.hide('edit-project')">
+          <button class="button" @click="$modal.hide('edit-task')">
             <Icon icon-name="close" icon-text="Close" />
           </button>
         </template>
         <template v-slot:content>
-          <ProjectsForm :project="getCurrentProject" />
+          <TasksForm
+            :task="getCurrentTask"
+            :project-id="getCurrentTask.project_id"
+          />
         </template>
       </Card>
     </modal>
 
     <button class="button mb-3">
-      <nuxt-link to="/projects">
+      <nuxt-link to="/tasks">
         <Icon icon-name="arrow-thin-left" icon-text="Back" class="text-black" />
       </nuxt-link>
     </button>
 
-    <Card :title="getCurrentProject.title">
+    <Card :title="getCurrentTask.title">
       <template v-slot:button>
-        <button class="button-teal" @click="$modal.show('edit-project')">
-          <Icon icon-name="edit-pencil" icon-text="Edit Project" />
+        <button class="button-teal" @click="$modal.show('edit-task')">
+          <Icon icon-name="edit-pencil" icon-text="Edit Task" />
         </button>
       </template>
       <template v-slot:content>
-        {{ getCurrentProject }}
-        <button class="button-danger" @click="trash(getCurrentProject)">
+        {{ getCurrentTask }}
+        <button class="button-danger" @click="trash(getCurrentTask)">
           <Icon icon-name="trash" icon-text="Trash" />
         </button>
       </template>
@@ -40,35 +43,33 @@ import { mapGetters } from 'vuex'
 
 import Card from '~/components/UI/Cards/Card.vue'
 import Icon from '~/components/Icon.vue'
-import ProjectsForm from '~/components/Projects/ProjectsForm.vue'
+import TasksForm from '~/components/Tasks/TasksForm.vue'
 
 export default {
   components: {
     Card,
     Icon,
-    ProjectsForm
+    TasksForm
   },
   async fetch({ store, params }) {
-    await store.dispatch('projects/getProject', params.id)
+    await store.dispatch('tasks/getTask', [params.projectId, params.taskId])
   },
   computed: {
-    ...mapGetters('projects', ['getCurrentProject'])
+    ...mapGetters('tasks', ['getCurrentTask'])
   },
   methods: {
-    async trash(project) {
+    async trash(task) {
       await this.$swal({
-        title: 'Are you sure you want to trash this project?',
+        title: 'Are you sure you want to trash this task?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.value) {
-          this.$store.dispatch('projects/trashProject', project)
+          this.$store.dispatch('tasks/trashTask', task)
         }
       })
     }
   }
 }
 </script>
-
-<style lang="css" scoped></style>

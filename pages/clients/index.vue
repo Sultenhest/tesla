@@ -8,7 +8,7 @@
           </button>
         </template>
         <template v-slot:content>
-          <ClientsForm form-title="Create new Client" />
+          <ClientsForm />
         </template>
       </Card>
     </modal>

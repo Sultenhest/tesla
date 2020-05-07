@@ -6,8 +6,8 @@
       }}</nuxt-link>
     </td>
     <td>
-      <div v-if="project.client" class="text-teal-700">
-        <nuxt-link :to="clientLink">{{ project.client.name }}</nuxt-link>
+      <div v-if="project.client_id" class="text-teal-700">
+        <nuxt-link :to="clientLink">{{ project.client_name }}</nuxt-link>
       </div>
     </td>
     <td>
@@ -46,8 +46,8 @@ export default {
       return '/projects/' + this.id
     },
     clientLink() {
-      if (this.project.client) {
-        return '/clients/' + this.project.client.id
+      if (this.project.client_id) {
+        return '/clients/' + this.project.client_id
       }
       return ''
     },

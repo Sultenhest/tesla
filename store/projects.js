@@ -32,13 +32,13 @@ export const mutations = {
 
 export const actions = {
   getProject(context, id) {
-    return this.$axios.$get('/api/projects/' + id).then((data) => {
-      context.commit('setCurrentProject', data)
+    return this.$axios.$get('/api/projects/' + id).then((response) => {
+      context.commit('setCurrentProject', response.data)
     })
   },
   getProjects(context) {
-    return this.$axios.$get('/api/projects').then((data) => {
-      context.commit('setProjects', data)
+    return this.$axios.$get('/api/projects').then((response) => {
+      context.commit('setProjects', response.data)
     })
   },
   addProject(context, project) {

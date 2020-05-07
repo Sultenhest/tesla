@@ -58,7 +58,7 @@
       <template v-slot:content>
         <Table :cols="['Task Title', 'Completed', 'Billed', '']">
           <TasksList
-            :tasks="getCurrentProject.tasks.slice(0, 3)"
+            :tasks="getCurrentProject.tasks"
             :with-project-link="false"
           />
         </Table>

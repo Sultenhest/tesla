@@ -1,8 +1,8 @@
 <template>
   <div class="dashboard">
-    <Card title="Welcome to the dashboard"
-      ><template v-slot:content>There aren't any failed jobs.</template></Card
-    >
+    <Card title="Welcome to the dashboard">
+      <template v-slot:content>There aren't any failed jobs.</template>
+    </Card>
   </div>
 </template>
 

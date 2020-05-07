@@ -1,8 +1,14 @@
 <template>
   <tr>
-    <td>{{ client.name }}</td>
     <td>
-      {{ client.projects_count }}
+      <nuxt-link :to="clientLink" class="text-teal-700">{{
+        client.name
+      }}</nuxt-link>
+    </td>
+    <td>
+      <nuxt-link :to="clientProjectsLink" class="text-teal-700">
+        {{ client.projects_count }}
+      </nuxt-link>
     </td>
     <td class="text-right button flex justify-end">
       <nuxt-link :to="clientLink">
@@ -33,6 +39,9 @@ export default {
   computed: {
     clientLink() {
       return '/clients/' + this.id
+    },
+    clientProjectsLink() {
+      return this.clientLink + '/projects'
     }
   }
 }

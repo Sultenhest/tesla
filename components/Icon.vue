@@ -1,6 +1,6 @@
 <template>
   <div>
-    <svgicon :name="iconName" width="18" height="18" class="mr-1"></svgicon>
+    <svgicon :name="iconName" width="18" height="18" class="mr-3"></svgicon>
     {{ iconText }}
   </div>
 </template>

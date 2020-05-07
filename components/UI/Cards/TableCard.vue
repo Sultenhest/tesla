@@ -1,8 +1,17 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <h5 class="text-xl">{{ title }}</h5>
+      <h3 class="text-xl">{{ title }}</h3>
       <slot name="button"></slot>
+    </div>
+    <div class="bg-gray-100">
+      <ul class="flex">
+        <li class="py-3 px-5">First</li>
+        <li class="py-3 px-5 text-teal-500 border-teal-500 border-b-2">
+          Second
+        </li>
+        <li class="py-3 px-5">Third</li>
+      </ul>
     </div>
     <div>
       <slot name="content"></slot>

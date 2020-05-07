@@ -138,7 +138,6 @@ export default {
    */
   router: {
     middleware: ['auth'],
-    linkActiveClass: 'text-teal-700',
-    linkExactActiveClass: 'opacity-100'
+    linkActiveClass: 'text-teal-500'
   }
 }

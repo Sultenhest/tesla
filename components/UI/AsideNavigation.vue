@@ -2,31 +2,31 @@
   <aside class="w-1/5">
     <ul class="space-y-3">
       <li>
-        <nuxt-link to="/dashboard"
-          ><Icon icon-name="browser-window-open" />Dashboard</nuxt-link
-        >
+        <nuxt-link to="/dashboard">
+          <Icon icon-name="browser-window-open" />Dashboard
+        </nuxt-link>
       </li>
       <li>
-        <nuxt-link to="/clients"
-          ><Icon icon-name="user-group" />Clients</nuxt-link
-        >
+        <nuxt-link to="/clients">
+          <Icon icon-name="user-group" />Clients
+        </nuxt-link>
       </li>
       <li>
-        <nuxt-link to="/projects"
-          ><Icon icon-name="view-carousel" />Projects</nuxt-link
-        >
+        <nuxt-link to="/projects">
+          <Icon icon-name="view-carousel" />Projects
+        </nuxt-link>
       </li>
       <li>
-        <nuxt-link to="/tasks"><Icon icon-name="checkmark" />Tasks</nuxt-link>
+        <nuxt-link to="/tasks"> <Icon icon-name="checkmark" />Tasks </nuxt-link>
       </li>
       <li class="h-1"></li>
       <li>
-        <nuxt-link to="/activities"
-          ><Icon icon-name="stroke-width" />Activity</nuxt-link
-        >
+        <nuxt-link to="/activities">
+          <Icon icon-name="stroke-width" />Activity
+        </nuxt-link>
       </li>
       <li>
-        <nuxt-link to="/me"><Icon icon-name="user" />Profile</nuxt-link>
+        <nuxt-link to="/me"> <Icon icon-name="user" />Profile </nuxt-link>
       </li>
     </ul>
   </aside>
@@ -52,7 +52,7 @@ a {
 }
 
 .nuxt-link-active,
-.text-teal-600 {
+.text-teal-500 {
   @apply opacity-100;
 }
 </style>

@@ -1,17 +1,10 @@
 <template>
   <div>
-    <modal name="edit-client" height="auto">
-      <Card title="Edit Client">
-        <template v-slot:button>
-          <button class="button" @click="$modal.hide('edit-client')">
-            <Icon icon-name="close" icon-text="Close" />
-          </button>
-        </template>
-        <template v-slot:content>
-          <ClientsForm :client="getCurrentClient" />
-        </template>
-      </Card>
-    </modal>
+    <ClientsModal
+      name="edit-client"
+      title="Edit Client"
+      :client="getCurrentClient"
+    />
 
     <button class="button mb-3">
       <nuxt-link to="/clients">
@@ -26,7 +19,9 @@
         </button>
       </template>
       <template v-slot:content>
-        {{ getCurrentClient }}
+        <pre>
+          {{ getCurrentClient }}
+        </pre>
         <button class="button-danger" @click="trash(getCurrentClient)">
           <Icon icon-name="trash" icon-text="Trash" />
         </button>
@@ -40,13 +35,13 @@ import { mapGetters } from 'vuex'
 
 import Card from '~/components/UI/Cards/Card.vue'
 import Icon from '~/components/Icon.vue'
-import ClientsForm from '~/components/Clients/ClientsForm.vue'
+import ClientsModal from '~/components/Clients/ClientsModal.vue'
 
 export default {
   components: {
     Card,
     Icon,
-    ClientsForm
+    ClientsModal
   },
   async fetch({ store, params }) {
     await store.dispatch('clients/getClient', params.id)

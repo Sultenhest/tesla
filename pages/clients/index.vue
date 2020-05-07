@@ -1,17 +1,6 @@
 <template>
   <div>
-    <modal name="new-client" height="auto">
-      <Card title="Create new Client">
-        <template v-slot:button>
-          <button class="button" @click="$modal.hide('new-client')">
-            <Icon icon-name="close" icon-text="Close" />
-          </button>
-        </template>
-        <template v-slot:content>
-          <ClientsForm />
-        </template>
-      </Card>
-    </modal>
+    <ClientsModal name="new-client" title="New Client" />
 
     <TableCard title="Clients">
       <template v-slot:button>
@@ -31,22 +20,20 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import Card from '~/components/UI/Cards/Card.vue'
 import TableCard from '~/components/UI/Cards/TableCard.vue'
 import Table from '~/components/UI/Table.vue'
 
 import Icon from '~/components/Icon.vue'
 
-import ClientsForm from '~/components/Clients/ClientsForm.vue'
+import ClientsModal from '~/components/Clients/ClientsModal.vue'
 import ClientsList from '~/components/Clients/ClientsList.vue'
 
 export default {
   components: {
-    Card,
     TableCard,
     Table,
     Icon,
-    ClientsForm,
+    ClientsModal,
     ClientsList
   },
   computed: {

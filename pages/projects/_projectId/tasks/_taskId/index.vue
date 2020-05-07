@@ -1,20 +1,11 @@
 <template>
   <div>
-    <modal name="edit-task" height="auto">
-      <Card title="Edit Task">
-        <template v-slot:button>
-          <button class="button" @click="$modal.hide('edit-task')">
-            <Icon icon-name="close" icon-text="Close" />
-          </button>
-        </template>
-        <template v-slot:content>
-          <TasksForm
-            :task="getCurrentTask"
-            :project-id="getCurrentTask.project_id"
-          />
-        </template>
-      </Card>
-    </modal>
+    <TasksModal
+      name="edit-task"
+      title="Edit Task"
+      :task="getCurrentTask"
+      :project-id="getCurrentTask.id"
+    />
 
     <button class="button mb-3">
       <nuxt-link to="/tasks">
@@ -43,13 +34,13 @@ import { mapGetters } from 'vuex'
 
 import Card from '~/components/UI/Cards/Card.vue'
 import Icon from '~/components/Icon.vue'
-import TasksForm from '~/components/Tasks/TasksForm.vue'
+import TasksModal from '~/components/Tasks/TasksModal.vue'
 
 export default {
   components: {
     Card,
     Icon,
-    TasksForm
+    TasksModal
   },
   async fetch({ store, params }) {
     await store.dispatch('tasks/getTask', [params.projectId, params.taskId])

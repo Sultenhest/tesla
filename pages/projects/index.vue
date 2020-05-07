@@ -1,17 +1,6 @@
 <template>
   <div>
-    <modal name="new-project" height="auto">
-      <Card title="Create new Project">
-        <template v-slot:button>
-          <button class="button" @click="$modal.hide('new-project')">
-            <Icon icon-name="close" icon-text="Close" />
-          </button>
-        </template>
-        <template v-slot:content>
-          <ProjectsForm />
-        </template>
-      </Card>
-    </modal>
+    <ProjectsModal name="new-project" title="New Project" />
 
     <TableCard title="Projects">
       <template v-slot:button>
@@ -31,22 +20,20 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import Card from '~/components/UI/Cards/Card.vue'
 import TableCard from '~/components/UI/Cards/TableCard.vue'
 import Table from '~/components/UI/Table.vue'
 
 import Icon from '~/components/Icon.vue'
 
-import ProjectsForm from '~/components/Projects/ProjectsForm.vue'
+import ProjectsModal from '~/components/Projects/ProjectsModal.vue'
 import ProjectsList from '~/components/Projects/ProjectsList.vue'
 
 export default {
   components: {
-    Card,
     TableCard,
     Table,
     Icon,
-    ProjectsForm,
+    ProjectsModal,
     ProjectsList
   },
   computed: {

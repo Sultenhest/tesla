@@ -7,7 +7,11 @@
         </button>
       </template>
       <template v-slot:content>
-        <ClientsForm :client="client" />
+        <TasksForm
+          :task="task"
+          :project-id="projectId"
+          @taskFormSubmitted="formSubmit()"
+        />
       </template>
     </Card>
   </modal>
@@ -16,14 +20,14 @@
 <script>
 import Card from '~/components/UI/Cards/Card.vue'
 import Icon from '~/components/Icon.vue'
-import ClientsForm from '~/components/Clients/ClientsForm.vue'
+import TasksForm from '~/components/Tasks/TasksForm.vue'
 
 export default {
-  name: 'ClientsModal',
+  name: 'TasksModal',
   components: {
     Card,
     Icon,
-    ClientsForm
+    TasksForm
   },
   props: {
     name: {
@@ -34,9 +38,19 @@ export default {
       type: String,
       default: ''
     },
-    client: {
+    task: {
       type: Object,
       default: () => null
+    },
+    projectId: {
+      type: Number,
+      required: false,
+      default: 0
+    }
+  },
+  methods: {
+    formSubmit() {
+      this.$emit('taskFormSubmitted', this.task)
     }
   }
 }

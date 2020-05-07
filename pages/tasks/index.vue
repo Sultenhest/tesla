@@ -1,17 +1,6 @@
 <template>
   <div>
-    <modal name="new-task" height="auto">
-      <Card title="Create new Task">
-        <template v-slot:button>
-          <button class="button" @click="$modal.hide('new-task')">
-            <Icon icon-name="close" icon-text="Close" />
-          </button>
-        </template>
-        <template v-slot:content>
-          <TasksForm />
-        </template>
-      </Card>
-    </modal>
+    <TasksModal name="new-task" title="Create new Task" />
 
     <TableCard title="Tasks">
       <template v-slot:button>
@@ -31,22 +20,20 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import Card from '~/components/UI/Cards/Card.vue'
 import TableCard from '~/components/UI/Cards/TableCard.vue'
 import Table from '~/components/UI/Table.vue'
 
 import Icon from '~/components/Icon.vue'
 
-import TasksForm from '~/components/Tasks/TasksForm.vue'
+import TasksModal from '~/components/Tasks/TasksModal.vue'
 import TasksList from '~/components/Tasks/TasksList.vue'
 
 export default {
   components: {
-    Card,
     TableCard,
     Table,
     Icon,
-    TasksForm,
+    TasksModal,
     TasksList
   },
   computed: {

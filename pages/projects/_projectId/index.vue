@@ -1,17 +1,10 @@
 <template>
   <div>
-    <modal name="edit-project" height="auto">
-      <Card title="Edit Project">
-        <template v-slot:button>
-          <button class="button" @click="$modal.hide('edit-project')">
-            <Icon icon-name="close" icon-text="Close" />
-          </button>
-        </template>
-        <template v-slot:content>
-          <ProjectsForm :project="getCurrentProject" />
-        </template>
-      </Card>
-    </modal>
+    <ProjectsModal
+      name="edit-project"
+      title="Edit Project"
+      :project="getCurrentProject"
+    />
 
     <button class="button mb-3">
       <nuxt-link to="/projects">
@@ -33,21 +26,12 @@
       </template>
     </Card>
 
-    <modal name="new-task" height="auto">
-      <Card title="Create new Task">
-        <template v-slot:button>
-          <button class="button" @click="$modal.hide('new-task')">
-            <Icon icon-name="close" icon-text="Close" />
-          </button>
-        </template>
-        <template v-slot:content>
-          <TasksForm
-            :project-id="getCurrentProject.id"
-            @taskFormSubmitted="refreshProject()"
-          />
-        </template>
-      </Card>
-    </modal>
+    <TasksModal
+      name="new-task"
+      title="Create new Task"
+      :project-id="getCurrentProject.id"
+      @taskFormSubmitted="refreshProject()"
+    />
 
     <TableCard class="mt-4" title="Project Tasks">
       <template v-slot:button>
@@ -84,8 +68,8 @@ import Table from '~/components/UI/Table.vue'
 
 import Icon from '~/components/Icon.vue'
 
-import ProjectsForm from '~/components/Projects/ProjectsForm.vue'
-import TasksForm from '~/components/Tasks/TasksForm.vue'
+import ProjectsModal from '~/components/Projects/ProjectsModal.vue'
+import TasksModal from '~/components/Tasks/TasksModal.vue'
 import TasksList from '~/components/Tasks/TasksList.vue'
 
 export default {
@@ -94,8 +78,8 @@ export default {
     TableCard,
     Table,
     Icon,
-    ProjectsForm,
-    TasksForm,
+    ProjectsModal,
+    TasksModal,
     TasksList
   },
   async fetch({ store, params }) {

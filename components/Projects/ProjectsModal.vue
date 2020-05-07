@@ -7,7 +7,7 @@
         </button>
       </template>
       <template v-slot:content>
-        <ClientsForm :client="client" />
+        <ProjectsForm :project="project" />
       </template>
     </Card>
   </modal>
@@ -16,14 +16,14 @@
 <script>
 import Card from '~/components/UI/Cards/Card.vue'
 import Icon from '~/components/Icon.vue'
-import ClientsForm from '~/components/Clients/ClientsForm.vue'
+import ProjectsForm from '~/components/Projects/ProjectsForm.vue'
 
 export default {
   name: 'ClientsModal',
   components: {
     Card,
     Icon,
-    ClientsForm
+    ProjectsForm
   },
   props: {
     name: {
@@ -34,7 +34,7 @@ export default {
       type: String,
       default: ''
     },
-    client: {
+    project: {
       type: Object,
       default: () => null
     }

@@ -1,8 +1,10 @@
 <template>
   <tr>
     <td>{{ task.title }}</td>
-    <td v-if="withProjectLink" class="text-teal-700">
-      <nuxt-link :to="projectLink">{{ task.project.title }}</nuxt-link>
+    <td v-if="withProjectLink">
+      <nuxt-link :to="projectLink" class="text-teal-700">{{
+        task.project_title
+      }}</nuxt-link>
     </td>
     <td>{{ task.completed_at }}</td>
     <td>

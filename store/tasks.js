@@ -42,8 +42,8 @@ export const actions = {
       })
   },
   getTasks(context) {
-    return this.$axios.$get('/api/tasks').then((data) => {
-      context.commit('setTasks', data)
+    return this.$axios.$get('/api/tasks').then((response) => {
+      context.commit('setTasks', response.data)
     })
   },
   addTask(context, task) {

@@ -16,7 +16,7 @@
       </Card>
     </modal>
 
-    <TableCard class="mt-4" :title="tableHeader">
+    <TableCard :title="tableHeader">
       <template v-slot:button>
         <button class="button-teal" @click="$modal.show('new-task')">
           <Icon icon-name="add-outline" icon-text="Add Task to Project" />

@@ -38,7 +38,7 @@ export const actions = {
     return this.$axios
       .$get('/api/projects/' + idArray[0] + '/tasks/' + idArray[1])
       .then((response) => {
-        context.commit('setCurrentTask', response)
+        context.commit('setCurrentTask', response.data)
       })
   },
   getTasks(context) {

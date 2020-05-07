@@ -2,6 +2,21 @@
   <div class="home">
     <Card title="Login" class="w-1/2">
       <template v-slot:content>
+        <button @click="currentView = 'login'">
+          Login
+        </button>
+        <button @click="currentView = 'register'">
+          Register
+        </button>
+
+        {{ currentView }}
+
+        <ul class="flex">
+          <li class="py-3 px-5">Login</li>
+          <li class="py-3 px-5 text-teal-500 border-teal-500 border-b-2">
+            Register
+          </li>
+        </ul>
         <form class="login-form" @submit.prevent="login()">
           <InputField
             v-model="user.username"
@@ -14,7 +29,7 @@
             input-name="Password"
           />
           <div>
-            <button type="submit">Submit</button>
+            <button class="button-teal" type="submit">Login</button>
           </div>
         </form>
       </template>
@@ -35,6 +50,7 @@ export default {
   },
   data() {
     return {
+      currentView: 'login',
       user: {
         username: '',
         password: ''

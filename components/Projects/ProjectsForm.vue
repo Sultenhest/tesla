@@ -1,6 +1,6 @@
 <template>
   <form class="w-full" @submit.prevent="postProjectForm">
-    <div class="input-group">
+    <div v-if="clientId === 0" class="input-group">
       <label>Client</label>
       <v-select
         v-model="form.client_id"
@@ -40,6 +40,11 @@ export default {
     project: {
       type: Object,
       default: () => null
+    },
+    clientId: {
+      type: Number,
+      required: false,
+      default: 0
     }
   },
   data() {
@@ -48,9 +53,9 @@ export default {
       form: this.project
         ? { ...this.project }
         : {
+            client_id: this.clientId ? this.clientId : '',
             title: '',
-            description: '',
-            client_id: ''
+            description: ''
           }
     }
   },
@@ -88,6 +93,7 @@ export default {
       this.form.title = ''
       this.form.description = ''
       this.$modal.hide(modalName)
+      this.$emit('projectFormSubmitted', this.task)
     }
   }
 }

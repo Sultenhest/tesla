@@ -10,9 +10,7 @@
         <small class="text-sm text-gray-700">Projects</small>
         <h4 class="text-xl mt-3">{{ client.projects_count }}</h4>
       </div>
-      <div class="w-1/2 p-3">
-        <small class="text-sm text-gray-700">Tasks</small>
-      </div>
+      <div class="w-1/2 p-3"></div>
     </div>
 
     <div class="flex items-center justify-between px-3">

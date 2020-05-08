@@ -6,7 +6,11 @@
           <Icon icon-name="close" icon-text="Close" />
         </button>
       </template>
-      <ProjectsForm :project="project" />
+      <ProjectsForm
+        :client-id="clientId"
+        :project="project"
+        @projectFormSubmitted="formSubmit()"
+      />
     </Card>
   </modal>
 </template>
@@ -35,6 +39,16 @@ export default {
     project: {
       type: Object,
       default: () => null
+    },
+    clientId: {
+      type: Number,
+      required: false,
+      default: 0
+    }
+  },
+  methods: {
+    formSubmit() {
+      this.$emit('projectFormSubmitted', this.task)
     }
   }
 }

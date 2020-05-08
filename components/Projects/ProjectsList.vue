@@ -1,6 +1,6 @@
 <template>
   <tbody>
-    <p v-if="!projects" class="card-content">
+    <p v-if="!projects" class="center-content">
       You dont seem to have any projects yet.
     </p>
     <ProjectsRow

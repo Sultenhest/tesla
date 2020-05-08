@@ -20,6 +20,24 @@
       </template>
       <ClientInformation :client="getCurrentClient" />
     </Card>
+
+    <ProjectsModal
+      name="new-project"
+      title="New Project"
+      :client-id="getCurrentClient.id"
+      @projectFormSubmitted="refresh()"
+    />
+
+    <Card :title="projectsTitle()" class="mt-4">
+      <template v-slot:button>
+        <button class="button-teal" @click="$modal.show('new-project')">
+          <Icon icon-name="add-outline" icon-text="Add Project to Client" />
+        </button>
+      </template>
+      <MyTable :cols="['Project Title', 'Client', 'Tasks', '']">
+        <ProjectsList :projects="getCurrentClient.projects" />
+      </MyTable>
+    </Card>
   </div>
 </template>
 
@@ -32,12 +50,19 @@ import Icon from '~/components/Icon.vue'
 import ClientInformation from '~/components/Clients/ClientInformation.vue'
 import ClientsModal from '~/components/Clients/ClientsModal.vue'
 
+import ProjectsModal from '~/components/Projects/ProjectsModal.vue'
+import MyTable from '~/components/UI/Table.vue'
+import ProjectsList from '~/components/Projects/ProjectsList.vue'
+
 export default {
   components: {
     Card,
     Icon,
     ClientInformation,
-    ClientsModal
+    ClientsModal,
+    ProjectsModal,
+    MyTable,
+    ProjectsList
   },
   async fetch({ store, params }) {
     await store.dispatch('clients/getClient', params.id)
@@ -46,8 +71,14 @@ export default {
     ...mapGetters('clients', ['getCurrentClient'])
   },
   methods: {
+    async refresh() {
+      await this.$store.dispatch('clients/getClient', this.getCurrentClient.id)
+    },
     getVat() {
       return this.getCurrentClient.vat_abbr + this.getCurrentClient.vat
+    },
+    projectsTitle() {
+      return this.getCurrentClient.name + "'s Projects"
     }
   }
 }

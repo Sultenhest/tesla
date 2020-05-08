@@ -19,7 +19,7 @@
         @click="toggleCompleted"
       ></svgicon>
       <svgicon
-        name="currency-dollar"
+        name="credit-card"
         width="18"
         height="18"
         class="mr-1 mt-05 cursor-pointer"

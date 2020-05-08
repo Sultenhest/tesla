@@ -24,7 +24,7 @@
       <small class="text-sm text-gray-700"
         >Last updated: <Moment :timestamp="project.updated_at"
       /></small>
-      <button class="button-danger" @click="trash(getCurrentProject)">
+      <button class="button-danger" @click="trash(project)">
         <Icon icon-name="trash" icon-text="Trash" />
       </button>
     </div>

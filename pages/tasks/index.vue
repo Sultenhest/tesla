@@ -21,8 +21,6 @@ import { mapGetters } from 'vuex'
 import Card from '~/components/UI/Cards/Card.vue'
 import Table from '~/components/UI/Table.vue'
 
-import Icon from '~/components/Icon.vue'
-
 import TasksModal from '~/components/Tasks/TasksModal.vue'
 import TasksList from '~/components/Tasks/TasksList.vue'
 
@@ -30,7 +28,6 @@ export default {
   components: {
     Card,
     Table,
-    Icon,
     TasksModal,
     TasksList
   },

@@ -1,38 +1,36 @@
 <template>
   <div class="home">
-    <Card title="Login" class="w-1/2">
-      <template v-slot:content>
-        <button @click="currentView = 'login'">
-          Login
-        </button>
-        <button @click="currentView = 'register'">
+    <Card title="Login" :center="true" class="w-1/2">
+      <button @click="currentView = 'login'">
+        Login
+      </button>
+      <button @click="currentView = 'register'">
+        Register
+      </button>
+
+      {{ currentView }}
+
+      <ul class="flex">
+        <li class="py-3 px-5">Login</li>
+        <li class="py-3 px-5 text-teal-500 border-teal-500 border-b-2">
           Register
-        </button>
-
-        {{ currentView }}
-
-        <ul class="flex">
-          <li class="py-3 px-5">Login</li>
-          <li class="py-3 px-5 text-teal-500 border-teal-500 border-b-2">
-            Register
-          </li>
-        </ul>
-        <form class="login-form" @submit.prevent="login()">
-          <InputField
-            v-model="user.username"
-            input-type="email"
-            input-name="Email"
-          />
-          <InputField
-            v-model="user.password"
-            input-type="password"
-            input-name="Password"
-          />
-          <div>
-            <button class="button-teal" type="submit">Login</button>
-          </div>
-        </form>
-      </template>
+        </li>
+      </ul>
+      <form class="login-form" @submit.prevent="login()">
+        <InputField
+          v-model="user.username"
+          input-type="email"
+          input-name="Email"
+        />
+        <InputField
+          v-model="user.password"
+          input-type="password"
+          input-name="Password"
+        />
+        <div>
+          <button class="button-teal" type="submit">Login</button>
+        </div>
+      </form>
     </Card>
   </div>
 </template>

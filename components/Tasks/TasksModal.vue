@@ -1,18 +1,16 @@
 <template>
   <modal :name="name" height="auto">
-    <Card :title="title">
+    <Card :title="title" :center="true">
       <template v-slot:button>
         <button class="button" @click="$modal.hide(name)">
           <Icon icon-name="close" icon-text="Close" />
         </button>
       </template>
-      <template v-slot:content>
-        <TasksForm
-          :task="task"
-          :project-id="projectId"
-          @taskFormSubmitted="formSubmit()"
-        />
-      </template>
+      <TasksForm
+        :task="task"
+        :project-id="projectId"
+        @taskFormSubmitted="formSubmit()"
+      />
     </Card>
   </modal>
 </template>

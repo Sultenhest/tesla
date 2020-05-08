@@ -7,28 +7,26 @@
       @taskFormSubmitted="refreshProject()"
     />
 
-    <TableCard :title="tableHeader">
+    <Card :title="tableHeader">
       <template v-slot:button>
         <button class="button-teal" @click="$modal.show('new-task')">
           <Icon icon-name="add-outline" icon-text="Add Task to Project" />
         </button>
       </template>
-      <template v-slot:content>
-        <Table :cols="['Task Title', 'Completed', 'Billed', '']">
-          <TasksList
-            :tasks="getCurrentProject.tasks"
-            :with-project-link="false"
-          />
-        </Table>
-      </template>
-    </TableCard>
+      <Table :cols="['Task Title', 'Completed', 'Billed', '']">
+        <TasksList
+          :tasks="getCurrentProject.tasks"
+          :with-project-link="false"
+        />
+      </Table>
+    </Card>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
-import TableCard from '~/components/UI/Cards/TableCard.vue'
+import Card from '~/components/UI/Cards/Card.vue'
 import Table from '~/components/UI/Table.vue'
 
 import Icon from '~/components/Icon.vue'
@@ -38,7 +36,7 @@ import TasksList from '~/components/Tasks/TasksList.vue'
 
 export default {
   components: {
-    TableCard,
+    Card,
     Table,
     Icon,
     TasksModal,

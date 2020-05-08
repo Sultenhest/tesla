@@ -2,25 +2,23 @@
   <div>
     <ProjectsModal name="new-project" title="New Project" />
 
-    <TableCard title="Projects">
+    <Card title="Projects">
       <template v-slot:button>
         <button class="button-teal" @click="$modal.show('new-project')">
           <Icon icon-name="add-outline" icon-text="Add Project" />
         </button>
       </template>
-      <template v-slot:content>
-        <Table :cols="['Project Title', 'Client', 'Tasks', '']">
-          <ProjectsList :projects="getAllProjects" />
-        </Table>
-      </template>
-    </TableCard>
+      <Table :cols="['Project Title', 'Client', 'Tasks', '']">
+        <ProjectsList :projects="getAllProjects" />
+      </Table>
+    </Card>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
-import TableCard from '~/components/UI/Cards/TableCard.vue'
+import Card from '~/components/UI/Cards/Card.vue'
 import Table from '~/components/UI/Table.vue'
 
 import Icon from '~/components/Icon.vue'
@@ -30,7 +28,7 @@ import ProjectsList from '~/components/Projects/ProjectsList.vue'
 
 export default {
   components: {
-    TableCard,
+    Card,
     Table,
     Icon,
     ProjectsModal,

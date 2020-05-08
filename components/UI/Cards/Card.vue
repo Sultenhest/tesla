@@ -1,11 +1,14 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <h3 class="text-xl">{{ title }}</h3>
+      <div>
+        <h3 class="text-xl">{{ title }}</h3>
+        <h4 class="text-sm text-gray-700">{{ subTitle }}</h4>
+      </div>
       <slot name="button"></slot>
     </div>
-    <div class="card-content">
-      <slot name="content"></slot>
+    <div class="card-content" :class="{ 'center-content': center }">
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -17,6 +20,14 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    subTitle: {
+      type: String,
+      default: ''
+    },
+    center: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -24,3 +35,17 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.card {
+  @apply flex flex-col rounded shadow bg-gray-100;
+}
+
+.card-header {
+  @apply flex items-center justify-between py-3 px-5 rounded-t bg-white;
+}
+
+.card-footer {
+  @apply flex items-center justify-center py-3 px-5 rounded-b bg-white border-t;
+}
+</style>

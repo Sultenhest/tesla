@@ -18,12 +18,10 @@
           <Icon icon-name="edit-pencil" icon-text="Edit Project" />
         </button>
       </template>
-      <template v-slot:content>
-        {{ getCurrentProject }}
-        <button class="button-danger" @click="trash(getCurrentProject)">
-          <Icon icon-name="trash" icon-text="Trash" />
-        </button>
-      </template>
+      {{ getCurrentProject }}
+      <button class="button-danger" @click="trash(getCurrentProject)">
+        <Icon icon-name="trash" icon-text="Trash" />
+      </button>
     </Card>
 
     <TasksModal
@@ -33,29 +31,25 @@
       @taskFormSubmitted="refreshProject()"
     />
 
-    <TableCard class="mt-4" title="Project Tasks">
+    <Card class="mt-4" title="Project Tasks">
       <template v-slot:button>
         <button class="button-teal" @click="$modal.show('new-task')">
           <Icon icon-name="add-outline" icon-text="Add Task to Project" />
         </button>
       </template>
-      <template v-slot:content>
-        <Table :cols="['Task Title', 'Completed', 'Billed', '']">
-          <TasksList
-            :tasks="getCurrentProject.tasks"
-            :with-project-link="false"
-          />
-        </Table>
-      </template>
-      <template v-slot:footer>
-        <nuxt-link :to="projectTasksLink" class="text-teal-700">
-          <Icon
-            icon-name="checkmark-outline"
-            icon-text="Go to All Project Tasks"
-          />
-        </nuxt-link>
-      </template>
-    </TableCard>
+      <Table :cols="['Task Title', 'Completed', 'Billed', '']">
+        <TasksList
+          :tasks="getCurrentProject.tasks"
+          :with-project-link="false"
+        />
+      </Table>
+      <nuxt-link :to="projectTasksLink" class="text-teal-700">
+        <Icon
+          icon-name="checkmark-outline"
+          icon-text="Go to All Project Tasks"
+        />
+      </nuxt-link>
+    </Card>
   </div>
 </template>
 
@@ -63,7 +57,6 @@
 import { mapGetters } from 'vuex'
 
 import Card from '~/components/UI/Cards/Card.vue'
-import TableCard from '~/components/UI/Cards/TableCard.vue'
 import Table from '~/components/UI/Table.vue'
 
 import Icon from '~/components/Icon.vue'
@@ -75,7 +68,6 @@ import TasksList from '~/components/Tasks/TasksList.vue'
 export default {
   components: {
     Card,
-    TableCard,
     Table,
     Icon,
     ProjectsModal,

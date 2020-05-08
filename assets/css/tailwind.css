@@ -31,20 +31,8 @@ body {
   @apply flex mx-auto min-h-screen;
 }
 
-.card {
-  @apply flex flex-col rounded shadow bg-gray-100;
-}
-
-.card-header {
-  @apply flex items-center justify-between py-3 px-5 rounded-t bg-white;
-}
-
-.card-content {
-  @apply flex flex-col items-center justify-between p-5;
-}
-
-.card-footer {
-  @apply flex items-center justify-center py-3 px-5 rounded-b bg-white border-t;
+.center-content {
+  @apply flex flex-col items-center justify-between p-3;
 }
 
 .button {

@@ -61,7 +61,8 @@ export default {
     '@nuxtjs/toast',
     'nuxt-svgicon',
     'vue-sweetalert2/nuxt',
-    'nuxt-vue-select'
+    'nuxt-vue-select',
+    '@nuxtjs/moment'
   ],
   /*
    ** Axios module configuration

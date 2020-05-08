@@ -19,12 +19,10 @@
           <Icon icon-name="edit-pencil" icon-text="Edit Task" />
         </button>
       </template>
-      <template v-slot:content>
-        {{ getCurrentTask }}
-        <button class="button-danger" @click="trash(getCurrentTask)">
-          <Icon icon-name="trash" icon-text="Trash" />
-        </button>
-      </template>
+      {{ getCurrentTask }}
+      <button class="button-danger" @click="trash(getCurrentTask)">
+        <Icon icon-name="trash" icon-text="Trash" />
+      </button>
     </Card>
   </div>
 </template>

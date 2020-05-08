@@ -12,20 +12,13 @@
       </nuxt-link>
     </button>
 
-    <Card :title="getCurrentClient.name">
+    <Card :title="getCurrentClient.name" :sub-title="getVat()" :center="true">
       <template v-slot:button>
         <button class="button-teal" @click="$modal.show('edit-client')">
           <Icon icon-name="edit-pencil" icon-text="Edit Client" />
         </button>
       </template>
-      <template v-slot:content>
-        <pre>
-          {{ getCurrentClient }}
-        </pre>
-        <button class="button-danger" @click="trash(getCurrentClient)">
-          <Icon icon-name="trash" icon-text="Trash" />
-        </button>
-      </template>
+      <ClientInformation :client="getCurrentClient" />
     </Card>
   </div>
 </template>
@@ -35,12 +28,15 @@ import { mapGetters } from 'vuex'
 
 import Card from '~/components/UI/Cards/Card.vue'
 import Icon from '~/components/Icon.vue'
+
+import ClientInformation from '~/components/Clients/ClientInformation.vue'
 import ClientsModal from '~/components/Clients/ClientsModal.vue'
 
 export default {
   components: {
     Card,
     Icon,
+    ClientInformation,
     ClientsModal
   },
   async fetch({ store, params }) {
@@ -50,20 +46,9 @@ export default {
     ...mapGetters('clients', ['getCurrentClient'])
   },
   methods: {
-    async trash(client) {
-      await this.$swal({
-        title: 'Are you sure you want to trash this client?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes'
-      }).then((result) => {
-        if (result.value) {
-          this.$store.dispatch('clients/trashClient', client)
-        }
-      })
+    getVat() {
+      return this.getCurrentClient.vat_abbr + this.getCurrentClient.vat
     }
   }
 }
 </script>
-
-<style lang="css" scoped></style>

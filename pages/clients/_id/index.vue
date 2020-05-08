@@ -34,15 +34,19 @@
           <Icon icon-name="add-outline" icon-text="Add Project to Client" />
         </button>
       </template>
-      <MyTable :cols="['Project Title', 'Client', 'Tasks', '']">
+      <Table :cols="['Project Title', 'Client', 'Tasks', '']">
         <ProjectsList :projects="getCurrentClient.projects" />
-      </MyTable>
+      </Table>
     </Card>
+
+    <ActivityFeed :activities="getCurrentClient.activity" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+
+import ActivityFeed from '~/components/ActivityFeed.vue'
 
 import Card from '~/components/UI/Cards/Card.vue'
 import Icon from '~/components/Icon.vue'
@@ -51,17 +55,18 @@ import ClientInformation from '~/components/Clients/ClientInformation.vue'
 import ClientsModal from '~/components/Clients/ClientsModal.vue'
 
 import ProjectsModal from '~/components/Projects/ProjectsModal.vue'
-import MyTable from '~/components/UI/Table.vue'
+import Table from '~/components/UI/Table.vue'
 import ProjectsList from '~/components/Projects/ProjectsList.vue'
 
 export default {
   components: {
+    ActivityFeed,
     Card,
     Icon,
     ClientInformation,
     ClientsModal,
     ProjectsModal,
-    MyTable,
+    Table,
     ProjectsList
   },
   async fetch({ store, params }) {

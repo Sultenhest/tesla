@@ -65,6 +65,9 @@ export default {
       this.currentActivity = event.params.activity
     },
     listChanges(changes) {
+      if (changes == null) {
+        return ''
+      }
       const str = Object.keys(changes.before).toString()
       return str.replace(/(.*),(.*)$/, '$1 and $2')
     }

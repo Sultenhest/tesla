@@ -1,13 +1,13 @@
 <template>
   <div class="w-full">
     <div class="w-full p-3">
-      <small class="text-sm text-gray-700">Description</small>
+      <small class="text-sm text-gray-700">Client Description</small>
       <p class="mt-3">{{ client.description }}</p>
     </div>
 
     <div class="flex">
       <div class="w-1/2 p-3">
-        <small class="text-sm text-gray-700">Projects</small>
+        <small class="text-sm text-gray-700">Client Projects</small>
         <h4 class="text-xl mt-3">{{ client.projects_count }}</h4>
       </div>
       <div class="w-1/2 p-3"></div>

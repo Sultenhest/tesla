@@ -12,16 +12,17 @@
       </nuxt-link>
     </button>
 
-    <Card :title="getCurrentProject.title">
+    <Card
+      :title="getCurrentProject.title"
+      :sub-title="getCurrentProject.client_name"
+      :center="true"
+    >
       <template v-slot:button>
         <button class="button-teal" @click="$modal.show('edit-project')">
           <Icon icon-name="edit-pencil" icon-text="Edit Project" />
         </button>
       </template>
-      {{ getCurrentProject }}
-      <button class="button-danger" @click="trash(getCurrentProject)">
-        <Icon icon-name="trash" icon-text="Trash" />
-      </button>
+      <ProjectInformation :project="getCurrentProject" />
     </Card>
 
     <TasksModal
@@ -43,33 +44,43 @@
           :with-project-link="false"
         />
       </Table>
-      <nuxt-link :to="projectTasksLink" class="text-teal-700">
-        <Icon
-          icon-name="checkmark-outline"
-          icon-text="Go to All Project Tasks"
-        />
-      </nuxt-link>
+      <div class="center-content">
+        <nuxt-link :to="projectTasksLink" class="text-teal-700">
+          <Icon
+            icon-name="checkmark-outline"
+            icon-text="Go to All Project Tasks"
+          />
+        </nuxt-link>
+      </div>
     </Card>
+
+    <ActivityFeed :activities="getCurrentProject.activity" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
+import ActivityFeed from '~/components/ActivityFeed.vue'
+
 import Card from '~/components/UI/Cards/Card.vue'
 import Table from '~/components/UI/Table.vue'
 
 import Icon from '~/components/Icon.vue'
 
+import ProjectInformation from '~/components/Projects/ProjectInformation.vue'
 import ProjectsModal from '~/components/Projects/ProjectsModal.vue'
+
 import TasksModal from '~/components/Tasks/TasksModal.vue'
 import TasksList from '~/components/Tasks/TasksList.vue'
 
 export default {
   components: {
+    ActivityFeed,
     Card,
     Table,
     Icon,
+    ProjectInformation,
     ProjectsModal,
     TasksModal,
     TasksList
@@ -84,18 +95,6 @@ export default {
     }
   },
   methods: {
-    async trash(project) {
-      await this.$swal({
-        title: 'Are you sure you want to trash this project?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes'
-      }).then((result) => {
-        if (result.value) {
-          this.$store.dispatch('projects/trashProject', project)
-        }
-      })
-    },
     async refreshProject() {
       await this.$store.dispatch(
         'projects/getProject',

@@ -26,7 +26,7 @@
               {{ listChanges(activity.changes) }}
             </td>
             <td>
-              {{ $moment(activity.created_at).fromNow() }}
+              <Moment :timestamp="activity.created_at" />
             </td>
           </tr>
         </tbody>

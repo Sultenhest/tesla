@@ -6,9 +6,9 @@
         task.project_title
       }}</nuxt-link>
     </td>
-    <td>{{ task.completed_at }}</td>
+    <td><Moment :timestamp="task.completed_at" /></td>
     <td>
-      {{ task.billed_at }}
+      <Moment :timestamp="task.billed_at" />
     </td>
     <td class="text-right button flex justify-end">
       <svgicon

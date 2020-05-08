@@ -15,8 +15,8 @@
 
     <div class="flex items-center justify-between px-3">
       <small class="text-sm text-gray-700"
-        >Last updated: {{ $moment(client.updated_at).fromNow() }}</small
-      >
+        >Last updated: <Moment :timestamp="client.updated_at"
+      /></small>
       <button class="button-danger" @click="trash(getCurrentClient)">
         <Icon icon-name="trash" icon-text="Trash" />
       </button>

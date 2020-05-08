@@ -18,19 +18,14 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import Card from '~/components/UI/Cards/Card.vue'
 import Table from '~/components/UI/Table.vue'
-
-import Icon from '~/components/Icon.vue'
 
 import ClientsModal from '~/components/Clients/ClientsModal.vue'
 import ClientsList from '~/components/Clients/ClientsList.vue'
 
 export default {
   components: {
-    Card,
     Table,
-    Icon,
     ClientsModal,
     ClientsList
   },

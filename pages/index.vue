@@ -36,14 +36,12 @@
 </template>
 
 <script>
-import Card from '~/components/UI/Cards/Card.vue'
 import InputField from '~/components/UI/Form/InputField.vue'
 
 export default {
   auth: 'guest',
   layout: 'basic',
   components: {
-    Card,
     InputField
   },
   data() {

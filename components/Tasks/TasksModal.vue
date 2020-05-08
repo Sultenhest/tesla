@@ -16,15 +16,11 @@
 </template>
 
 <script>
-import Card from '~/components/UI/Cards/Card.vue'
-import Icon from '~/components/Icon.vue'
 import TasksForm from '~/components/Tasks/TasksForm.vue'
 
 export default {
   name: 'TasksModal',
   components: {
-    Card,
-    Icon,
     TasksForm
   },
   props: {

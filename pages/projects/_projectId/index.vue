@@ -63,10 +63,7 @@ import { mapGetters } from 'vuex'
 
 import ActivityFeed from '~/components/ActivityFeed.vue'
 
-import Card from '~/components/UI/Cards/Card.vue'
 import Table from '~/components/UI/Table.vue'
-
-import Icon from '~/components/Icon.vue'
 
 import ProjectInformation from '~/components/Projects/ProjectInformation.vue'
 import ProjectsModal from '~/components/Projects/ProjectsModal.vue'
@@ -77,9 +74,7 @@ import TasksList from '~/components/Tasks/TasksList.vue'
 export default {
   components: {
     ActivityFeed,
-    Card,
     Table,
-    Icon,
     ProjectInformation,
     ProjectsModal,
     TasksModal,

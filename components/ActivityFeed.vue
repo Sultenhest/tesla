@@ -36,15 +36,11 @@
 </template>
 
 <script>
-import Icon from '~/components/Icon.vue'
-import Card from '~/components/UI/Cards/Card.vue'
 import Table from '~/components/UI/Table.vue'
 
 export default {
   name: 'ActivityFeed',
   components: {
-    Icon,
-    Card,
     Table
   },
   props: {

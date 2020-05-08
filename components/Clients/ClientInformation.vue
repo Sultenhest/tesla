@@ -25,13 +25,8 @@
 </template>
 
 <script>
-import Icon from '~/components/Icon.vue'
-
 export default {
   name: 'ClientInformation',
-  components: {
-    Icon
-  },
   props: {
     client: {
       type: Object,

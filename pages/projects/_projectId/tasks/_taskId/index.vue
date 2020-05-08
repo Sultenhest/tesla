@@ -33,17 +33,12 @@ import { mapGetters } from 'vuex'
 
 import ActivityFeed from '~/components/ActivityFeed.vue'
 
-import Card from '~/components/UI/Cards/Card.vue'
-import Icon from '~/components/Icon.vue'
-
 import TaskInformation from '~/components/Tasks/TaskInformation.vue'
 import TasksModal from '~/components/Tasks/TasksModal.vue'
 
 export default {
   components: {
     ActivityFeed,
-    Card,
-    Icon,
     TaskInformation,
     TasksModal
   },

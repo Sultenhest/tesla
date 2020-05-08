@@ -12,15 +12,11 @@
 </template>
 
 <script>
-import Card from '~/components/UI/Cards/Card.vue'
-import Icon from '~/components/Icon.vue'
 import ClientsForm from '~/components/Clients/ClientsForm.vue'
 
 export default {
   name: 'ClientsModal',
   components: {
-    Card,
-    Icon,
     ClientsForm
   },
   props: {

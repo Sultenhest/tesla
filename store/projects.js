@@ -7,6 +7,7 @@ export const state = () => ({
 export const mutations = {
   setCurrentProject(state, project) {
     state.currentProject = project
+    this.dispatch('clients/getClient', project.client_id)
   },
   setProjects(state, projects) {
     state.allProjects = projects

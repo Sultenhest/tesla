@@ -6,7 +6,7 @@
       }}</nuxt-link>
     </td>
     <td>
-      <nuxt-link :to="clientProjectsLink" class="text-teal-700">
+      <nuxt-link :to="projectsLink" class="text-teal-700">
         {{ client.projects_count }}
       </nuxt-link>
     </td>
@@ -40,8 +40,8 @@ export default {
     clientLink() {
       return '/clients/' + this.id
     },
-    clientProjectsLink() {
-      return this.clientLink + '/projects'
+    projectsLink() {
+      return '/clients/' + this.id + '/#client-projects'
     }
   }
 }

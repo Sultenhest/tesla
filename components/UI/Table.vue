@@ -1,12 +1,15 @@
-<template
-  ><table class="table">
-    <thead>
-      <tr>
-        <th v-for="col in cols" :key="col">{{ col }}</th>
-      </tr>
-    </thead>
-    <slot></slot></table
-></template>
+<template>
+  <div class="table-wrapper">
+    <table class="table">
+      <thead>
+        <tr>
+          <th v-for="col in cols" :key="col">{{ col }}</th>
+        </tr>
+      </thead>
+      <slot></slot>
+    </table>
+  </div>
+</template>
 
 <script>
 export default {
@@ -24,8 +27,12 @@ export default {
 </script>
 
 <style lang="css">
+.table-wrapper {
+  @apply overflow-x-auto;
+}
+
 .table {
-  @apply w-full;
+  @apply w-full table-auto;
 }
 
 .table thead {

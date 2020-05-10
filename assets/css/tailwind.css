@@ -32,7 +32,7 @@ body {
 }
 
 .center-content {
-  @apply flex flex-col items-center justify-between p-3;
+  @apply h-full flex flex-col items-center justify-between p-3;
 }
 
 .button {

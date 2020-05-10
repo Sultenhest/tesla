@@ -28,7 +28,7 @@
       @projectFormSubmitted="refresh()"
     />
 
-    <Card :title="projectsTitle()" class="mt-4">
+    <Card id="client-projects" :title="projectsTitle()" class="mt-4">
       <template v-slot:button>
         <button class="button-teal" @click="$modal.show('new-project')">
           <Icon icon-name="add-outline" icon-text="Add Project to Client" />

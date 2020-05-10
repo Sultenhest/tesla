@@ -1,5 +1,5 @@
 <template>
-  <aside class="w-1/5">
+  <aside>
     <ul class="space-y-3">
       <li>
         <nuxt-link to="/dashboard">

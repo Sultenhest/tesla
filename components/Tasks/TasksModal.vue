@@ -1,5 +1,11 @@
 <template>
-  <modal :name="name" height="auto">
+  <modal
+    :name="name"
+    height="auto"
+    :maxWidth="600"
+    :adaptive="true"
+    :scrollable="true"
+  >
     <Card :title="title" :center="true">
       <template v-slot:button>
         <button class="button" @click="$modal.hide(name)">

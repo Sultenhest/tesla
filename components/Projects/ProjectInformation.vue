@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div class="w-full h-full flex flex-col">
     <div class="w-full p-3">
       <small class="text-sm text-gray-700">Project Description</small>
       <p class="mt-3">{{ project.description }}</p>
@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="flex items-center justify-between px-3">
+    <div class="mt-auto flex items-center justify-between px-3">
       <small class="text-sm text-gray-700"
         >Last updated: <Moment :timestamp="project.updated_at"
       /></small>

@@ -1,5 +1,5 @@
 <template>
-  <Card title="Profile" :center="true">
+  <Card title="Settings" :center="true">
     No content
   </Card>
 </template>

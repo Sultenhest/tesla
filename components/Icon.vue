@@ -1,6 +1,11 @@
 <template>
   <div>
-    <svgicon :name="iconName" width="18" height="18" class="mr-1"></svgicon>
+    <svgicon
+      :name="iconName"
+      :width="getSize"
+      :height="getSize"
+      class="mr-1"
+    ></svgicon>
     {{ iconText }}
   </div>
 </template>
@@ -13,9 +18,31 @@ export default {
       type: String,
       default: ''
     },
+    iconSize: {
+      type: String,
+      default: 'md',
+      validator: (value) => {
+        return ['sm', 'md', 'lg'].includes(value)
+      }
+    },
     iconText: {
       type: String,
       default: ''
+    }
+  },
+  computed: {
+    getSize() {
+      let size = '18'
+      switch (this.iconSize) {
+        case 'sm':
+          size = '15'
+          break
+        case 'lg':
+          size = '20'
+          break
+        default:
+      }
+      return size
     }
   }
 }

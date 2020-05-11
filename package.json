@@ -18,10 +18,13 @@
     "@nuxtjs/moment": "^1.6.0",
     "@nuxtjs/pwa": "^3.0.0-0",
     "@nuxtjs/toast": "^3.3.0",
+    "chart.js": "^2.9.3",
     "js-cookie": "^2.2.1",
     "nuxt": "^2.0.0",
     "nuxt-svgicon": "^1.2.7",
     "nuxt-vue-select": "^0.1.4",
+    "v-tooltip": "^2.0.3",
+    "vue-chartjs": "^3.5.0",
     "vue-js-modal": "^2.0.0-rc.3",
     "vue-sweetalert2": "^3.0.3"
   },

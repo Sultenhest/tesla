@@ -1,9 +1,9 @@
 <template>
   <tr>
     <td>
-      <nuxt-link :to="projectLink" class="text-teal-700">{{
-        project.title
-      }}</nuxt-link>
+      <nuxt-link :to="projectLink" class="text-teal-700">
+        {{ project.title }}
+      </nuxt-link>
     </td>
     <td>
       <div v-if="project.client_id" class="text-teal-700">
@@ -12,7 +12,14 @@
     </td>
     <td>
       <div class="text-teal-700">
-        <nuxt-link :to="tasksLink">{{ project.tasks_count }}</nuxt-link>
+        <nuxt-link :to="tasksLink">
+          <PercentageBar
+            :green="project.completed_tasks"
+            :red="project.incompleted_tasks"
+            :total="project.tasks_count"
+            link-text="Go to Tasks"
+          />
+        </nuxt-link>
       </div>
     </td>
     <td class="text-right button flex justify-end">
@@ -29,8 +36,13 @@
 </template>
 
 <script>
+import PercentageBar from '~/components/Charts/PercentageBar.vue'
+
 export default {
   name: 'ProjectsRow',
+  components: {
+    PercentageBar
+  },
   props: {
     id: {
       type: Number,

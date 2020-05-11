@@ -36,7 +36,12 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~plugins/vue-js-modal', '~plugins/global-components'],
+  plugins: [
+    '~plugins/vue-js-modal',
+    '~plugins/vue-chartjs',
+    '~plugins/v-tooltip',
+    '~plugins/global-components'
+  ],
   /*
    ** Nuxt.js dev-modules
    */

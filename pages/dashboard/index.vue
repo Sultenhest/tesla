@@ -1,37 +1,24 @@
 <template>
   <div class="dashboard">
     <div class="block lg:flex mb-4">
-      <Card class="w-full" title="Statistics" subtitle="This weeks numbers">
+      <Card class="w-full" title="Statistics" sub-title="This weeks numbers">
         <div class="flex p-3">
           <div class="w-1/4 p-3">
-            <small class="text-sm text-gray-700">Completed Tasks</small>
-            <div class="flex items-end mt-3">
-              <h4 class="text-4xl leading-7">33</h4>
-              <span
-                class="flex text-sm mt-1 ml-4 bg-green-200 bg-opacity-50 text-green-500 px-2 py-1 rounded-full"
-              >
-                <Icon icon-name="arrow-thin-up" icon-size="sm" /> 22%
-              </span>
-            </div>
+            <Stat header="Completed tasks" :value="33" :percentage="18" />
           </div>
           <div class="w-1/4 p-3">
-            <small class="text-sm text-gray-700">New Tasks</small>
-            <div class="flex items-end mt-3">
-              <h4 class="text-4xl leading-7">12</h4>
-              <span
-                class="flex text-sm mt-1 ml-4 bg-red-200 bg-opacity-50 text-red-500 px-2 py-1 rounded-full"
-              >
-                <Icon icon-name="arrow-thin-down" icon-size="sm" /> 22%
-              </span>
-            </div>
+            <Stat
+              header="New Tasks"
+              :value="12"
+              arrow="down"
+              :percentage="22"
+            />
           </div>
           <div class="w-1/4 p-3">
-            <small class="text-sm text-gray-700">Total Tasks</small>
-            <h4 class="text-2xl mt-3">54</h4>
+            <Stat header="Total Tasks" :value="54" :percentage="44" />
           </div>
           <div class="w-1/4 p-3">
-            <small class="text-sm text-gray-700">Total Tasks</small>
-            <h4 class="text-2xl mt-3">11</h4>
+            <Stat header="Total Projects" :value="11" :percentage="0" />
           </div>
         </div>
       </Card>
@@ -77,6 +64,7 @@
 
 <script>
 import ProjectsListItem from '~/components/Dashboard/ProjectsListItem.vue'
+import Stat from '~/components/Dashboard/Stat.vue'
 
 import LineChart from '~/components/Charts/LineChart.vue'
 import PieChart from '~/components/Charts/PieChart.vue'
@@ -84,6 +72,7 @@ import PieChart from '~/components/Charts/PieChart.vue'
 export default {
   components: {
     ProjectsListItem,
+    Stat,
     LineChart,
     PieChart
   },

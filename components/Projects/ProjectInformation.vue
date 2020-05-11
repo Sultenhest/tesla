@@ -6,6 +6,16 @@
     </div>
 
     <div class="flex">
+      <div class="w-full p-3">
+        <PercentageBar
+          :green="project.completed_tasks"
+          :red="project.incompleted_tasks"
+          :total="project.tasks_count"
+        />
+      </div>
+    </div>
+
+    <div class="flex">
       <div class="w-1/3 p-3">
         <small class="text-sm text-gray-700">Project Tasks</small>
         <h4 class="text-xl mt-3">{{ project.tasks_count }}</h4>
@@ -32,8 +42,13 @@
 </template>
 
 <script>
+import PercentageBar from '~/components/Charts/PercentageBar.vue'
+
 export default {
   name: 'ProjectInformation',
+  components: {
+    PercentageBar
+  },
   props: {
     project: {
       type: Object,

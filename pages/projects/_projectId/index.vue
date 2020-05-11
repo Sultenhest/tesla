@@ -12,8 +12,12 @@
       </nuxt-link>
     </button>
 
-    <div class="flex">
-      <Card class="w-4/6 mr-4" :title="getCurrentProject.title" :center="true">
+    <div class="block lg:flex">
+      <Card
+        class="w-full lg:w-4/6 mr-4 mb-4 lg:mb-0"
+        :title="getCurrentProject.title"
+        :center="true"
+      >
         <template v-slot:button>
           <button class="button-teal" @click="$modal.show('edit-project')">
             <Icon icon-name="edit-pencil" icon-text="Edit Project" />
@@ -22,7 +26,11 @@
         <ProjectInformation :project="getCurrentProject" />
       </Card>
 
-      <Card class="w-2/6" :title="getCurrentClient.name" :center="true">
+      <Card
+        class="w-full lg:w-2/6"
+        :title="getCurrentClient.name"
+        :center="true"
+      >
         <template v-slot:button>
           <button class="button-teal">
             <nuxt-link :to="projectClientLink">
@@ -44,17 +52,14 @@
       @taskFormSubmitted="refreshProject()"
     />
 
-    <Card class="mt-4" title="Project Tasks">
+    <Card class="mt-4" title="Most Recent Project Tasks">
       <template v-slot:button>
         <button class="button-teal" @click="$modal.show('new-task')">
           <Icon icon-name="add-outline" icon-text="Add Task to Project" />
         </button>
       </template>
       <Table :cols="['Task Title', 'Completed', 'Billed', '']">
-        <TasksList
-          :tasks="getCurrentProject.tasks"
-          :with-project-link="false"
-        />
+        <TasksList :tasks="recentProjects" :with-project-link="false" />
       </Table>
       <div class="center-content">
         <nuxt-link :to="projectTasksLink" class="text-teal-700">
@@ -102,6 +107,10 @@ export default {
     }),
     projectClientLink() {
       return '/clients/' + this.getCurrentProject.client_id
+    },
+    recentProjects() {
+      const tasksClones = [...this.getCurrentProject.tasks]
+      return tasksClones.splice(0, 3)
     },
     projectTasksLink() {
       return '/projects/' + this.getCurrentProject.id + '/tasks'

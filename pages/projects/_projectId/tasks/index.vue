@@ -7,19 +7,43 @@
       @taskFormSubmitted="refreshProject()"
     />
 
-    <Card :title="tableHeader">
-      <template v-slot:button>
-        <button class="button-teal" @click="$modal.show('new-task')">
-          <Icon icon-name="add-outline" icon-text="Add Task to Project" />
-        </button>
-      </template>
-      <Table :cols="['Task Title', 'Completed', 'Billed', '']">
-        <TasksList
-          :tasks="getCurrentProject.tasks"
-          :with-project-link="false"
-        />
-      </Table>
-    </Card>
+    <div class="block lg:flex">
+      <Card class="w-full lg:w-4/6 mr-4 mb-4 lg:mb-0" :title="tableHeader">
+        <template v-slot:button>
+          <button class="button-teal" @click="$modal.show('new-task')">
+            <Icon icon-name="add-outline" icon-text="Add Task to Project" />
+          </button>
+        </template>
+        <Table :cols="['Task Title', 'Completed', 'Billed', '']">
+          <TasksList
+            :tasks="getCurrentProject.tasks"
+            :with-project-link="false"
+          />
+        </Table>
+      </Card>
+
+      <Card
+        class="w-full lg:w-2/6"
+        :title="getCurrentProject.title"
+        :center="true"
+      >
+        <template v-slot:button>
+          <button class="button-teal">
+            <nuxt-link :to="projectLink">
+              <Icon
+                icon-name="view-carousel"
+                icon-text="Go to Project"
+                class="text-white"
+              />
+            </nuxt-link>
+          </button>
+        </template>
+        <div class="w-full p-3">
+          <small class="text-sm text-gray-700">Project Description</small>
+          <p class="mt-3">{{ getCurrentProject.description }}</p>
+        </div>
+      </Card>
+    </div>
   </div>
 </template>
 
@@ -44,6 +68,9 @@ export default {
     ...mapGetters('projects', ['getCurrentProject']),
     tableHeader() {
       return this.getCurrentProject.title + ' tasks'
+    },
+    projectLink() {
+      return '/projects/' + this.getCurrentProject.id
     }
   },
   methods: {

@@ -2,7 +2,7 @@
   <modal
     :name="name"
     height="auto"
-    :maxWidth="600"
+    :max-width="600"
     :adaptive="true"
     :scrollable="true"
   >

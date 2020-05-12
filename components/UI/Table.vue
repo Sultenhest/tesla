@@ -40,7 +40,7 @@ export default {
 }
 
 .table tr {
-  @apply flex;
+  @apply flex transition duration-300 ease-in-out;
 }
 
 .table tr th {
@@ -53,6 +53,6 @@ export default {
 }
 
 .table tbody tr:hover {
-  @apply bg-gray-200;
+  @apply bg-gray-200 cursor-pointer;
 }
 </style>

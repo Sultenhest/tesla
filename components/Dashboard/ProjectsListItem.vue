@@ -27,7 +27,10 @@ export default {
 
 <style scoped>
 .project-link {
-  @apply flex items-center justify-between py-3 px-5 border-t;
+  @apply flex items-center justify-between py-3 px-5 border-t transition duration-300 ease-in-out;
+}
+.project-link:hover {
+  @apply bg-gray-200;
 }
 .project-link:first-child {
   @apply border-none;

@@ -1,12 +1,15 @@
 <template>
   <div class="dashboard">
     <div class="block lg:flex mb-4">
-      <Card class="w-full" title="Statistics" sub-title="This weeks numbers">
-        <div class="flex p-3">
-          <div class="w-1/4 p-3">
+      <Card class="w-full" title="Statistics" sub-title="This week in numbers">
+        <div class="flex flex-wrap p-3">
+          <div class="w-1/2 md:w-1/4 p-3">
+            <Stat header="Billed Tasks" :value="11" :percentage="1" />
+          </div>
+          <div class="w-1/2 md:w-1/4 p-3">
             <Stat header="Completed tasks" :value="33" :percentage="18" />
           </div>
-          <div class="w-1/4 p-3">
+          <div class="w-1/2 md:w-1/4 p-3">
             <Stat
               header="New Tasks"
               :value="12"
@@ -14,18 +17,19 @@
               :percentage="22"
             />
           </div>
-          <div class="w-1/4 p-3">
+          <div class="w-1/2 md:w-1/4 p-3">
             <Stat header="Total Tasks" :value="54" :percentage="44" />
-          </div>
-          <div class="w-1/4 p-3">
-            <Stat header="Total Projects" :value="11" :percentage="0" />
           </div>
         </div>
       </Card>
     </div>
 
     <div class="block lg:flex">
-      <Card class="w-full lg:w-2/3 mr-0 lg:mr-2" title="Overview">
+      <Card
+        class="w-full lg:w-2/3 mr-0 lg:mr-2"
+        title="Overview"
+        sub-title="Your current status"
+      >
         <div class="flex p-3">
           <div class="w-1/3 p-3">
             <small class="text-sm text-gray-700">Total Clients</small>
@@ -76,6 +80,16 @@ export default {
     LineChart,
     PieChart
   },
+  fetch() {
+    this.$axios
+      .$get('/api/dashboard')
+      .then((response) => {
+        this.projects = response.projects
+      })
+      .catch((error) => {
+        this.error = error
+      })
+  },
   data() {
     return {
       projects: {},
@@ -103,16 +117,6 @@ export default {
         ]
       }
     }
-  },
-  async created() {
-    await this.$axios
-      .$get('/api/dashboard')
-      .then((response) => {
-        this.projects = response.projects
-      })
-      .catch((error) => {
-        this.error = error
-      })
   }
 }
 </script>

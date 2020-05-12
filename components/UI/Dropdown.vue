@@ -21,6 +21,11 @@
             </nuxt-link>
           </li>
           <li>
+            <nuxt-link to="/activities">
+              Activity
+            </nuxt-link>
+          </li>
+          <li>
             <nuxt-link to="/settings">
               Settings
             </nuxt-link>
@@ -88,6 +93,9 @@ export default {
 }
 .dropdown-menu a {
   @apply block px-4 py-2;
+}
+.dropdown-menu li {
+  @apply transition duration-300 ease-in-out;
 }
 .dropdown-menu li:hover {
   @apply bg-gray-200;

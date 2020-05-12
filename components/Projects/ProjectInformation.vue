@@ -62,10 +62,12 @@ export default {
         title: 'Are you sure you want to trash this project?',
         icon: 'warning',
         showCancelButton: true,
+        confirmButtonColor: '#E53E3E',
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.value) {
           this.$store.dispatch('projects/trashProject', project)
+          this.$router.back()
         }
       })
     }

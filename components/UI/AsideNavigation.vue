@@ -55,7 +55,7 @@ a {
 }
 
 .nuxt-link-active,
-.text-teal-500 {
+.text-teal-700 {
   @apply opacity-100;
 }
 </style>

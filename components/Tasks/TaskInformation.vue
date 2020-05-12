@@ -63,10 +63,12 @@ export default {
         title: 'Are you sure you want to trash this task?',
         icon: 'warning',
         showCancelButton: true,
+        confirmButtonColor: '#E53E3E',
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.value) {
           this.$store.dispatch('tasks/trashTask', task)
+          this.$router.back()
         }
       })
     }

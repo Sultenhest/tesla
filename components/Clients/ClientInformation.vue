@@ -17,7 +17,7 @@
       <small class="text-sm text-gray-700"
         >Last updated: <Moment :timestamp="client.updated_at"
       /></small>
-      <button class="button-danger" @click="trash(getCurrentClient)">
+      <button class="button-danger" @click="trash(client)">
         <Icon icon-name="trash" icon-text="Trash" />
       </button>
     </div>
@@ -40,10 +40,12 @@ export default {
         title: 'Are you sure you want to trash this client?',
         icon: 'warning',
         showCancelButton: true,
+        confirmButtonColor: '#E53E3E',
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.value) {
           this.$store.dispatch('clients/trashClient', client)
+          this.$router.back()
         }
       })
     }

@@ -59,6 +59,17 @@
       </Card>
     </div>
 
+    {{ statistics }}
+    <ul>
+      <li
+        v-for="statistic in statistics"
+        :id="statistic.id"
+        :key="statistic.id"
+      >
+        {{ statistic }}
+      </li>
+    </ul>
+
     <Card title="Big Dick Charts" style="display: none;">
       <LineChart :data="lineData" />
       <PieChart :data="pieData" />
@@ -81,10 +92,12 @@ export default {
     PieChart
   },
   fetch() {
+    this.$auth.fetchUser()
     this.$axios
       .$get('/api/dashboard')
       .then((response) => {
         this.projects = response.projects
+        this.statistics = response.statistics
       })
       .catch((error) => {
         this.error = error
@@ -93,6 +106,7 @@ export default {
   data() {
     return {
       projects: {},
+      statistics: {},
       error: {},
       lineData: {
         labels: ['January', 'February', 'March'],

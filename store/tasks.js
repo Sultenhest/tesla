@@ -1,4 +1,4 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 
 export const state = () => ({
   currentTask: {},
@@ -20,8 +20,8 @@ export const mutations = {
     const taskIndex = state.allTasks.findIndex(
       (task) => task.id === updatedTask.id
     )
-    // state.allTasks[taskIndex] = updatedTask
-    Vue.set(state.allTasks, taskIndex, updatedTask)
+    state.allTasks[taskIndex] = updatedTask
+    // Vue.set(state.allTasks, taskIndex, updatedTask)
     state.currentTask = updatedTask
   },
   trashTask(state, task) {
@@ -39,6 +39,9 @@ export const actions = {
       .$get('/api/projects/' + idArray[0] + '/tasks/' + idArray[1])
       .then((response) => {
         context.commit('setCurrentTask', response.data)
+      })
+      .catch((error) => {
+        this.$toast.error(error.response.data.message)
       })
   },
   getTasks(context) {

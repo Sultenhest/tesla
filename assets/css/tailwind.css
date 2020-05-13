@@ -50,3 +50,7 @@ body {
 .button-danger {
   @apply py-1 px-2 rounded text-sm text-white bg-red-500;
 }
+
+.button-active {
+  @apply opacity-50;
+}

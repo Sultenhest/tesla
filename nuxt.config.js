@@ -120,6 +120,7 @@ export default {
   toast: {
     position: 'bottom-right',
     duration: 3000,
+    // className: ['w-64', 'h-12', 'p-4', 'bg-white', 'rounded'],
     register: [
       // Register custom toasts
       {

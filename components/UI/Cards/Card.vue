@@ -46,6 +46,6 @@ export default {
 }
 
 .card-footer {
-  @apply flex items-center justify-center py-3 px-5 rounded-b bg-white border-t;
+  @apply items-center justify-between py-3 px-5 rounded-b bg-white border-t;
 }
 </style>

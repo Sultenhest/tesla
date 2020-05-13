@@ -1,12 +1,13 @@
 <template>
   <div>
+    <span v-if="iconAlign === 'right'">{{ iconText }}</span>
     <svgicon
       :name="iconName"
       :width="getSize"
       :height="getSize"
       class="mr-1"
     ></svgicon>
-    {{ iconText }}
+    <span v-if="iconAlign === 'left'">{{ iconText }}</span>
   </div>
 </template>
 
@@ -28,6 +29,13 @@ export default {
     iconText: {
       type: String,
       default: ''
+    },
+    iconAlign: {
+      type: String,
+      default: 'left',
+      validator: (value) => {
+        return ['left', 'right'].includes(value)
+      }
     }
   },
   computed: {

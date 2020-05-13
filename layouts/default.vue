@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import HeaderNavigation from '~/components/UI/HeaderNavigation.vue'
-import AsideNavigation from '~/components/UI/AsideNavigation.vue'
+import HeaderNavigation from '~/components/UI/Navigation/HeaderNavigation.vue'
+import AsideNavigation from '~/components/UI/Navigation/AsideNavigation.vue'
 
 export default {
   components: {

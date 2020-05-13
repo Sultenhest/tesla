@@ -31,6 +31,9 @@
           </tr>
         </tbody>
       </Table>
+      <div class="card-footer">
+        <slot></slot>
+      </div>
     </Card>
   </div>
 </template>

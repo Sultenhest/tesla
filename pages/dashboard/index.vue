@@ -26,7 +26,7 @@
 
     <div class="block lg:flex">
       <Card
-        class="w-full lg:w-2/3 mr-0 lg:mr-2"
+        class="w-full lg:w-2/3 mr-0 lg:mr-2 mb-4 lg:mb-0"
         title="Overview"
         sub-title="Your current status"
       >

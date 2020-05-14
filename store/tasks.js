@@ -1,9 +1,9 @@
-// import Vue from 'vue'
+import Vue from 'vue'
 
 export const state = () => ({
   currentTask: {},
   meta: [],
-  allTasks: [],
+  tasks: [],
   trashedTasks: []
 })
 
@@ -12,27 +12,30 @@ export const mutations = {
     state.currentTask = task
   },
   setTasks(state, tasks) {
-    state.allTasks = tasks
+    state.tasks = state.tasks.concat(tasks)
+  },
+  resetTasks(state) {
+    state.tasks = []
   },
   setMeta(state, meta) {
     state.meta = meta
   },
   addTask(state, task) {
-    state.allTasks.unshift(task)
+    state.tasks.unshift(task)
   },
   updateTask(state, updatedTask) {
-    const taskIndex = state.allTasks.findIndex(
+    const taskIndex = state.tasks.findIndex(
       (task) => task.id === updatedTask.id
     )
-    state.allTasks[taskIndex] = updatedTask
-    // Vue.set(state.allTasks, taskIndex, updatedTask)
+    // state.tasks[taskIndex] = updatedTask
+    Vue.set(state.tasks, taskIndex, updatedTask)
     state.currentTask = updatedTask
   },
   trashTask(state, task) {
-    const index = state.allTasks.indexOf(task)
+    const index = state.tasks.indexOf(task)
     if (index > -1) {
       state.trashedTasks.push(task)
-      state.allTasks.splice(index, 1)
+      state.tasks.splice(index, 1)
     }
   }
 }
@@ -48,8 +51,11 @@ export const actions = {
         this.$toast.error(error.response.data.message)
       })
   },
-  getTasks(context) {
-    return this.$axios.$get('/api/tasks').then((response) => {
+  getTasks(context, page) {
+    if (page === 1) {
+      context.commit('resetTasks')
+    }
+    return this.$axios.$get('/api/tasks?page=' + page).then((response) => {
       context.commit('setTasks', response.data)
       context.commit('setMeta', response.meta)
     })
@@ -60,6 +66,7 @@ export const actions = {
       .then((response) => {
         context.commit('addTask', response.task)
         this.$toast.success(response.message)
+        context.dispatch('getTasks', 1)
       })
       .catch((error) => {
         this.$toast.error(error.response.data.message)
@@ -157,8 +164,8 @@ export const getters = {
   getCurrentTask: (state) => {
     return state.currentTask
   },
-  getAllTasks: (state) => {
-    return state.allTasks
+  getTasks: (state) => {
+    return state.tasks
   },
   getMeta: (state) => {
     return state.meta

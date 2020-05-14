@@ -9,10 +9,19 @@
         </button>
       </template>
       <Table :cols="['Task Title', 'Project', 'Completed', 'Billed', '']">
-        <TasksList :tasks="getAllTasks" />
+        <TasksList :tasks="getTasks" />
       </Table>
-      <div class="card-footer">
-        <Pagination base="tasks" :meta="getMeta" />
+      <div class="card-footer flex flex-col">
+        <button
+          v-if="!currentPageIsLastPage"
+          class="button-primary mb-2"
+          @click="loadMore"
+        >
+          Load more
+        </button>
+        <p class="text-sm text-center text-gray-700">
+          Showing 1 to {{ getMeta.to }} of {{ getMeta.total }} results
+        </p>
       </div>
     </Card>
   </div>
@@ -25,20 +34,33 @@ import Table from '~/components/UI/Table.vue'
 
 import TasksModal from '~/components/Tasks/TasksModal.vue'
 import TasksList from '~/components/Tasks/TasksList.vue'
-import Pagination from '~/components/UI/Navigation/Pagination.vue'
 
 export default {
   components: {
     Table,
     TasksModal,
-    TasksList,
-    Pagination
+    TasksList
   },
-  fetch({ store, params }) {
-    store.dispatch('tasks/getTasks')
+  fetch({ store }) {
+    store.dispatch('tasks/getTasks', 1)
+  },
+  data() {
+    return {
+      noMoreData: false
+    }
   },
   computed: {
-    ...mapGetters('tasks', ['getAllTasks', 'getMeta'])
+    ...mapGetters('tasks', ['getTasks', 'getMeta']),
+    currentPageIsLastPage() {
+      return this.getMeta.current_page === this.getMeta.last_page
+    }
+  },
+  methods: {
+    loadMore() {
+      if (!this.currentPageIsLastPage) {
+        this.$store.dispatch('tasks/getTasks', this.getMeta.current_page + 1)
+      }
+    }
   }
 }
 </script>

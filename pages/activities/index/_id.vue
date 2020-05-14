@@ -24,11 +24,12 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'ActivitesTable',
-  fetch({ store, params }) {
-    store.dispatch('activities/getActivities', params.id)
+  fetch({ store, params, query }) {
+    store.dispatch('activities/getActivities', query.page)
   },
   computed: {
-    ...mapGetters('activities', ['getActivities', 'getMeta', 'getLinks'])
-  }
+    ...mapGetters('activities', ['getActivities', 'getMeta'])
+  },
+  watchQuery: ['page']
 }
 </script>

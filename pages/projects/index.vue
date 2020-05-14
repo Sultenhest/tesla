@@ -11,6 +11,9 @@
       <Table :cols="['Project Title', 'Client', 'Tasks', '']">
         <ProjectsList :projects="getAllProjects" />
       </Table>
+      <div class="card-footer">
+        <Pagination base="projects" :meta="getMeta" />
+      </div>
     </Card>
   </div>
 </template>
@@ -22,18 +25,20 @@ import Table from '~/components/UI/Table.vue'
 
 import ProjectsModal from '~/components/Projects/ProjectsModal.vue'
 import ProjectsList from '~/components/Projects/ProjectsList.vue'
+import Pagination from '~/components/UI/Navigation/Pagination.vue'
 
 export default {
   components: {
     Table,
     ProjectsModal,
-    ProjectsList
+    ProjectsList,
+    Pagination
+  },
+  fetch({ store, params }) {
+    store.dispatch('projects/getProjects')
   },
   computed: {
-    ...mapGetters('projects', ['getAllProjects'])
-  },
-  created() {
-    this.$store.dispatch('projects/getProjects')
+    ...mapGetters('projects', ['getAllProjects', 'getMeta'])
   }
 }
 </script>

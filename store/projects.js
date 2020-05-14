@@ -1,5 +1,6 @@
 export const state = () => ({
   allProjects: [],
+  meta: [],
   trashedProjects: [],
   currentProject: {}
 })
@@ -11,6 +12,9 @@ export const mutations = {
   },
   setProjects(state, projects) {
     state.allProjects = projects
+  },
+  setMeta(state, meta) {
+    state.meta = meta
   },
   addProject(state, project) {
     state.allProjects.unshift(project)
@@ -40,6 +44,7 @@ export const actions = {
   getProjects(context) {
     return this.$axios.$get('/api/projects').then((response) => {
       context.commit('setProjects', response.data)
+      context.commit('setMeta', response.meta)
     })
   },
   addProject(context, project) {
@@ -106,6 +111,9 @@ export const getters = {
   },
   getAllProjects: (state) => {
     return state.allProjects
+  },
+  getMeta: (state) => {
+    return state.meta
   },
   getAllTrashedProjects: (state) => {
     return state.trashedProjects

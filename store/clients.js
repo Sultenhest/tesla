@@ -1,5 +1,7 @@
 export const state = () => ({
   allClients: [],
+  meta: [],
+  links: [],
   trashedClients: [],
   currentClient: {}
 })
@@ -10,6 +12,12 @@ export const mutations = {
   },
   setClients(state, clients) {
     state.allClients = clients
+  },
+  setMeta(state, meta) {
+    state.meta = meta
+  },
+  setLinks(state, links) {
+    state.links = links
   },
   addClient(state, client) {
     state.allClients.unshift(client)
@@ -39,6 +47,8 @@ export const actions = {
   getClients(context) {
     return this.$axios.$get('/api/clients').then((response) => {
       context.commit('setClients', response.data)
+      context.commit('setMeta', response.meta)
+      context.commit('setLinks', response.links)
     })
   },
   addClient(context, client) {
@@ -104,6 +114,12 @@ export const getters = {
   },
   getAllClients: (state) => {
     return state.allClients
+  },
+  getMeta: (state) => {
+    return state.meta
+  },
+  getLinks: (state) => {
+    return state.links
   },
   getAllTrashedClients: (state) => {
     return state.trashedClients

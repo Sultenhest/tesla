@@ -2,6 +2,7 @@
 
 export const state = () => ({
   currentTask: {},
+  meta: [],
   allTasks: [],
   trashedTasks: []
 })
@@ -12,6 +13,9 @@ export const mutations = {
   },
   setTasks(state, tasks) {
     state.allTasks = tasks
+  },
+  setMeta(state, meta) {
+    state.meta = meta
   },
   addTask(state, task) {
     state.allTasks.unshift(task)
@@ -47,6 +51,7 @@ export const actions = {
   getTasks(context) {
     return this.$axios.$get('/api/tasks').then((response) => {
       context.commit('setTasks', response.data)
+      context.commit('setMeta', response.meta)
     })
   },
   addTask(context, task) {
@@ -154,6 +159,9 @@ export const getters = {
   },
   getAllTasks: (state) => {
     return state.allTasks
+  },
+  getMeta: (state) => {
+    return state.meta
   },
   getAllTrashedTasks: (state) => {
     return state.trashedTasks

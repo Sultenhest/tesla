@@ -2,10 +2,10 @@
   <div>
     <Card title="Activities" class="mt-4">
       <Table :cols="['Subject Type', 'Activity', 'Changes', 'At']">
-        <nuxt-child :key="$route.params.id" />
+        <nuxt-child :key="$route.query.page" />
       </Table>
       <div class="card-footer">
-        <Pagination :meta="getMeta" />
+        <Pagination base="activities" :meta="getMeta" />
       </div>
     </Card>
   </div>
@@ -22,24 +22,12 @@ export default {
     Table,
     Pagination
   },
-  fetch({ store, params }) {
-    store.dispatch('activities/getActivities', params.id)
+  fetch({ store, params, query }) {
+    store.dispatch('activities/getActivities', query.page)
   },
   computed: {
-    ...mapGetters('activities', ['getMeta', 'getLinks'])
-  }
-  /*
-  methods: {
-    previous(url) {
-      return '/activities/5'
-    },
-    next(url) {
-      if (this.$route.params.id === 1 && this.getMeta.last_page !== 1) {
-        return '/activities/2'
-      }
-      return '/activities/7'
-    }
-  }
-  */
+    ...mapGetters('activities', ['getMeta'])
+  },
+  watchQuery: ['page']
 }
 </script>

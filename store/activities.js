@@ -1,7 +1,6 @@
 export const state = () => ({
   activities: [],
-  meta: [],
-  links: []
+  meta: []
 })
 
 export const mutations = {
@@ -10,9 +9,6 @@ export const mutations = {
   },
   setMeta(state, meta) {
     state.meta = meta
-  },
-  setLinks(state, links) {
-    state.links = links
   }
 }
 
@@ -23,7 +19,6 @@ export const actions = {
       .then((response) => {
         context.commit('setActivities', response.data)
         context.commit('setMeta', response.meta)
-        context.commit('setLinks', response.links)
       })
   }
 }
@@ -34,8 +29,5 @@ export const getters = {
   },
   getMeta: (state) => {
     return state.meta
-  },
-  getLinks: (state) => {
-    return state.links
   }
 }

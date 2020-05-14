@@ -55,10 +55,15 @@ export const actions = {
     if (page === 1) {
       context.commit('resetTasks')
     }
-    return this.$axios.$get('/api/tasks?page=' + page).then((response) => {
-      context.commit('setTasks', response.data)
-      context.commit('setMeta', response.meta)
-    })
+    return this.$axios
+      .$get('/api/tasks?page=' + page)
+      .then((response) => {
+        context.commit('setTasks', response.data)
+        context.commit('setMeta', response.meta)
+      })
+      .catch((error) => {
+        this.$toast.error(error.response.data.message)
+      })
   },
   addTask(context, task) {
     return this.$axios

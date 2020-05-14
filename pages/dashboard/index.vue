@@ -59,6 +59,8 @@
       </Card>
     </div>
 
+    {{ feed }}
+
     {{ statistics }}
     <ul>
       <li
@@ -98,6 +100,7 @@ export default {
       .then((response) => {
         this.projects = response.projects
         this.statistics = response.statistics
+        this.feed = response.feed
       })
       .catch((error) => {
         this.error = error
@@ -107,6 +110,7 @@ export default {
     return {
       projects: {},
       statistics: {},
+      feed: {},
       error: {},
       lineData: {
         labels: ['January', 'February', 'March'],

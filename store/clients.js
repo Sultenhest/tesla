@@ -32,14 +32,24 @@ export const mutations = {
 
 export const actions = {
   getClient(context, id) {
-    return this.$axios.$get('/api/clients/' + id).then((response) => {
-      context.commit('setCurrentClient', response.data)
-    })
+    return this.$axios
+      .$get('/api/clients/' + id)
+      .then((response) => {
+        context.commit('setCurrentClient', response.data)
+      })
+      .catch((error) => {
+        this.$toast.error(error.response.data.message)
+      })
   },
   getClients(context) {
-    return this.$axios.$get('/api/clients').then((response) => {
-      context.commit('setClients', response.data)
-    })
+    return this.$axios
+      .$get('/api/clients')
+      .then((response) => {
+        context.commit('setClients', response.data)
+      })
+      .catch((error) => {
+        this.$toast.error(error.response.data.message)
+      })
   },
   addClient(context, client) {
     return this.$axios

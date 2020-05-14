@@ -5,7 +5,7 @@
   >
     <HeaderNavigation />
 
-    <div class="container flex-col lg:flex-row mt-6 lg:mt-10 px-2">
+    <div class="container flex-col lg:flex-row mt-4 lg:mt-10 px-2">
       <AsideNavigation class="w-full lg:w-1/5" />
 
       <main class="w-full lg:w-4/5">

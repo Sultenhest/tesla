@@ -1,41 +1,17 @@
 <template>
   <div class="dropdown">
     <div class="dropdown-toggle" @click.prevent="toggleOpen">
-      <p class="leading-8 mr-2">
-        {{ $auth.user.name }}
-      </p>
-      <img
-        class="inline-block h-8 w-8 rounded-full text-white shadow-solid"
-        :class="{ 'border-2 border-gray-400': isOpen }"
-        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
-        alt=""
-      />
+      <slot name="trigger"></slot>
     </div>
 
     <transition name="dropdown-menu" mode="out-in">
-      <div v-show="isOpen" class="dropdown-menu" @click.prevent="toggleOpen">
-        <ul class="py-1">
-          <li>
-            <nuxt-link to="/me">
-              Profile
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/activities">
-              Activity
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/settings">
-              Settings
-            </nuxt-link>
-          </li>
-          <li>
-            <nuxt-link to="/logout">
-              Logout
-            </nuxt-link>
-          </li>
-        </ul>
+      <div
+        v-show="isOpen"
+        class="dropdown-menu"
+        :class="align === 'left' ? 'left-0' : 'right-0'"
+        @click.prevent="toggleOpen"
+      >
+        <slot></slot>
       </div>
     </transition>
   </div>
@@ -44,6 +20,9 @@
 <script>
 export default {
   name: 'Dropdown',
+  props: {
+    align: { type: String, default: 'right' }
+  },
   data() {
     return {
       isOpen: false
@@ -67,7 +46,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .dropdown {
   @apply relative cursor-pointer;
 }
@@ -75,7 +54,7 @@ export default {
   @apply flex;
 }
 .dropdown-menu {
-  @apply w-48 absolute right-0 bg-white rounded shadow;
+  @apply w-48 absolute bg-white rounded shadow;
   @apply origin-top-right;
   top: 2.5rem;
 }

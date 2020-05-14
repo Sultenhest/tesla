@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Card title="Activities" class="mt-4">
+    <Card title="Activities">
       <Table :cols="['Subject Type', 'Activity', 'Changes', 'At']">
         <nuxt-child :key="$route.query.page" />
       </Table>

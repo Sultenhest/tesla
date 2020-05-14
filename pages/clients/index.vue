@@ -12,7 +12,9 @@
         <ClientsList :clients="getAllClients" />
       </Table>
       <div class="card-footer">
-        <Pagination base="clients" :meta="getMeta" />
+        <p class="text-sm text-center text-gray-700">
+          Showing all clients
+        </p>
       </div>
     </Card>
   </div>
@@ -25,20 +27,18 @@ import Table from '~/components/UI/Table.vue'
 
 import ClientsModal from '~/components/Clients/ClientsModal.vue'
 import ClientsList from '~/components/Clients/ClientsList.vue'
-import Pagination from '~/components/UI/Navigation/Pagination.vue'
 
 export default {
   components: {
     Table,
     ClientsModal,
-    ClientsList,
-    Pagination
+    ClientsList
   },
   fetch({ store, params }) {
     store.dispatch('clients/getClients')
   },
   computed: {
-    ...mapGetters('clients', ['getAllClients', 'getMeta'])
+    ...mapGetters('clients', ['getAllClients'])
   },
   methods: {
     async restore(client) {

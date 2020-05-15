@@ -26,13 +26,6 @@ export default {
       type: Number,
       required: true
     },
-    arrow: {
-      type: String,
-      default: 'up',
-      validator: (value) => {
-        return ['up', 'down'].includes(value)
-      }
-    },
     percentage: {
       type: Number,
       required: true
@@ -40,13 +33,13 @@ export default {
   },
   computed: {
     getIcon() {
-      if (this.arrow === 'down') {
+      if (this.percentage < 0) {
         return 'arrow-thin-down'
       }
       return 'arrow-thin-up'
     },
     getClasses() {
-      if (this.arrow === 'down') {
+      if (this.percentage < 0) {
         return 'bg-red-200 text-red-500'
       }
       return 'bg-green-200 text-green-500'

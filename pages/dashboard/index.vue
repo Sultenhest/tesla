@@ -4,17 +4,24 @@
       <Card class="w-full" title="Statistics" sub-title="This week in numbers">
         <div class="flex flex-wrap p-3">
           <div class="w-1/2 md:w-1/4 p-3">
-            <Stat header="Billed Tasks" :value="11" :percentage="1" />
+            <Stat
+              header="Billed Tasks"
+              :value="getBilledAt.this_week"
+              :percentage="getBilledAt.difference"
+            />
           </div>
           <div class="w-1/2 md:w-1/4 p-3">
-            <Stat header="Completed tasks" :value="33" :percentage="18" />
+            <Stat
+              header="Completed tasks"
+              :value="getCompletedAt.this_week"
+              :percentage="getCompletedAt.difference"
+            />
           </div>
           <div class="w-1/2 md:w-1/4 p-3">
             <Stat
               header="New Tasks"
-              :value="12"
-              arrow="down"
-              :percentage="22"
+              :value="getCreatedAt.this_week"
+              :percentage="getCreatedAt.difference"
             />
           </div>
           <div class="w-1/2 md:w-1/4 p-3">
@@ -58,48 +65,27 @@
         />
       </Card>
     </div>
-
-    {{ feed }}
-
-    {{ statistics }}
-    <ul>
-      <li
-        v-for="statistic in statistics"
-        :id="statistic.id"
-        :key="statistic.id"
-      >
-        {{ statistic }}
-      </li>
-    </ul>
-
-    <Card title="Big Dick Charts" style="display: none;">
-      <LineChart :data="lineData" />
-      <PieChart :data="pieData" />
-    </Card>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 import ProjectsListItem from '~/components/Dashboard/ProjectsListItem.vue'
 import Stat from '~/components/Dashboard/Stat.vue'
-
-import LineChart from '~/components/Charts/LineChart.vue'
-import PieChart from '~/components/Charts/PieChart.vue'
 
 export default {
   components: {
     ProjectsListItem,
-    Stat,
-    LineChart,
-    PieChart
+    Stat
   },
   fetch() {
     this.$auth.fetchUser()
+    this.$store.dispatch('taskStatistics/getBilledStats')
     this.$axios
       .$get('/api/dashboard')
       .then((response) => {
         this.projects = response.projects
-        this.statistics = response.statistics
         this.feed = response.feed
       })
       .catch((error) => {
@@ -109,32 +95,15 @@ export default {
   data() {
     return {
       projects: {},
-      statistics: {},
-      feed: {},
-      error: {},
-      lineData: {
-        labels: ['January', 'February', 'March'],
-        datasets: [
-          {
-            label: 'GitHub Commits',
-            backgroundColor: 'transparent',
-            pointBackgroundColor: '#2c7a7b',
-            borderColor: '#2c7a7b',
-            data: [40, 20, 12]
-          }
-        ]
-      },
-      pieData: {
-        labels: ['Green', 'Red', 'Blue'],
-        datasets: [
-          {
-            label: 'Data One',
-            backgroundColor: ['#41B883', '#E46651', '#00D8FF'],
-            data: [1, 10, 5]
-          }
-        ]
-      }
+      feed: {}
     }
+  },
+  computed: {
+    ...mapGetters('taskStatistics', [
+      'getBilledAt',
+      'getCompletedAt',
+      'getCreatedAt'
+    ])
   }
 }
 </script>

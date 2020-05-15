@@ -4,7 +4,7 @@
       <div class="relative flex items-center justify-between h-16">
         <Dropdown align="left" class="lg:hidden">
           <template v-slot:trigger>
-            Menu
+            <Icon icon-name="menu" />
           </template>
 
           <ul class="py-1">
@@ -31,7 +31,7 @@
           </ul>
         </Dropdown>
         <nuxt-link to="/" class="text-xl">
-          🐈<span class="text-gray-800 ml-1">Tesla</span>
+          <span class="text-gray-800 ml-1">🐈 Tesla</span>
         </nuxt-link>
         <Dropdown>
           <template v-slot:trigger>

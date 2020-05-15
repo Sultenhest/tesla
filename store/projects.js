@@ -87,7 +87,7 @@ export const actions = {
       .$delete('/api/projects/' + project.id)
       .then((response) => {
         context.commit('trashProject', project)
-        this.$toast.success('trashed')
+        this.$toast.show('Project was trashed')
       })
       .catch((error) => {
         this.$toast.error(error.response)
@@ -97,7 +97,7 @@ export const actions = {
     return this.$axios
       .$patch('/api/projects/' + project.id + '/restore')
       .then((response) => {
-        this.$toast.success(response.message)
+        this.$toast.show(response.message)
       })
       .catch((error) => {
         this.$toast.error(error.response)
@@ -107,7 +107,7 @@ export const actions = {
     return this.$axios
       .$delete('/api/projects/' + project.id + '/forcedelete')
       .then((response) => {
-        this.$toast.success(response.message)
+        this.$toast.show(response.message)
       })
       .catch((error) => {
         this.$toast.error(error.response)

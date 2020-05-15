@@ -80,7 +80,7 @@ export const actions = {
       .$delete('/api/clients/' + client.id)
       .then((response) => {
         context.commit('trashClient', client)
-        this.$toast.success('trashed')
+        this.$toast.show('Client was trashed')
       })
       .catch((error) => {
         this.$toast.error(error.response)
@@ -90,7 +90,7 @@ export const actions = {
     return this.$axios
       .$patch('/api/clients/' + client.id + '/restore')
       .then((response) => {
-        this.$toast.success(response.message)
+        this.$toast.show(response.message)
       })
       .catch((error) => {
         this.$toast.error(error.response)
@@ -100,7 +100,7 @@ export const actions = {
     return this.$axios
       .$delete('/api/clients/' + client.id + '/forcedelete')
       .then((response) => {
-        this.$toast.success(response.message)
+        this.$toast.show(response.message)
       })
       .catch((error) => {
         this.$toast.error(error.response)

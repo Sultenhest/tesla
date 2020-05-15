@@ -99,7 +99,7 @@ export const actions = {
       .$delete('/api/projects/' + task.project_id + '/tasks/' + task.id)
       .then((response) => {
         context.commit('trashTask', task)
-        this.$toast.success('trashed')
+        this.$toast.show('Task was trashed.')
       })
       .catch((error) => {
         this.$toast.error(error.response)
@@ -111,7 +111,7 @@ export const actions = {
         '/api/projects/' + task.project_id + '/tasks/' + task.id + '/restore'
       )
       .then((response) => {
-        this.$toast.success(response.message)
+        this.$toast.show(response.message)
       })
       .catch((error) => {
         this.$toast.error(error.response)
@@ -127,7 +127,7 @@ export const actions = {
           '/forcedelete'
       )
       .then((response) => {
-        this.$toast.success(response.message)
+        this.$toast.show(response.message)
       })
       .catch((error) => {
         this.$toast.error(error.response)
@@ -141,7 +141,7 @@ export const actions = {
       )
       .then((response) => {
         context.commit('updateTask', response.task)
-        this.$toast.success(response.message)
+        this.$toast.show(response.message)
       })
       .catch((error) => {
         this.$toast.error(error.response.data.message)
@@ -156,7 +156,7 @@ export const actions = {
       )
       .then((response) => {
         context.commit('updateTask', response.task)
-        this.$toast.success(response.message)
+        this.$toast.show(response.message)
       })
       .catch((error) => {
         this.$toast.error(error.response.data.message)

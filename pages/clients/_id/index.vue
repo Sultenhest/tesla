@@ -6,12 +6,6 @@
       :client="getCurrentClient"
     />
 
-    <button class="button mb-3">
-      <nuxt-link to="/clients">
-        <Icon icon-name="arrow-thin-left" icon-text="Back" class="text-black" />
-      </nuxt-link>
-    </button>
-
     <Card :title="getCurrentClient.name" :sub-title="getVat()" :center="true">
       <template v-slot:button>
         <button class="button-teal" @click="$modal.show('edit-client')">

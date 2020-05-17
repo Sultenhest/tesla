@@ -6,12 +6,6 @@
       :project="getCurrentProject"
     />
 
-    <button class="button mb-3">
-      <nuxt-link to="/projects">
-        <Icon icon-name="arrow-thin-left" icon-text="Back" class="text-black" />
-      </nuxt-link>
-    </button>
-
     <div class="block lg:flex">
       <Card
         class="w-full lg:w-4/6 mr-4 mb-4 lg:mb-0"

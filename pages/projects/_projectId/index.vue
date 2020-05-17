@@ -71,6 +71,8 @@
       </div>
     </Card>
 
+    <ActivitiesModal />
+
     <ActivityFeed :activities="getCurrentProject.activity" />
   </div>
 </template>
@@ -78,7 +80,8 @@
 <script>
 import { mapGetters } from 'vuex'
 
-import ActivityFeed from '~/components/ActivityFeed.vue'
+import ActivitiesModal from '~/components/Activities/ActivitiesModal.vue'
+import ActivityFeed from '~/components/Activities/ActivityFeed.vue'
 
 import Table from '~/components/UI/Table.vue'
 
@@ -90,6 +93,7 @@ import TasksList from '~/components/Tasks/TasksList.vue'
 
 export default {
   components: {
+    ActivitiesModal,
     ActivityFeed,
     Table,
     ProjectInformation,

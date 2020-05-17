@@ -3,29 +3,26 @@
     <div class="block lg:flex mb-4">
       <Card class="w-full" title="Statistics" sub-title="This week in numbers">
         <div class="flex flex-wrap p-3">
-          <div class="w-1/2 md:w-1/4 p-3">
+          <div class="w-1/3 p-3">
             <Stat
               header="Billed Tasks"
               :value="getBilledAt.this_week"
               :percentage="getBilledAt.difference"
             />
           </div>
-          <div class="w-1/2 md:w-1/4 p-3">
+          <div class="w-1/3 p-3">
             <Stat
               header="Completed tasks"
               :value="getCompletedAt.this_week"
               :percentage="getCompletedAt.difference"
             />
           </div>
-          <div class="w-1/2 md:w-1/4 p-3">
+          <div class="w-1/3 p-3">
             <Stat
               header="New Tasks"
               :value="getCreatedAt.this_week"
               :percentage="getCreatedAt.difference"
             />
-          </div>
-          <div class="w-1/2 md:w-1/4 p-3">
-            <Stat header="Total Tasks" :value="54" :percentage="44" />
           </div>
         </div>
       </Card>
@@ -86,7 +83,6 @@ export default {
       .$get('/api/dashboard')
       .then((response) => {
         this.projects = response.projects
-        this.feed = response.feed
       })
       .catch((error) => {
         this.error = error
@@ -94,8 +90,7 @@ export default {
   },
   data() {
     return {
-      projects: {},
-      feed: {}
+      projects: {}
     }
   },
   computed: {

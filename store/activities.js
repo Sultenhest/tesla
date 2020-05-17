@@ -1,6 +1,7 @@
 export const state = () => ({
   activities: [],
-  meta: []
+  meta: [],
+  feed: []
 })
 
 export const mutations = {
@@ -9,16 +10,27 @@ export const mutations = {
   },
   setMeta(state, meta) {
     state.meta = meta
+  },
+  setFeed(state, feed) {
+    state.feed = feed
   }
 }
 
 export const actions = {
-  async getActivities(context, page) {
-    return await this.$axios
-      .$get('/api/activities?page=' + page)
+  getActivities(context, page) {
+    return this.$axios.$get('/api/activities?page=' + page).then((response) => {
+      context.commit('setActivities', response.data)
+      context.commit('setMeta', response.meta)
+    })
+  },
+  fetchFeed(context) {
+    return this.$axios
+      .$get('/api/me')
       .then((response) => {
-        context.commit('setActivities', response.data)
-        context.commit('setMeta', response.meta)
+        context.commit('setFeed', response.feed)
+      })
+      .catch((error) => {
+        this.$toast.error(error.response.data.message)
       })
   }
 }
@@ -29,5 +41,8 @@ export const getters = {
   },
   getMeta: (state) => {
     return state.meta
+  },
+  getFeed: (state) => {
+    return state.feed
   }
 }

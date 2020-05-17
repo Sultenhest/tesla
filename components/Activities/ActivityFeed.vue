@@ -1,17 +1,6 @@
 <template>
   <div>
-    <modal name="activity-info" height="auto" @before-open="setCurrentActivity">
-      <Card title="Activity Information" :center="true">
-        <template v-slot:button>
-          <button class="button" @click="$modal.hide('activity-info')">
-            <Icon icon-name="close" icon-text="Close" />
-          </button>
-        </template>
-        <pre><code>{{ currentActivity.changes }}</code></pre>
-      </Card>
-    </modal>
-
-    <Card title="Activities" class="mt-4">
+    <Card :title="title" class="mt-4">
       <Table :cols="['Activity', 'Changes', 'At']">
         <tbody>
           <tr
@@ -47,22 +36,16 @@ export default {
     Table
   },
   props: {
+    title: {
+      type: String,
+      default: 'Activities'
+    },
     activities: {
       type: Array,
       required: true
     }
   },
-  data() {
-    return {
-      currentActivity: {
-        changes: null
-      }
-    }
-  },
   methods: {
-    setCurrentActivity(event) {
-      this.currentActivity = event.params.activity
-    },
     listChanges(changes) {
       if (changes == null) {
         return ''

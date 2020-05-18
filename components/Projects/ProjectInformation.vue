@@ -40,8 +40,12 @@
         <h4 class="text-xl mt-3">4h 30m</h4>
       </div>
       <div class="w-1/3 p-3">
-        <small class="text-sm text-gray-700"></small>
-        <h4 class="text-xl mt-3"></h4>
+        <small class="text-sm text-gray-700">Activities</small>
+        <h4 class="text-xl mt-3">
+          <button class="button-teal">
+            <nuxt-link :to="activitiesLink">See Activity Log</nuxt-link>
+          </button>
+        </h4>
       </div>
     </div>
 
@@ -69,6 +73,11 @@ export default {
       type: Object,
       required: true,
       default: () => null
+    }
+  },
+  computed: {
+    activitiesLink() {
+      return this.$route.path + '/activities'
     }
   },
   methods: {

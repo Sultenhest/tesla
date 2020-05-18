@@ -2,7 +2,9 @@ export const state = () => ({
   allProjects: [],
   meta: [],
   trashedProjects: [],
-  currentProject: {}
+  currentProject: {},
+  projectActivity: [],
+  projectMeta: []
 })
 
 export const mutations = {
@@ -35,6 +37,12 @@ export const mutations = {
       state.trashedProjects.push(project)
       state.allProjects.splice(index, 1)
     }
+  },
+  setProjectActivity(state, activities) {
+    state.projectActivity = activities
+  },
+  setProjectMeta(state, meta) {
+    state.projectMeta = meta
   }
 }
 
@@ -126,6 +134,17 @@ export const actions = {
       .catch((error) => {
         this.$toast.error(error.response)
       })
+  },
+  getProjectActivity(context, params) {
+    return this.$axios
+      .$get('/api/projects/' + params[0] + '/activity?page=' + params[1])
+      .then((response) => {
+        context.commit('setProjectActivity', response.data)
+        context.commit('setProjectMeta', response.meta)
+      })
+      .catch((error) => {
+        this.$toast.error(error.response.data.message)
+      })
   }
 }
 
@@ -141,5 +160,11 @@ export const getters = {
   },
   getAllTrashedProjects: (state) => {
     return state.trashedProjects
+  },
+  getProjectActivity: (state) => {
+    return state.projectActivity
+  },
+  getProjectMeta: (state) => {
+    return state.projectMeta
   }
 }

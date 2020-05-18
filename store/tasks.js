@@ -4,7 +4,9 @@ export const state = () => ({
   currentTask: {},
   meta: [],
   tasks: [],
-  trashedTasks: []
+  trashedTasks: [],
+  taskActivity: [],
+  taskMeta: []
 })
 
 export const mutations = {
@@ -37,6 +39,12 @@ export const mutations = {
       state.trashedTasks.push(task)
       state.tasks.splice(index, 1)
     }
+  },
+  setTaskActivity(state, activities) {
+    state.taskActivity = activities
+  },
+  setTaskMeta(state, meta) {
+    state.taskMeta = meta
   }
 }
 
@@ -170,6 +178,24 @@ export const actions = {
         this.$toast.error(error.response.data.message)
         return error.response.data.errors
       })
+  },
+  getTaskActivity(context, params) {
+    return this.$axios
+      .$get(
+        '/api/projects/' +
+          params[0] +
+          '/tasks/' +
+          params[1] +
+          '/activity?page=' +
+          params[2]
+      )
+      .then((response) => {
+        context.commit('setTaskActivity', response.data)
+        context.commit('setTaskMeta', response.meta)
+      })
+      .catch((error) => {
+        this.$toast.error(error.response.data.message)
+      })
   }
 }
 
@@ -185,5 +211,11 @@ export const getters = {
   },
   getAllTrashedTasks: (state) => {
     return state.trashedTasks
+  },
+  getTaskActivity: (state) => {
+    return state.taskActivity
+  },
+  getTaskMeta: (state) => {
+    return state.taskMeta
   }
 }

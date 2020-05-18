@@ -1,5 +1,5 @@
 <template>
-  <ActivityTableBody :activites="getProjectActivity" />
+  <ActivityTableBody :activites="getTaskActivity" />
 </template>
 
 <script>
@@ -12,8 +12,9 @@ export default {
     ActivityTableBody
   },
   async fetch({ store, params, query }) {
-    await store.dispatch('projects/getProjectActivity', [
+    await store.dispatch('tasks/getTaskActivity', [
       params.projectId,
+      params.taskId,
       query.page
     ])
   },
@@ -25,7 +26,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('projects', ['getProjectActivity', 'getProjectMeta'])
+    ...mapGetters('tasks', ['getTaskActivity', 'getTaskMeta'])
   },
   methods: {
     setCurrentActivity(event) {

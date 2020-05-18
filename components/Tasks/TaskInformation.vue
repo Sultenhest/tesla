@@ -35,9 +35,16 @@
         Last updated:
         <Moment :timestamp="task.updated_at" />
       </small>
-      <button class="button-danger" @click="trash(task)">
-        <Icon icon-name="trash" icon-text="Trash" />
-      </button>
+      <div>
+        <button class="button-teal">
+          <nuxt-link :to="activitiesLink">
+            <Icon icon-name="queue" icon-text="Activity" />
+          </nuxt-link>
+        </button>
+        <button class="button-danger" @click="trash(task)">
+          <Icon icon-name="trash" icon-text="Trash" />
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -55,6 +62,9 @@ export default {
   computed: {
     timeSpent() {
       return this.task.hours_spent + 'h ' + this.task.minutes_spent + 'm'
+    },
+    activitiesLink() {
+      return this.$route.path + '/activities'
     }
   },
   methods: {

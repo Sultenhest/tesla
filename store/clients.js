@@ -62,6 +62,7 @@ export const actions = {
         } else {
           this.$toast.error(error.response.data.message)
         }
+        error({ statusCode: 404 })
       })
   },
   getClients(context) {

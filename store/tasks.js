@@ -48,7 +48,15 @@ export const actions = {
         context.commit('setCurrentTask', response.data)
       })
       .catch((error) => {
-        this.$toast.error(error.response.data.message)
+        if (error.response.status === 404) {
+          this.$toast.show(
+            'This task has been trashed. You need to restore it to see it.'
+          )
+          context.commit('setCurrentTask', {})
+        } else {
+          this.$toast.error(error.response.data.message)
+        }
+        error({ statusCode: 404 })
       })
   },
   getTasks(context, page) {

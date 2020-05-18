@@ -43,7 +43,15 @@ export const actions = {
         context.commit('setCurrentProject', response.data)
       })
       .catch((error) => {
-        this.$toast.error(error.response.data.message)
+        if (error.response.status === 404) {
+          this.$toast.show(
+            'This project has been trashed. You need to restore it to see it.'
+          )
+          context.commit('setCurrentProject', {})
+        } else {
+          this.$toast.error(error.response.data.message)
+        }
+        error({ statusCode: 404 })
       })
   },
   getProjects(context) {

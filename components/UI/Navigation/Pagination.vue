@@ -50,11 +50,11 @@ export default {
       return this.meta.current_page === this.meta.last_page
     },
     prev() {
-      return '/' + this.base + '?page=' + (this.meta.current_page - 1)
+      return this.base + '?page=' + (this.meta.current_page - 1)
     },
     next() {
       if (this.currentPageIsLastPage) return ''
-      return '/' + this.base + '?page=' + (this.meta.current_page + 1)
+      return this.base + '?page=' + (this.meta.current_page + 1)
     }
   }
 }

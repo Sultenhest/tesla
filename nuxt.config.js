@@ -144,7 +144,6 @@ export default {
    ** Route configuration
    */
   router: {
-    middleware: ['auth'],
-    linkActiveClass: 'text-teal-700'
+    middleware: ['auth']
   }
 }

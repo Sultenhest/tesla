@@ -1,7 +1,9 @@
 export const state = () => ({
   allClients: [],
   trashedClients: [],
-  currentClient: {}
+  currentClient: {},
+  clientActivity: [],
+  clientMeta: []
 })
 
 export const mutations = {
@@ -43,6 +45,12 @@ export const mutations = {
     if (index > -1) {
       state.trashedClients.splice(index, 1)
     }
+  },
+  setClientActivity(state, activities) {
+    state.clientActivity = activities
+  },
+  setClientMeta(state, meta) {
+    state.clientMeta = meta
   }
 }
 
@@ -132,6 +140,17 @@ export const actions = {
       .catch((error) => {
         this.$toast.error(error.response)
       })
+  },
+  getClientActivity(context, params) {
+    return this.$axios
+      .$get('/api/clients/' + params[0] + '/activity?page=' + params[1])
+      .then((response) => {
+        context.commit('setClientActivity', response.data)
+        context.commit('setClientMeta', response.meta)
+      })
+      .catch((error) => {
+        this.$toast.error(error.response.data.message)
+      })
   }
 }
 
@@ -144,5 +163,11 @@ export const getters = {
   },
   getAllTrashedClients: (state) => {
     return state.trashedClients
+  },
+  getClientActivity: (state) => {
+    return state.clientActivity
+  },
+  getClientMeta: (state) => {
+    return state.clientMeta
   }
 }

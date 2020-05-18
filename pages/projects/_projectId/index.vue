@@ -46,7 +46,7 @@
         :center="true"
       >
         <div class="flex items-center justify-between flex-col py-5">
-          The projects client has been trashed.
+          This project's client has been trashed.
 
           <nuxt-link to="/clients/trashed" class="button-teal mt-3">
             Go here to restore it
@@ -80,18 +80,11 @@
         </nuxt-link>
       </div>
     </Card>
-
-    <ActivitiesModal />
-
-    <ActivityFeed :activities="getCurrentProject.activity" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-
-import ActivitiesModal from '~/components/Activities/ActivitiesModal.vue'
-import ActivityFeed from '~/components/Activities/ActivityFeed.vue'
 
 import Table from '~/components/UI/Table.vue'
 
@@ -103,8 +96,6 @@ import TasksList from '~/components/Tasks/TasksList.vue'
 
 export default {
   components: {
-    ActivitiesModal,
-    ActivityFeed,
     Table,
     ProjectInformation,
     ProjectsModal,

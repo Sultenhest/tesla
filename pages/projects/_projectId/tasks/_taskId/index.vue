@@ -43,26 +43,17 @@
       </template>
       <TaskInformation :task="getCurrentTask" />
     </Card>
-
-    <ActivitiesModal />
-
-    <ActivityFeed :activities="getCurrentTask.activity" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 
-import ActivitiesModal from '~/components/Activities/ActivitiesModal.vue'
-import ActivityFeed from '~/components/Activities/ActivityFeed.vue'
-
 import TaskInformation from '~/components/Tasks/TaskInformation.vue'
 import TasksModal from '~/components/Tasks/TasksModal.vue'
 
 export default {
   components: {
-    ActivitiesModal,
-    ActivityFeed,
     TaskInformation,
     TasksModal
   },

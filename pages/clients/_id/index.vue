@@ -32,18 +32,11 @@
         <ProjectsList :projects="getCurrentClient.projects" />
       </Table>
     </Card>
-
-    <ActivitiesModal />
-
-    <ActivityFeed :activities="getCurrentClient.activity" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-
-import ActivitiesModal from '~/components/Activities/ActivitiesModal.vue'
-import ActivityFeed from '~/components/Activities/ActivityFeed.vue'
 
 import ClientInformation from '~/components/Clients/ClientInformation.vue'
 import ClientsModal from '~/components/Clients/ClientsModal.vue'
@@ -54,8 +47,6 @@ import ProjectsList from '~/components/Projects/ProjectsList.vue'
 
 export default {
   components: {
-    ActivitiesModal,
-    ActivityFeed,
     ClientInformation,
     ClientsModal,
     ProjectsModal,

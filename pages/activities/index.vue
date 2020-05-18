@@ -1,5 +1,7 @@
 <template>
   <div>
+    <ActivitiesModal />
+
     <Card title="Activities">
       <Table :cols="['Subject Type', 'Activity', 'Changes', 'At']">
         <nuxt-child :key="$route.query.page" />
@@ -14,11 +16,13 @@
 <script>
 import { mapGetters } from 'vuex'
 
+import ActivitiesModal from '~/components/Activities/ActivitiesModal.vue'
 import Table from '~/components/UI/Table.vue'
 import Pagination from '~/components/UI/Navigation/Pagination.vue'
 
 export default {
   components: {
+    ActivitiesModal,
     Table,
     Pagination
   },

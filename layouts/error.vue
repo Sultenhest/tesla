@@ -11,7 +11,6 @@
 
 <script>
 export default {
-  name: 'error',
   methods: {
     goBack() {
       this.$router.back()

@@ -90,7 +90,8 @@ export default {
   },
   data() {
     return {
-      projects: {}
+      projects: {},
+      error: {}
     }
   },
   computed: {

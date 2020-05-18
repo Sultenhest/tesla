@@ -3,11 +3,6 @@
     <TasksModal name="new-task" title="Create new Task" />
 
     <Card title="Tasks">
-      <template v-slot:button>
-        <button class="button-teal" @click="$modal.show('new-task')">
-          <Icon icon-name="add-outline" icon-text="Add Task" />
-        </button>
-      </template>
       <Table :cols="['Task Title', 'Project', 'Completed', 'Billed', '']">
         <TasksList :tasks="getTasks" />
       </Table>

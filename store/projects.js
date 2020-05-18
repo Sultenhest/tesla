@@ -11,7 +11,10 @@ export const mutations = {
     this.dispatch('clients/getClient', project.client_id)
   },
   setProjects(state, projects) {
-    state.allProjects = projects
+    state.allProjects = state.allProjects.concat(projects)
+  },
+  resetProjects(state) {
+    state.allProjects = []
   },
   setMeta(state, meta) {
     state.meta = meta
@@ -54,9 +57,12 @@ export const actions = {
         error({ statusCode: 404 })
       })
   },
-  getProjects(context) {
+  getProjects(context, page) {
+    if (page === 1) {
+      context.commit('resetProjects')
+    }
     return this.$axios
-      .$get('/api/projects')
+      .$get('/api/projects?page=' + page)
       .then((response) => {
         context.commit('setProjects', response.data)
         context.commit('setMeta', response.meta)

@@ -1,14 +1,5 @@
 <template>
   <form class="w-full" @submit.prevent="postTaskForm">
-    <div v-if="projectId === 0" class="input-group">
-      <label>Project</label>
-      <v-select
-        v-model="form.project_id"
-        label="title"
-        :reduce="(project) => project.id"
-        :options="getAllProjects"
-      ></v-select>
-    </div>
     <InputField
       v-model="form.title"
       input-type="text"

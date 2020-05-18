@@ -11,6 +11,9 @@ export const mutations = {
   setClients(state, clients) {
     state.allClients = clients
   },
+  setTrashedClients(state, trashedClients) {
+    state.trashedClients = trashedClients
+  },
   addClient(state, client) {
     state.allClients.unshift(client)
   },
@@ -27,6 +30,19 @@ export const mutations = {
       state.trashedClients.push(client)
       state.allClients.splice(index, 1)
     }
+  },
+  restoreClient(state, client) {
+    const index = state.trashedClients.indexOf(client)
+    if (index > -1) {
+      state.allClients.push(client)
+      state.trashedClients.splice(index, 1)
+    }
+  },
+  deleteClient(state, client) {
+    const index = state.trashedClients.indexOf(client)
+    if (index > -1) {
+      state.trashedClients.splice(index, 1)
+    }
   }
 }
 
@@ -38,14 +54,22 @@ export const actions = {
         context.commit('setCurrentClient', response.data)
       })
       .catch((error) => {
-        this.$toast.error(error.response.data.message)
+        if (error.response.status === 404) {
+          this.$toast.show(
+            'This client has been trashed. You need to restore it to see it.'
+          )
+          context.commit('setCurrentClient', {})
+        } else {
+          this.$toast.error(error.response.data.message)
+        }
       })
   },
   getClients(context) {
     return this.$axios
       .$get('/api/clients')
       .then((response) => {
-        context.commit('setClients', response.data)
+        context.commit('setClients', response.clients.data)
+        context.commit('setTrashedClients', response.trashed_clients.data)
       })
       .catch((error) => {
         this.$toast.error(error.response.data.message)
@@ -90,6 +114,7 @@ export const actions = {
     return this.$axios
       .$patch('/api/clients/' + client.id + '/restore')
       .then((response) => {
+        context.commit('restoreClient', client)
         this.$toast.show(response.message)
       })
       .catch((error) => {
@@ -100,6 +125,7 @@ export const actions = {
     return this.$axios
       .$delete('/api/clients/' + client.id + '/forcedelete')
       .then((response) => {
+        context.commit('deleteClient', client)
         this.$toast.show(response.message)
       })
       .catch((error) => {

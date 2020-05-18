@@ -13,7 +13,10 @@
       </Table>
       <div class="card-footer">
         <p class="text-sm text-center text-gray-700">
-          Showing all clients
+          Showing all clients -
+          <nuxt-link to="/clients/trashed">
+            Click here to see trashed clients
+          </nuxt-link>
         </p>
       </div>
     </Card>
@@ -39,14 +42,6 @@ export default {
   },
   computed: {
     ...mapGetters('clients', ['getAllClients'])
-  },
-  methods: {
-    async restore(client) {
-      await this.$store.dispatch('clients/restoreClient', client)
-    },
-    async forceDelete(client) {
-      await this.$store.dispatch('clients/deleteClient', client)
-    }
   }
 }
 </script>

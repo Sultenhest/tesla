@@ -6,7 +6,7 @@
       </nuxt-link>
     </span>
     <p class="text-sm text-gray-700">
-      Showing {{ meta.from }} to {{ meta.to }} of {{ meta.total }} results
+      Showing {{ meta.from }} to {{ meta.to }} out of {{ meta.total }} results
     </p>
     <span class="w-24 text-right">
       <nuxt-link v-if="!currentPageIsLastPage" :to="next">

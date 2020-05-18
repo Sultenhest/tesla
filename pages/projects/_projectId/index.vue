@@ -21,6 +21,7 @@
       </Card>
 
       <Card
+        v-if="hasClient"
         class="w-full lg:w-2/6"
         :title="getCurrentClient.name"
         :center="true"
@@ -35,6 +36,21 @@
         <div class="w-full p-3">
           <small class="text-sm text-gray-700">Client Description</small>
           <p class="mt-3">{{ getCurrentClient.description }}</p>
+        </div>
+      </Card>
+
+      <Card
+        v-else
+        class="w-full lg:w-2/6"
+        title="Client has been trashed"
+        :center="true"
+      >
+        <div class="flex items-center justify-between flex-col py-5">
+          The projects client has been trashed.
+
+          <nuxt-link to="/clients/trashed" class="button-teal mt-3">
+            Go here to restore it
+          </nuxt-link>
         </div>
       </Card>
     </div>
@@ -103,6 +119,9 @@ export default {
       getCurrentProject: 'projects/getCurrentProject',
       getCurrentClient: 'clients/getCurrentClient'
     }),
+    hasClient() {
+      return typeof this.getCurrentClient.name !== 'undefined'
+    },
     projectClientLink() {
       return '/clients/' + this.getCurrentProject.client_id
     },

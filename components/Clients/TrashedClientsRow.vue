@@ -38,7 +38,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.$store.dispatch('clients/deleteClient', this.client)
-          this.$router.back()
+          this.$router.push('/clients')
         }
       })
     }

@@ -68,7 +68,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.$store.dispatch('tasks/trashTask', task)
-          this.$router.back()
+          this.$router.push('/tasks')
         }
       })
     }

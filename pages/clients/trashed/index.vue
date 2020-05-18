@@ -2,7 +2,7 @@
   <div>
     <Card title="Trashed Clients">
       <Table :cols="['Client Name', '']">
-        <TrashedClientsList :trashedClients="getAllTrashedClients" />
+        <TrashedClientsList :trashed-clients="getAllTrashedClients" />
       </Table>
       <div class="card-footer">
         <p class="text-sm text-center text-gray-700">

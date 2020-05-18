@@ -67,7 +67,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.$store.dispatch('projects/trashProject', project)
-          this.$router.back()
+          this.$router.push('/projects')
         }
       })
     }

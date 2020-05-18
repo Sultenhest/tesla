@@ -45,7 +45,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.$store.dispatch('clients/trashClient', client)
-          this.$router.back()
+          this.$router.push('/clients')
         }
       })
     }

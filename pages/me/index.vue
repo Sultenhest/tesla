@@ -1,7 +1,8 @@
 <template>
   <div>
     <Card class="mb-4" title="Profile" :center="true">
-      No content
+      There are no profile settings. But i guess password update and profile
+      upload and so on would be here.
     </Card>
 
     <ActivitiesModal />

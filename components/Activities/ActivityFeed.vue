@@ -1,7 +1,7 @@
 <template>
   <div>
     <Card :title="title" class="mt-4">
-      <Table :cols="['Activity', 'Changes', 'At']">
+      <Table :cols="['Subject Type', 'Activity', 'Changes', 'At']">
         <ActivityTableBody :activites="activities" />
       </Table>
     </Card>

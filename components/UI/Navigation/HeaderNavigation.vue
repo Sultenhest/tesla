@@ -61,6 +61,7 @@
                 Settings
               </nuxt-link>
             </li>
+            <li class="border-t my-1"></li>
             <li>
               <nuxt-link to="/logout">
                 Logout

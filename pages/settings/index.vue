@@ -1,6 +1,6 @@
 <template>
   <Card title="Settings" :center="true">
-    No content
+    There are no settings.
   </Card>
 </template>
 

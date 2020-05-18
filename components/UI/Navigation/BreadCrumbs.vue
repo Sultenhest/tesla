@@ -1,5 +1,8 @@
 <template>
-  <div class="w-full button mb-3 cursor-pointer">
+  <div
+    v-if="this.$route.name !== 'dashboard'"
+    class="w-full button mb-3 cursor-pointer"
+  >
     <small class="text-sm text-gray-700" @click="goBack">
       <Icon
         icon-name="arrow-thin-left"

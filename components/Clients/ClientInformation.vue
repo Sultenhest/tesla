@@ -13,7 +13,9 @@
       <div class="w-1/2 p-3">
         <small class="text-sm text-gray-700">Activities</small>
         <h4 class="text-xl mt-3">
-          <nuxt-link :to="activitiesLink">See Activity Log</nuxt-link>
+          <button class="button-teal">
+            <nuxt-link :to="activitiesLink">See Activity Log</nuxt-link>
+          </button>
         </h4>
       </div>
     </div>

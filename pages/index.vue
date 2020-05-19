@@ -1,5 +1,6 @@
 <template>
-  <div class="home">
+  <div class="home flex-col">
+    {{ response }}
     <Card :title="currentView" class="w-1/2">
       <div class="center-content">
         <transition name="page" mode="out-in">
@@ -39,9 +40,20 @@ export default {
     Login,
     Register
   },
+  async fetch() {
+    await this.$axios
+      .$get('/api/test')
+      .then((response) => {
+        this.response = response
+      })
+      .catch((error) => {
+        this.response = error
+      })
+  },
   data() {
     return {
-      currentView: 'Login'
+      currentView: 'Login',
+      response: ''
     }
   }
 }

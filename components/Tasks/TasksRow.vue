@@ -2,17 +2,27 @@
   <tr>
     <td>
       <nuxt-link :to="taskLink">
-        {{ task.title }}
+        <p class="text-teal-700">{{ task.title }}</p>
+        <div>
+          <span v-if="task.completed_at" class="mr-3">
+            <small class="text-sm text-gray-700">Completed:</small>
+            <small class="text-sm">
+              <Moment :timestamp="task.completed_at" />
+            </small>
+          </span>
+          <span v-if="task.billed_at">
+            <small class="text-sm text-gray-700">Billed:</small>
+            <small class="text-sm">
+              <Moment :timestamp="task.billed_at" />
+            </small>
+          </span>
+        </div>
       </nuxt-link>
     </td>
     <td v-if="withProjectLink">
       <nuxt-link :to="projectLink" class="text-teal-700">{{
         task.project_title
       }}</nuxt-link>
-    </td>
-    <td><Moment :timestamp="task.completed_at" /></td>
-    <td>
-      <Moment :timestamp="task.billed_at" />
     </td>
     <td class="text-right button flex justify-end">
       <svgicon
@@ -29,14 +39,6 @@
         class="mr-1 mt-05 cursor-pointer"
         @click="toggleBilled"
       ></svgicon>
-      <nuxt-link :to="taskLink">
-        <svgicon
-          name="information-outline"
-          width="18"
-          height="18"
-          class="mr-1"
-        ></svgicon>
-      </nuxt-link>
     </td>
   </tr>
 </template>

@@ -157,7 +157,11 @@ export const actions = {
       )
       .then((response) => {
         context.commit('updateTask', response.task)
-        this.$toast.show(response.message)
+        if (response.task.completed_at) {
+          this.$toast.success(response.message)
+        } else {
+          this.$toast.show(response.message)
+        }
       })
       .catch((error) => {
         this.$toast.error(error.response.data.message)
@@ -172,7 +176,11 @@ export const actions = {
       )
       .then((response) => {
         context.commit('updateTask', response.task)
-        this.$toast.show(response.message)
+        if (response.task.billed_at) {
+          this.$toast.success(response.message)
+        } else {
+          this.$toast.show(response.message)
+        }
       })
       .catch((error) => {
         this.$toast.error(error.response.data.message)

@@ -3,7 +3,7 @@
     <TasksModal name="new-task" title="Create new Task" />
 
     <Card title="Tasks">
-      <Table :cols="['Task Title', 'Project', 'Completed', 'Billed', '']">
+      <Table :cols="['Task Title', 'Project', '']">
         <TasksList :tasks="getTasks" />
       </Table>
       <div class="card-footer flex flex-col">

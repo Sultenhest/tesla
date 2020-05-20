@@ -2,13 +2,16 @@
   <tr>
     <td>
       <nuxt-link :to="projectLink" class="text-teal-700">
-        {{ project.title }}
+        <p>{{ project.title }}</p>
+        <div v-if="project.client_id" class="text-teal-700">
+          <nuxt-link :to="clientLink">
+            <small class="text-sm text-gray-700">Client:</small>
+            <small class="text-sm">
+              {{ project.client_name }}
+            </small>
+          </nuxt-link>
+        </div>
       </nuxt-link>
-    </td>
-    <td>
-      <div v-if="project.client_id" class="text-teal-700">
-        <nuxt-link :to="clientLink">{{ project.client_name }}</nuxt-link>
-      </div>
     </td>
     <td>
       <div class="text-teal-700">
@@ -21,16 +24,6 @@
           />
         </nuxt-link>
       </div>
-    </td>
-    <td class="text-right button flex justify-end">
-      <nuxt-link :to="projectLink">
-        <svgicon
-          name="information-outline"
-          width="18"
-          height="18"
-          class="mr-1"
-        ></svgicon>
-      </nuxt-link>
     </td>
   </tr>
 </template>

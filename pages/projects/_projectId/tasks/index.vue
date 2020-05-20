@@ -14,7 +14,7 @@
             <Icon icon-name="add-outline" icon-text="Add Task to Project" />
           </button>
         </template>
-        <Table :cols="['Task Title', 'Completed', 'Billed', '']">
+        <Table :cols="['Task Title', '']">
           <TasksList
             :tasks="getCurrentProject.tasks"
             :with-project-link="false"

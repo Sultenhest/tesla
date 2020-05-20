@@ -122,7 +122,7 @@ export default {
    ** Toast module configuration
    */
   toast: {
-    position: 'bottom-right',
+    position: 'top-right',
     duration: 3000,
     // className: ['w-64', 'h-12', 'p-4', 'bg-white', 'rounded'],
     register: [

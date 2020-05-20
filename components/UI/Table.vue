@@ -42,7 +42,7 @@ export default {
 }
 
 .table tr {
-  @apply flex transition duration-300 ease-in-out;
+  @apply flex justify-between transition duration-300 ease-in-out;
 }
 
 .table tr th {
@@ -51,7 +51,22 @@ export default {
 
 .table tr th,
 .table tr td {
-  @apply flex-1 py-4 px-5;
+  @apply flex items-center py-4 px-5;
+}
+
+.table tr th:first-child,
+.table tr td:first-child {
+  @apply w-3/5;
+}
+
+.table tr th:not(:first-child),
+.table tr td:not(:first-child) {
+  @apply flex-1;
+}
+
+.table tr th:last-child,
+.table tr td:last-child {
+  @apply w-1/3 flex-none;
 }
 
 @media (max-width: 1024px) {

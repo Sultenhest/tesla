@@ -8,7 +8,7 @@
           <Icon icon-name="add-outline" icon-text="Add Client" />
         </button>
       </template>
-      <Table :cols="['Client Name', 'Projects', '']">
+      <Table :cols="['Client Name', 'Projects']">
         <ClientsList :clients="getAllClients" />
       </Table>
       <div class="card-footer">

@@ -10,16 +10,6 @@
         {{ client.projects_count }}
       </nuxt-link>
     </td>
-    <td class="text-right button flex justify-end">
-      <nuxt-link :to="clientLink">
-        <svgicon
-          name="information-outline"
-          width="18"
-          height="18"
-          class="mr-1"
-        ></svgicon>
-      </nuxt-link>
-    </td>
   </tr>
 </template>
 

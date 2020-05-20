@@ -28,7 +28,7 @@
           <Icon icon-name="add-outline" icon-text="Add Project to Client" />
         </button>
       </template>
-      <Table :cols="['Project Title', 'Client', 'Tasks', '']">
+      <Table :cols="['Project Title', 'Tasks']">
         <ProjectsList :projects="getCurrentClient.projects" />
       </Table>
     </Card>

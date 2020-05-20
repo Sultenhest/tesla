@@ -1,6 +1,6 @@
 <template>
   <div class="home flex-col">
-    <Card :title="currentView" class="w-1/2">
+    <Card :title="currentView" class="w-11/12 lg:w-1/2">
       <div class="center-content">
         <transition name="page" mode="out-in">
           <Login v-if="currentView === 'Login'" />

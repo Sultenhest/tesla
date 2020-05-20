@@ -3,7 +3,9 @@
     <table class="table">
       <thead>
         <tr>
-          <th v-for="col in cols" :key="col">{{ col }}</th>
+          <th v-for="col in cols" :key="col">
+            {{ col }}
+          </th>
         </tr>
       </thead>
       <slot></slot>
@@ -50,6 +52,13 @@ export default {
 .table tr th,
 .table tr td {
   @apply flex-1 py-4 px-5;
+}
+
+@media (max-width: 1024px) {
+  .table tbody {
+    box-shadow: inset 0 3px 3px 0 rgba(0, 0, 0, 0.1),
+      inset 0 -3px 3px 0 rgba(0, 0, 0, 0.1);
+  }
 }
 
 .table tbody tr:hover {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <tbody>
     <p v-if="!tasks" class="card-content">
       You dont seem to have any tasks yet.
     </p>
@@ -10,7 +10,7 @@
       :task="task"
       :with-project-link="withProjectLink"
     />
-  </div>
+  </tbody>
 </template>
 
 <script>

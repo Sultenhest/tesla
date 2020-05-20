@@ -1,13 +1,17 @@
 <template>
   <div>
-    <span v-if="iconAlign === 'right'">{{ iconText }}</span>
+    <span v-if="iconAlign === 'right'" class="hidden lg:inline">{{
+      iconText
+    }}</span>
     <svgicon
       :name="iconName"
       :width="getSize"
       :height="getSize"
-      class="mr-1"
+      class="lg:mr-1"
     ></svgicon>
-    <span v-if="iconAlign === 'left'">{{ iconText }}</span>
+    <span v-if="iconAlign === 'left'" class="hidden lg:inline">{{
+      iconText
+    }}</span>
   </div>
 </template>
 

@@ -72,11 +72,9 @@
         <TasksList :tasks="recentProjects" :with-project-link="false" />
       </Table>
       <div class="center-content">
-        <nuxt-link :to="projectTasksLink" class="text-teal-700">
-          <Icon
-            icon-name="checkmark-outline"
-            icon-text="Go to All Project Tasks"
-          />
+        <nuxt-link :to="projectTasksLink" class="flex text-teal-700">
+          <Icon icon-name="checkmark-outline" class="mr-1" />
+          Go to All Project Tasks
         </nuxt-link>
       </div>
     </Card>

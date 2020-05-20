@@ -25,6 +25,7 @@
 html,
 body {
   font-family: 'Nunito', sans-serif;
+  touch-action: manipulation;
 }
 
 .container {
@@ -49,6 +50,10 @@ body {
 
 .button-danger {
   @apply py-1 px-2 rounded text-sm text-white bg-red-500;
+}
+
+.button-large {
+  @apply py-2 px-4 w-full text-base;
 }
 
 .button-active {

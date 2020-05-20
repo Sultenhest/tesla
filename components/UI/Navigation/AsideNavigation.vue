@@ -1,5 +1,6 @@
 <template>
   <aside class="hidden lg:block">
+    <div class="h-6 mb-3"></div>
     <ul class="space-y-3">
       <li>
         <nuxt-link to="/dashboard">

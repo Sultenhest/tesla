@@ -20,8 +20,8 @@
       <small class="text-sm text-gray-700"
         >Last updated: <Moment :timestamp="client.updated_at"
       /></small>
-      <div>
-        <button class="button-teal">
+      <div class="flex justify-end">
+        <button class="button-teal mr-1">
           <nuxt-link :to="activitiesLink">
             <Icon icon-name="queue" icon-text="Activity" />
           </nuxt-link>

@@ -35,8 +35,8 @@
         Last updated:
         <Moment :timestamp="task.updated_at" />
       </small>
-      <div>
-        <button class="button-teal">
+      <div class="flex justify-end">
+        <button class="button-teal mr-1">
           <nuxt-link :to="activitiesLink">
             <Icon icon-name="queue" icon-text="Activity" />
           </nuxt-link>

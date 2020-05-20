@@ -1,7 +1,7 @@
 {
-  "name": "tesla",
+  "name": "Tesla",
   "version": "1.0.0",
-  "description": "My groovy Nuxt.js project",
+  "description": "Task Manager",
   "author": "Simon Konstantyner",
   "private": true,
   "scripts": {
@@ -26,7 +26,8 @@
     "v-tooltip": "^2.0.3",
     "vue-chartjs": "^3.5.0",
     "vue-js-modal": "^2.0.0-rc.3",
-    "vue-sweetalert2": "^3.0.3"
+    "vue-sweetalert2": "^3.0.3",
+    "vuedraggable": "^2.23.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",

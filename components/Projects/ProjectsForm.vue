@@ -20,7 +20,7 @@
       input-type="textarea"
       input-name="Project Description"
     />
-    <button class="button-primary" type="submit">
+    <button class="button-primary button-large" type="submit">
       Save
     </button>
   </form>

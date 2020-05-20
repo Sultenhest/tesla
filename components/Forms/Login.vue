@@ -7,7 +7,7 @@
       input-name="Password"
     />
     <div>
-      <button class="button-primary" type="submit">Login</button>
+      <button class="button-primary button-large" type="submit">Login</button>
     </div>
   </form>
 </template>

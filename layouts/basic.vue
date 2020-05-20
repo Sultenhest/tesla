@@ -6,5 +6,17 @@
     <div class="container">
       <nuxt />
     </div>
+
+    <TeslaFooter class="fixed w-full bottom-0 left-0" />
   </div>
 </template>
+
+<script>
+import TeslaFooter from '~/components/UI/TeslaFooter.vue'
+
+export default {
+  components: {
+    TeslaFooter
+  }
+}
+</script>

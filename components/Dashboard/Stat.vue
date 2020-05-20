@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="h-full flex flex-col justify-between">
     <small class="text-sm text-gray-700">{{ header }}</small>
-    <div class="flex items-end mt-3">
+    <div class="block lg:flex items-end mt-3">
       <h4 class="text-4xl leading-7">{{ value }}</h4>
       <span
-        class="flex text-sm mt-1 ml-4 bg-opacity-50 px-2 py-1 rounded-full"
+        class="flex justify-center text-sm mt-3 lg:mt-1 lg:ml-4 bg-opacity-50 px-2 py-1 rounded-full"
         :class="getClasses"
       >
         <Icon :icon-name="getIcon" icon-size="sm" />

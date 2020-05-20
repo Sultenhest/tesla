@@ -1,5 +1,12 @@
 <template>
-  <modal name="activity-info" height="auto" @before-open="setCurrentActivity">
+  <modal
+    name="activity-info"
+    height="auto"
+    :max-width="600"
+    :adaptive="true"
+    :scrollable="true"
+    @before-open="setCurrentActivity"
+  >
     <Card title="Activity Information" :center="true">
       <template v-slot:button>
         <button class="button" @click="$modal.hide('activity-info')">

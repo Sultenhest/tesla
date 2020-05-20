@@ -1,7 +1,7 @@
 <template>
   <div
     id="tesla"
-    class="default-layout antialiased h-full min-h-screen flex flex-col items-stretch bg-gray-200 pb-10"
+    class="default-layout antialiased h-full min-h-screen flex flex-col items-stretch bg-gray-200 pb-6"
   >
     <HeaderNavigation />
 
@@ -12,6 +12,8 @@
         <BreadCrumbs />
 
         <nuxt />
+
+        <TeslaFooter />
       </main>
     </div>
   </div>
@@ -21,12 +23,14 @@
 import HeaderNavigation from '~/components/UI/Navigation/HeaderNavigation.vue'
 import AsideNavigation from '~/components/UI/Navigation/AsideNavigation.vue'
 import BreadCrumbs from '~/components/UI/Navigation/BreadCrumbs.vue'
+import TeslaFooter from '~/components/UI/TeslaFooter.vue'
 
 export default {
   components: {
     HeaderNavigation,
     AsideNavigation,
-    BreadCrumbs
+    BreadCrumbs,
+    TeslaFooter
   },
   data() {
     return {}

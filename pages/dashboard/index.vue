@@ -1,5 +1,6 @@
 <template>
   <div class="dashboard">
+    <div class="hidden lg:block h-6 mb-3"></div>
     <div class="block lg:flex mb-4">
       <Card class="w-full" title="Statistics" sub-title="This week in numbers">
         <div class="flex flex-wrap p-3">

@@ -9,7 +9,7 @@ export default {
     title: 'Tesla',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' },
       {
         hid: 'description',
         name: 'description',
@@ -28,7 +28,10 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: {
+    color: '#2C7A7B',
+    height: '5px'
+  },
   /*
    ** Global CSS
    */
@@ -40,7 +43,8 @@ export default {
     '~plugins/vue-js-modal',
     '~plugins/vue-chartjs',
     '~plugins/v-tooltip',
-    '~plugins/global-components'
+    '~plugins/global-components',
+    '~plugins/vue-draggable'
   ],
   /*
    ** Nuxt.js dev-modules
@@ -138,7 +142,7 @@ export default {
   pageTransition: {
     name: 'page',
     mode: 'out-in',
-    duration: 500
+    duration: 300
   },
   /*
    ** Route configuration

@@ -8,7 +8,9 @@
       input-name="Password"
     />
     <div>
-      <button class="button-primary" type="submit">Register</button>
+      <button class="button-primary button-large" type="submit">
+        Register
+      </button>
     </div>
   </form>
 </template>

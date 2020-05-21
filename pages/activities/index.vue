@@ -3,7 +3,10 @@
     <ActivitiesModal />
 
     <Card title="Activities">
-      <Table :cols="['Subject Type', 'Activity', 'Changes', 'At']">
+      <Table
+        :cols="['Subject Type', 'Activity', 'Changes', 'At']"
+        :equal-width="true"
+      >
         <nuxt-child :key="$route.query.page" />
       </Table>
       <div class="card-footer">

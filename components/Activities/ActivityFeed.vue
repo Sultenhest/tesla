@@ -1,7 +1,10 @@
 <template>
   <div>
     <Card :title="title" class="mt-4">
-      <Table :cols="['Subject Type', 'Activity', 'Changes', 'At']">
+      <Table
+        :cols="['Subject Type', 'Activity', 'Changes', 'At']"
+        :equal-width="true"
+      >
         <ActivityTableBody :activites="activities" />
       </Table>
     </Card>

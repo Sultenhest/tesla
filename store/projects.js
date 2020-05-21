@@ -3,6 +3,7 @@ export const state = () => ({
   meta: [],
   trashedProjects: [],
   currentProject: {},
+  projectTasks: [],
   projectActivity: [],
   projectMeta: []
 })
@@ -38,6 +39,9 @@ export const mutations = {
       state.allProjects.splice(index, 1)
     }
   },
+  setProjectTasks(state, tasks) {
+    state.projectTasks = tasks
+  },
   setProjectActivity(state, activities) {
     state.projectActivity = activities
   },
@@ -52,6 +56,7 @@ export const actions = {
       .$get('/api/projects/' + id)
       .then((response) => {
         context.commit('setCurrentProject', response.data)
+        context.commit('setProjectTasks', response.data.tasks)
       })
       .catch((error) => {
         if (error.response.status === 404) {
@@ -160,6 +165,9 @@ export const getters = {
   },
   getAllTrashedProjects: (state) => {
     return state.trashedProjects
+  },
+  getProjectTasks: (state) => {
+    return state.projectTasks
   },
   getProjectActivity: (state) => {
     return state.projectActivity

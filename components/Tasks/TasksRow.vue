@@ -2,7 +2,9 @@
   <tr>
     <td>
       <nuxt-link :to="taskLink">
-        <p class="text-teal-700">{{ task.title }}</p>
+        <p class="text-teal-700">
+          {{ task.title }}
+        </p>
         <div>
           <span v-if="task.completed_at" class="mr-3">
             <small class="text-sm text-gray-700">Completed:</small>

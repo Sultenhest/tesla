@@ -15,10 +15,7 @@
           </button>
         </template>
         <Table :cols="['Task Title', '']">
-          <TasksList
-            :tasks="getCurrentProject.tasks"
-            :with-project-link="false"
-          />
+          <DraggableTasksList :with-project-link="false" />
         </Table>
       </Card>
 
@@ -51,13 +48,13 @@ import { mapGetters } from 'vuex'
 import Table from '~/components/UI/Table.vue'
 
 import TasksModal from '~/components/Tasks/TasksModal.vue'
-import TasksList from '~/components/Tasks/TasksList.vue'
+import DraggableTasksList from '~/components/Tasks/DraggableTasksList.vue'
 
 export default {
   components: {
     Table,
     TasksModal,
-    TasksList
+    DraggableTasksList
   },
   async fetch({ store, params }) {
     await store.dispatch('projects/getProject', params.projectId)

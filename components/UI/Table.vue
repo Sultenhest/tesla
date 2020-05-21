@@ -1,6 +1,6 @@
 <template>
   <div class="table-wrapper">
-    <table class="table">
+    <table class="table" :class="{ 'equal-width': equalWidth }">
       <thead>
         <tr>
           <th v-for="col in cols" :key="col">
@@ -20,6 +20,10 @@ export default {
     cols: {
       type: Array,
       default: () => []
+    },
+    equalWidth: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -78,5 +82,10 @@ export default {
 
 .table tbody tr:hover {
   @apply bg-gray-200 cursor-pointer;
+}
+
+.equal-width.table tr th,
+.equal-width.table tr td {
+  @apply flex-1;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show === 'true'" class="spinner">
+  <div v-if="loading" class="spinner">
     <div class="double-bounce1"></div>
     <div class="double-bounce2"></div>
   </div>
@@ -9,9 +9,9 @@
 export default {
   name: 'Loader',
   props: {
-    show: {
-      type: String,
-      default: 'true'
+    loading: {
+      type: Boolean,
+      default: true
     }
   }
 }

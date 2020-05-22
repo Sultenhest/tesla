@@ -9,7 +9,11 @@ export default {
     title: 'Tesla',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0' },
+      {
+        name: 'viewport',
+        content:
+          'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0'
+      },
       {
         hid: 'description',
         name: 'description',
@@ -27,11 +31,10 @@ export default {
   },
   /*
    ** Customize the progress-bar color
+   ** color: '#2C7A7B',
+   ** height: '5px'
    */
-  loading: {
-    color: '#2C7A7B',
-    height: '5px'
-  },
+  loading: false,
   /*
    ** Global CSS
    */
@@ -142,7 +145,7 @@ export default {
   pageTransition: {
     name: 'page',
     mode: 'out-in',
-    duration: 300
+    duration: 500
   },
   /*
    ** Route configuration

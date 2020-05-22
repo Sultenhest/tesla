@@ -6,7 +6,9 @@
       title="Chart"
       sub-title="Task Statistics on a Weekly basis"
     >
+      <Loader :loading="loading" />
       <LineChart
+        v-if="!loading"
         :data="lineData"
         :options="{ responsive: true, maintainAspectRatio: false }"
       />
@@ -92,14 +94,17 @@ export default {
   },
   fetch() {
     this.$auth.fetchUser()
-    this.$store.dispatch('taskStatistics/getTaskStats')
+    this.$store.dispatch('taskStatistics/getTaskStats').then(() => {
+      this.flipLoading()
+    })
     this.$axios.$get('/api/dashboard').then((response) => {
       this.projects = response.projects
     })
   },
   data() {
     return {
-      projects: {}
+      projects: {},
+      loading: true
     }
   },
   computed: {
@@ -129,6 +134,11 @@ export default {
           }
         ]
       }
+    }
+  },
+  methods: {
+    flipLoading() {
+      this.loading = !this.loading
     }
   }
 }

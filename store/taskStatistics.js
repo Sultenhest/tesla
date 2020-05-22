@@ -1,4 +1,5 @@
 export const state = () => ({
+  rawData: {},
   billedAt: {
     statistics: {},
     this_week: 0,
@@ -20,6 +21,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+  setRawData(state, stats) {
+    state.rawData = stats
+  },
   setBilledAt(state, statistics) {
     const stats = Object.entries(statistics)
     if (stats.length === 0) return
@@ -59,8 +63,9 @@ export const mutations = {
 }
 
 export const actions = {
-  async getBilledStats(context) {
+  async getTaskStats(context) {
     await this.$axios.$get('/api/dashboard').then((response) => {
+      context.commit('setRawData', response.statistics.tasks)
       context.commit('setBilledAt', response.statistics.tasks.billed_at)
       context.commit('setCompletedAt', response.statistics.tasks.completed_at)
       context.commit('setCreatedAt', response.statistics.tasks.created_at)
@@ -69,6 +74,9 @@ export const actions = {
 }
 
 export const getters = {
+  getRawData: (state) => {
+    return state.rawData
+  },
   getBilledAt: (state) => {
     return state.billedAt
   },

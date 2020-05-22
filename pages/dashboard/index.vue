@@ -1,6 +1,17 @@
 <template>
   <div class="dashboard">
     <div class="hidden lg:block h-6 mb-3"></div>
+    <Card
+      class="w-full mb-4"
+      title="Chart"
+      sub-title="Task Statistics on a Weekly basis"
+    >
+      <LineChart
+        :data="lineData"
+        :options="{ responsive: true, maintainAspectRatio: false }"
+      />
+    </Card>
+
     <div class="block lg:flex mb-4">
       <Card class="w-full" title="Statistics" sub-title="This week in numbers">
         <div class="flex flex-wrap p-3">
@@ -69,38 +80,56 @@
 <script>
 import { mapGetters } from 'vuex'
 
+import LineChart from '~/components/Charts/LineChart.vue'
 import ProjectsListItem from '~/components/Dashboard/ProjectsListItem.vue'
 import Stat from '~/components/Dashboard/Stat.vue'
 
 export default {
   components: {
+    LineChart,
     ProjectsListItem,
     Stat
   },
   fetch() {
     this.$auth.fetchUser()
-    this.$store.dispatch('taskStatistics/getBilledStats')
-    this.$axios
-      .$get('/api/dashboard')
-      .then((response) => {
-        this.projects = response.projects
-      })
-      .catch((error) => {
-        this.error = error
-      })
+    this.$store.dispatch('taskStatistics/getTaskStats')
+    this.$axios.$get('/api/dashboard').then((response) => {
+      this.projects = response.projects
+    })
   },
   data() {
     return {
-      projects: {},
-      error: {}
+      projects: {}
     }
   },
   computed: {
     ...mapGetters('taskStatistics', [
+      'getRawData',
       'getBilledAt',
       'getCompletedAt',
       'getCreatedAt'
-    ])
+    ]),
+    lineData() {
+      return {
+        labels: Object.keys(this.getRawData.billed_at), // ['11', '12', '13', '14', '16', '17', '18', '19', '20', '21'],
+        datasets: [
+          {
+            label: 'Billed Tasks',
+            backgroundColor: 'rgba(44, 122, 123, .2)',
+            pointBackgroundColor: '#2c7a7b',
+            borderColor: '#2c7a7b',
+            data: Object.values(this.getRawData.billed_at) // [67, 106, 84, 73, 71, 73, 77, 82, 91, 68]
+          },
+          {
+            label: 'Completed Tasks',
+            backgroundColor: 'rgba(76, 81, 191, .2)',
+            pointBackgroundColor: '#4c51bf',
+            borderColor: '#4c51bf',
+            data: Object.values(this.getRawData.completed_at)
+          }
+        ]
+      }
+    }
   }
 }
 </script>

@@ -83,9 +83,9 @@ export default {
     TaskInformation,
     TasksModal
   },
-  async fetch({ store, params }) {
-    await store.dispatch('projects/getProject', params.projectId)
-    await store.dispatch('tasks/getTask', [params.projectId, params.taskId])
+  fetch({ store, params }) {
+    store.dispatch('projects/fetchProject', params.projectId)
+    store.dispatch('tasks/fetchTask', [params.projectId, params.taskId])
   },
   computed: {
     ...mapGetters({
@@ -97,22 +97,22 @@ export default {
     }
   },
   methods: {
-    async toggleCompleted() {
-      await this.$store
+    toggleCompleted() {
+      this.$store
         .dispatch('tasks/toggleCompleted', this.getCurrentTask)
         .then(() => {
           this.refreshTask()
         })
     },
-    async toggleBilled() {
-      await this.$store
+    toggleBilled() {
+      this.$store
         .dispatch('tasks/toggleBilled', this.getCurrentTask)
         .then(() => {
           this.refreshTask()
         })
     },
-    async refreshTask() {
-      await this.$store.dispatch('tasks/getTask', [
+    refreshTask() {
+      this.$store.dispatch('tasks/fetchTask', [
         this.getCurrentTask.project_id,
         this.getCurrentTask.id
       ])

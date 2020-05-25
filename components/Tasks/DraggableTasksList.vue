@@ -36,8 +36,8 @@ export default {
       default: true
     }
   },
-  async fetch({ store, params }) {
-    await store.dispatch('projects/getProject', params.projectId)
+  fetch({ store, params }) {
+    store.dispatch('projects/fetchProject', params.projectId)
   },
   computed: {
     getProjectTasks: {

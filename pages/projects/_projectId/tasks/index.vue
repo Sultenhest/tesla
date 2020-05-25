@@ -15,7 +15,7 @@
           </button>
         </template>
         <Table :cols="['Task Title', '']">
-          <DraggableTasksList :with-project-link="false" />
+          <TasksList :tasks="getTasks" :with-project-link="false" />
         </Table>
       </Card>
 
@@ -48,19 +48,23 @@ import { mapGetters } from 'vuex'
 import Table from '~/components/UI/Table.vue'
 
 import TasksModal from '~/components/Tasks/TasksModal.vue'
-import DraggableTasksList from '~/components/Tasks/DraggableTasksList.vue'
+import TasksList from '~/components/Tasks/TasksList.vue'
 
 export default {
   components: {
     Table,
     TasksModal,
-    DraggableTasksList
+    TasksList
   },
-  async fetch({ store, params }) {
-    await store.dispatch('projects/getProject', params.projectId)
+  fetch({ store, params }) {
+    store.dispatch('projects/fetchProject', params.projectId)
+    store.dispatch('tasks/fetchTasks', { page: 1, project: params.projectId })
   },
   computed: {
-    ...mapGetters('projects', ['getCurrentProject']),
+    ...mapGetters({
+      getCurrentProject: 'projects/getCurrentProject',
+      getTasks: 'tasks/getTasks'
+    }),
     tableHeader() {
       return this.getCurrentProject.title + ' tasks'
     },
@@ -69,9 +73,10 @@ export default {
     }
   },
   methods: {
-    async refreshProject() {
-      await this.$store.dispatch(
-        'projects/getProject',
+    refreshProject() {
+      this.$store.dispatch('projects/fetchProject', this.getCurrentProject.id)
+      this.$store.dispatch(
+        'projects/fetchProjectTasks',
         this.getCurrentProject.id
       )
     }

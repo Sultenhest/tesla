@@ -17,7 +17,7 @@
         <nuxt-child :key="$route.query.page" />
       </Table>
       <div class="card-footer">
-        <Pagination :base="paginationBaseUrl" :meta="getProjectMeta" />
+        <Pagination :base="paginationBaseUrl" :meta="getProjectActivityMeta" />
       </div>
     </Card>
   </div>
@@ -36,15 +36,15 @@ export default {
     Table,
     Pagination
   },
-  async fetch({ store, params, query }) {
-    await store.dispatch('projects/getProject', params.projectId)
-    await store.dispatch('projects/getProjectActivity', [
+  fetch({ store, params, query }) {
+    store.dispatch('projects/fetchProject', params.projectId)
+    store.dispatch('projects/fetchProjectActivity', [
       params.projectId,
       query.page
     ])
   },
   computed: {
-    ...mapGetters('projects', ['getCurrentProject', 'getProjectMeta']),
+    ...mapGetters('projects', ['getCurrentProject', 'getProjectActivityMeta']),
     cardTitle() {
       return this.getCurrentProject.title + ' Activities'
     },

@@ -84,8 +84,8 @@ export default {
     }
   },
   methods: {
-    async trash(project) {
-      await this.$swal({
+    trash(project) {
+      this.$swal({
         title: 'Are you sure you want to trash this project?',
         icon: 'warning',
         showCancelButton: true,

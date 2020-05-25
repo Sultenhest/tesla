@@ -1,84 +1,84 @@
 export const state = () => ({
-  allClients: [],
-  trashedClients: [],
   currentClient: {},
+  clients: [],
+  trashedClients: [],
   clientActivity: [],
-  clientMeta: []
+  clientActivityMeta: []
 })
 
 export const mutations = {
-  setCurrentClient(state, client) {
+  SET_CURRENT_CLIENT(state, client) {
     state.currentClient = client
   },
-  setClients(state, clients) {
-    state.allClients = clients
+  SET_CLIENTS(state, clients) {
+    state.clients = clients
   },
-  setTrashedClients(state, trashedClients) {
+  SET_TRASHED_CLIENTS(state, trashedClients) {
     state.trashedClients = trashedClients
   },
-  addClient(state, client) {
-    state.allClients.unshift(client)
-  },
-  updateClient(state, updatedClient) {
-    const clientIndex = state.allClients.findIndex(
-      (client) => client.id === updatedClient.id
-    )
-    state.allClients[clientIndex] = updatedClient
-    state.currentClient = updatedClient
-  },
-  trashClient(state, client) {
-    const index = state.allClients.indexOf(client)
-    if (index > -1) {
-      state.trashedClients.push(client)
-      state.allClients.splice(index, 1)
-    }
-  },
-  restoreClient(state, client) {
-    const index = state.trashedClients.indexOf(client)
-    if (index > -1) {
-      state.allClients.push(client)
-      state.trashedClients.splice(index, 1)
-    }
-  },
-  deleteClient(state, client) {
-    const index = state.trashedClients.indexOf(client)
-    if (index > -1) {
-      state.trashedClients.splice(index, 1)
-    }
-  },
-  setClientActivity(state, activities) {
+  SET_CLIENT_ACTIVITY(state, activities) {
     state.clientActivity = activities
   },
-  setClientMeta(state, meta) {
-    state.clientMeta = meta
+  SET_CLIENT_ACTIVITY_META(state, meta) {
+    state.clientActivityMeta = meta
+  },
+  ADD_CLIENT(state, client) {
+    state.clients.unshift(client)
+  },
+  UPDATE_CLIENT(state, updatedClient) {
+    const clientIndex = state.clients.findIndex(
+      (client) => client.id === updatedClient.id
+    )
+    state.clients[clientIndex] = updatedClient
+    state.currentClient = updatedClient
+  },
+  TRASH_CLIENT(state, client) {
+    const index = state.clients.indexOf(client)
+    if (index > -1) {
+      state.trashedClients.push(client)
+      state.clients.splice(index, 1)
+    }
+  },
+  RESTORE_CLIENT(state, client) {
+    const index = state.trashedClients.indexOf(client)
+    if (index > -1) {
+      state.clients.push(client)
+      state.trashedClients.splice(index, 1)
+    }
+  },
+  DELETE_CLIENT(state, client) {
+    const index = state.trashedClients.indexOf(client)
+    if (index > -1) {
+      state.trashedClients.splice(index, 1)
+    }
   }
 }
 
 export const actions = {
-  getClient(context, id) {
-    return this.$axios
+  async fetchClient(context, id) {
+    return await this.$axios
       .$get('/api/clients/' + id)
       .then((response) => {
-        context.commit('setCurrentClient', response.data)
+        context.commit('SET_CURRENT_CLIENT', response.data)
       })
       .catch((error) => {
         if (error.response.status === 404) {
           this.$toast.show(
             'This client has been trashed. You need to restore it to see it.'
           )
-          context.commit('setCurrentClient', {})
+          context.commit('SET_CURRENT_CLIENT', {})
         } else {
           this.$toast.error(error.response.data.message)
         }
         error({ statusCode: 404 })
       })
   },
-  getClients(context) {
-    return this.$axios
+  async fetchClients(context) {
+    return await this.$axios
       .$get('/api/clients')
       .then((response) => {
-        context.commit('setClients', response.clients.data)
-        context.commit('setTrashedClients', response.trashed_clients.data)
+        context.commit('SET_CLIENTS', response.clients.data)
+        context.commit('SET_TRASHED_CLIENTS', response.trashed_clients.data)
       })
       .catch((error) => {
         this.$toast.error(error.response.data.message)
@@ -88,7 +88,7 @@ export const actions = {
     return this.$axios
       .$post('/api/clients', client)
       .then((response) => {
-        context.commit('addClient', response.client)
+        context.commit('ADD_CLIENT', response.client)
         this.$toast.success(response.message)
       })
       .catch((error) => {
@@ -100,7 +100,7 @@ export const actions = {
     return this.$axios
       .$patch('/api/clients/' + client.id, client)
       .then((response) => {
-        context.commit('updateClient', response.client)
+        context.commit('UPDATE_CLIENT', response.client)
         this.$toast.success(response.message)
       })
       .catch((error) => {
@@ -112,8 +112,8 @@ export const actions = {
     return this.$axios
       .$delete('/api/clients/' + client.id)
       .then((response) => {
-        context.commit('trashClient', client)
-        this.$toast.show('Client was trashed')
+        context.commit('TRASH_CLIENT', client)
+        this.$toast.show(response.message)
       })
       .catch((error) => {
         this.$toast.error(error.response)
@@ -123,7 +123,7 @@ export const actions = {
     return this.$axios
       .$patch('/api/clients/' + client.id + '/restore')
       .then((response) => {
-        context.commit('restoreClient', client)
+        context.commit('RESTORE_CLIENT', client)
         this.$toast.show(response.message)
       })
       .catch((error) => {
@@ -134,19 +134,19 @@ export const actions = {
     return this.$axios
       .$delete('/api/clients/' + client.id + '/forcedelete')
       .then((response) => {
-        context.commit('deleteClient', client)
+        context.commit('DELETE_CLIENT', client)
         this.$toast.show(response.message)
       })
       .catch((error) => {
         this.$toast.error(error.response)
       })
   },
-  getClientActivity(context, params) {
-    return this.$axios
+  async fetchClientActivity(context, params) {
+    return await this.$axios
       .$get('/api/clients/' + params[0] + '/activity?page=' + params[1])
       .then((response) => {
-        context.commit('setClientActivity', response.data)
-        context.commit('setClientMeta', response.meta)
+        context.commit('SET_CLIENT_ACTIVITY', response.data)
+        context.commit('SET_CLIENT_ACTIVITY_META', response.meta)
       })
       .catch((error) => {
         this.$toast.error(error.response.data.message)
@@ -158,16 +158,16 @@ export const getters = {
   getCurrentClient: (state) => {
     return state.currentClient
   },
-  getAllClients: (state) => {
-    return state.allClients
+  getClients: (state) => {
+    return state.clients
   },
-  getAllTrashedClients: (state) => {
+  getTrashedClients: (state) => {
     return state.trashedClients
   },
   getClientActivity: (state) => {
     return state.clientActivity
   },
-  getClientMeta: (state) => {
-    return state.clientMeta
+  getClientActivityMeta: (state) => {
+    return state.clientActivityMeta
   }
 }

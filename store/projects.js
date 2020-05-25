@@ -1,84 +1,81 @@
 export const state = () => ({
-  allProjects: [],
-  meta: [],
-  trashedProjects: [],
   currentProject: {},
-  projectTasks: [],
+  projects: [],
+  projectsMeta: [],
   projectActivity: [],
-  projectMeta: []
+  projectActivityMeta: []
 })
 
 export const mutations = {
-  setCurrentProject(state, project) {
+  SET_CURRENT_PROJECT(state, project) {
     state.currentProject = project
-    this.dispatch('clients/getClient', project.client_id)
+    this.dispatch('clients/fetchClient', project.client_id)
   },
-  setProjects(state, projects) {
-    state.allProjects = state.allProjects.concat(projects)
+  SET_PROJECTS(state, projects) {
+    state.projects = state.projects.concat(projects)
   },
-  resetProjects(state) {
-    state.allProjects = []
+  RESET_PROJECTS(state) {
+    state.projects = []
   },
-  setMeta(state, meta) {
-    state.meta = meta
+  SET_PROJECTS_META(state, meta) {
+    state.projectsMeta = meta
   },
-  addProject(state, project) {
-    state.allProjects.unshift(project)
+  ADD_PROJECT(state, project) {
+    state.projects.unshift(project)
   },
-  updateProject(state, updatedProject) {
-    const projectIndex = state.allProjects.findIndex(
+  UPDATE_PROJECT(state, updatedProject) {
+    const projectIndex = state.projects.findIndex(
       (project) => project.id === updatedProject.id
     )
-    state.allProjects[projectIndex] = updatedProject
+    state.projects[projectIndex] = updatedProject
     state.currentProject = updatedProject
   },
-  trashProject(state, project) {
-    const index = state.allProjects.indexOf(project)
+  TRASH_PROJECT(state, project) {
+    const index = state.projects.indexOf(project)
     if (index > -1) {
-      state.trashedProjects.push(project)
-      state.allProjects.splice(index, 1)
+      state.projects.splice(index, 1)
     }
   },
-  setProjectTasks(state, tasks) {
-    state.projectTasks = tasks
-  },
-  setProjectActivity(state, activities) {
+  SET_PROJECT_ACTIVITY(state, activities) {
     state.projectActivity = activities
   },
-  setProjectMeta(state, meta) {
-    state.projectMeta = meta
+  SET_PROJECT_ACTIVITY_META(state, meta) {
+    state.projectActivityMeta = meta
   }
 }
 
 export const actions = {
-  getProject(context, id) {
-    return this.$axios
+  async fetchProject(context, id) {
+    return await this.$axios
       .$get('/api/projects/' + id)
       .then((response) => {
-        context.commit('setCurrentProject', response.data)
-        context.commit('setProjectTasks', response.data.tasks)
+        context.commit('SET_CURRENT_PROJECT', response.data)
       })
       .catch((error) => {
         if (error.response.status === 404) {
           this.$toast.show(
             'This project has been trashed. You need to restore it to see it.'
           )
-          context.commit('setCurrentProject', {})
+          context.commit('SET_CURRENT_PROJECT', {})
         } else {
           this.$toast.error(error.response.data.message)
         }
         error({ statusCode: 404 })
       })
   },
-  getProjects(context, page) {
-    if (page === 1) {
-      context.commit('resetProjects')
+  async fetchProjects(context, params) {
+    let url = ''
+    if (params.page === 1) {
+      context.commit('RESET_PROJECTS')
     }
-    return this.$axios
-      .$get('/api/projects?page=' + page)
+    if ('client' in params) {
+      url = 'clients/' + params.client + '/'
+    }
+    return await this.$axios
+      .$get('/api/' + url + 'projects?page=' + params.page)
       .then((response) => {
-        context.commit('setProjects', response.data)
-        context.commit('setMeta', response.meta)
+        context.commit('SET_PROJECTS', response.data)
+        context.commit('SET_PROJECTS_META', response.meta)
       })
       .catch((error) => {
         this.$toast.error(error.response.data.message)
@@ -88,7 +85,7 @@ export const actions = {
     return this.$axios
       .$post('/api/projects', project)
       .then((response) => {
-        context.commit('addProject', response.project)
+        context.commit('ADD_PROJECT', response.project)
         this.$toast.success(response.message)
       })
       .catch((error) => {
@@ -100,8 +97,8 @@ export const actions = {
     return this.$axios
       .$patch('/api/projects/' + project.id, project)
       .then((response) => {
-        context.commit('updateProject', response.project)
-        context.dispatch('getProject', response.project.id)
+        context.commit('UPDATE_PROJECT', response.project)
+        context.dispatch('fetchProject', response.project.id)
         this.$toast.success(response.message)
       })
       .catch((error) => {
@@ -113,39 +110,19 @@ export const actions = {
     return this.$axios
       .$delete('/api/projects/' + project.id)
       .then((response) => {
-        context.commit('trashProject', project)
-        this.$toast.show('Project was trashed')
-      })
-      .catch((error) => {
-        this.$toast.error(error.response)
-      })
-  },
-  restoreProject(context, project) {
-    return this.$axios
-      .$patch('/api/projects/' + project.id + '/restore')
-      .then((response) => {
+        context.commit('TRASH_PROJECT', project)
         this.$toast.show(response.message)
       })
       .catch((error) => {
         this.$toast.error(error.response)
       })
   },
-  deleteProject(context, project) {
-    return this.$axios
-      .$delete('/api/projects/' + project.id + '/forcedelete')
-      .then((response) => {
-        this.$toast.show(response.message)
-      })
-      .catch((error) => {
-        this.$toast.error(error.response)
-      })
-  },
-  getProjectActivity(context, params) {
-    return this.$axios
+  async fetchProjectActivity(context, params) {
+    return await this.$axios
       .$get('/api/projects/' + params[0] + '/activity?page=' + params[1])
       .then((response) => {
-        context.commit('setProjectActivity', response.data)
-        context.commit('setProjectMeta', response.meta)
+        context.commit('SET_PROJECT_ACTIVITY', response.data)
+        context.commit('SET_PROJECT_ACTIVITY_META', response.meta)
       })
       .catch((error) => {
         this.$toast.error(error.response.data.message)
@@ -157,22 +134,16 @@ export const getters = {
   getCurrentProject: (state) => {
     return state.currentProject
   },
-  getAllProjects: (state) => {
-    return state.allProjects
+  getProjects: (state) => {
+    return state.projects
   },
-  getMeta: (state) => {
-    return state.meta
-  },
-  getAllTrashedProjects: (state) => {
-    return state.trashedProjects
-  },
-  getProjectTasks: (state) => {
-    return state.projectTasks
+  getProjectsMeta: (state) => {
+    return state.projectsMeta
   },
   getProjectActivity: (state) => {
     return state.projectActivity
   },
-  getProjectMeta: (state) => {
-    return state.projectMeta
+  getProjectActivityMeta: (state) => {
+    return state.projectActivityMeta
   }
 }

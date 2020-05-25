@@ -11,8 +11,8 @@ export default {
   components: {
     ActivityTableBody
   },
-  async fetch({ store, params, query }) {
-    await store.dispatch('tasks/getTaskActivity', [
+  fetch({ store, params, query }) {
+    store.dispatch('tasks/fetchTaskActivity', [
       params.projectId,
       params.taskId,
       query.page
@@ -26,7 +26,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('tasks', ['getTaskActivity', 'getTaskMeta'])
+    ...mapGetters('tasks', ['getTaskActivity', 'getTaskActivityMeta'])
   },
   methods: {
     setCurrentActivity(event) {

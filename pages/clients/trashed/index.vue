@@ -2,7 +2,7 @@
   <div>
     <Card title="Trashed Clients">
       <Table :cols="['Client Name', '']">
-        <TrashedClientsList :trashed-clients="getAllTrashedClients" />
+        <TrashedClientsList :trashed-clients="getTrashedClients" />
       </Table>
       <div class="card-footer">
         <p class="text-sm text-center text-gray-700">
@@ -29,10 +29,10 @@ export default {
     TrashedClientsList
   },
   fetch({ store, params }) {
-    store.dispatch('clients/getClients')
+    store.dispatch('clients/fetchClients')
   },
   computed: {
-    ...mapGetters('clients', ['getAllTrashedClients'])
+    ...mapGetters('clients', ['getTrashedClients'])
   }
 }
 </script>

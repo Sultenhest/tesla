@@ -12,7 +12,7 @@ export default {
     ActivityTableBody
   },
   async fetch({ store, params, query }) {
-    await store.dispatch('clients/getClientActivity', [params.id, query.page])
+    await store.dispatch('clients/fetchClientActivity', [params.id, query.page])
   },
   data() {
     return {
@@ -22,7 +22,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('clients', ['getClientActivity', 'getClientMeta'])
+    ...mapGetters('clients', ['getClientActivity', 'getClientActivityMeta'])
   },
   methods: {
     setCurrentActivity(event) {

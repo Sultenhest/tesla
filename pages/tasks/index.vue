@@ -15,7 +15,7 @@
           Load more
         </button>
         <p class="text-sm text-center text-gray-700">
-          Showing 1 to {{ getMeta.to }} of {{ getMeta.total }} results
+          Showing 1 to {{ getTasksMeta.to }} of {{ getTasksMeta.total }} results
         </p>
       </div>
     </Card>
@@ -37,7 +37,7 @@ export default {
     TasksList
   },
   fetch({ store }) {
-    store.dispatch('tasks/getTasks', 1)
+    store.dispatch('tasks/fetchTasks', { page: 1 })
   },
   data() {
     return {
@@ -45,15 +45,17 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('tasks', ['getTasks', 'getMeta']),
+    ...mapGetters('tasks', ['getTasks', 'getTasksMeta']),
     currentPageIsLastPage() {
-      return this.getMeta.current_page === this.getMeta.last_page
+      return this.getTasksMeta.current_page === this.getTasksMeta.last_page
     }
   },
   methods: {
     loadMore() {
       if (!this.currentPageIsLastPage) {
-        this.$store.dispatch('tasks/getTasks', this.getMeta.current_page + 1)
+        this.$store.dispatch('tasks/fetchTasks', {
+          page: this.getTasksMeta.current_page + 1
+        })
       }
     }
   }

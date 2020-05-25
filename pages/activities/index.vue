@@ -30,7 +30,7 @@ export default {
     Pagination
   },
   fetch({ store, params, query }) {
-    store.dispatch('activities/getActivities', query.page)
+    store.dispatch('activities/fetchActivities', query.page)
   },
   computed: {
     ...mapGetters('activities', ['getMeta'])

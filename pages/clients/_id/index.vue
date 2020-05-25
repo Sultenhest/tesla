@@ -29,7 +29,7 @@
         </button>
       </template>
       <Table :cols="['Project Title', 'Tasks']">
-        <ProjectsList :projects="getCurrentClient.projects" />
+        <ProjectsList :projects="getProjects" />
       </Table>
     </Card>
   </div>
@@ -53,17 +53,31 @@ export default {
     Table,
     ProjectsList
   },
-  async fetch({ store, params }) {
-    await store.dispatch('clients/getClient', params.id)
+  fetch({ store, params }) {
+    store.dispatch('clients/fetchClient', params.id)
+    store.dispatch('projects/fetchProjects', { page: 1, client: params.id })
   },
   computed: {
-    ...mapGetters('clients', ['getCurrentClient'])
+    ...mapGetters({
+      getCurrentClient: 'clients/getCurrentClient',
+      getProjects: 'projects/getProjects'
+    })
   },
   methods: {
-    async refresh() {
-      await this.$store.dispatch('clients/getClient', this.getCurrentClient.id)
+    refresh() {
+      this.$store.dispatch('clients/fetchClient', this.getCurrentClient.id)
+      this.$store.dispatch('projects/fetchProjects', {
+        page: 1,
+        client: this.getCurrentClient.id
+      })
     },
     getVat() {
+      if (
+        this.getCurrentClient.vat_abbr == null ||
+        this.getCurrentClient.vat == null
+      ) {
+        return ''
+      }
       return this.getCurrentClient.vat_abbr + this.getCurrentClient.vat
     },
     projectsTitle() {

@@ -2,30 +2,29 @@ import Vue from 'vue'
 
 export const state = () => ({
   currentTask: {},
-  meta: [],
   tasks: [],
-  trashedTasks: [],
+  tasksMeta: [],
   taskActivity: [],
-  taskMeta: []
+  taskActivityMeta: []
 })
 
 export const mutations = {
-  setCurrentTask(state, task) {
+  SET_CURRENT_TASK(state, task) {
     state.currentTask = task
   },
-  setTasks(state, tasks) {
+  SET_TASKS(state, tasks) {
     state.tasks = state.tasks.concat(tasks)
   },
-  resetTasks(state) {
+  RESET_TASKS(state) {
     state.tasks = []
   },
-  setMeta(state, meta) {
-    state.meta = meta
+  SET_TASKS_META(state, meta) {
+    state.tasksMeta = meta
   },
-  addTask(state, task) {
+  ADD_TASK(state, task) {
     state.tasks.unshift(task)
   },
-  updateTask(state, updatedTask) {
+  UPDATE_TASK(state, updatedTask) {
     const taskIndex = state.tasks.findIndex(
       (task) => task.id === updatedTask.id
     )
@@ -33,49 +32,53 @@ export const mutations = {
     Vue.set(state.tasks, taskIndex, updatedTask)
     state.currentTask = updatedTask
   },
-  trashTask(state, task) {
+  TRASH_TASK(state, task) {
     const index = state.tasks.indexOf(task)
     if (index > -1) {
       state.trashedTasks.push(task)
       state.tasks.splice(index, 1)
     }
   },
-  setTaskActivity(state, activities) {
+  SET_TASK_ACTIVITY(state, activities) {
     state.taskActivity = activities
   },
-  setTaskMeta(state, meta) {
-    state.taskMeta = meta
+  SET_TASK_ACTIVITY_META(state, meta) {
+    state.taskActivityMeta = meta
   }
 }
 
 export const actions = {
-  getTask(context, idArray) {
-    return this.$axios
+  async fetchTask(context, idArray) {
+    return await this.$axios
       .$get('/api/projects/' + idArray[0] + '/tasks/' + idArray[1])
       .then((response) => {
-        context.commit('setCurrentTask', response.data)
+        context.commit('SET_CURRENT_TASK', response.data)
       })
       .catch((error) => {
         if (error.response.status === 404) {
           this.$toast.show(
             'This task has been trashed. You need to restore it to see it.'
           )
-          context.commit('setCurrentTask', {})
+          context.commit('SET_CURRENT_TASK', {})
         } else {
           this.$toast.error(error.response.data.message)
         }
         error({ statusCode: 404 })
       })
   },
-  getTasks(context, page) {
-    if (page === 1) {
-      context.commit('resetTasks')
+  async fetchTasks(context, params) {
+    let url = ''
+    if (params.page === 1) {
+      context.commit('RESET_TASKS')
     }
-    return this.$axios
-      .$get('/api/tasks?page=' + page)
+    if ('project' in params) {
+      url = 'projects/' + params.project + '/'
+    }
+    return await this.$axios
+      .$get('/api/' + url + 'tasks?page=' + params.page)
       .then((response) => {
-        context.commit('setTasks', response.data)
-        context.commit('setMeta', response.meta)
+        context.commit('SET_TASKS', response.data)
+        context.commit('SET_TASKS_META', response.meta)
       })
       .catch((error) => {
         this.$toast.error(error.response.data.message)
@@ -85,9 +88,9 @@ export const actions = {
     return this.$axios
       .$post('/api/projects/' + task.project_id + '/tasks', task)
       .then((response) => {
-        context.commit('addTask', response.task)
+        context.commit('ADD_TASK', response.task)
         this.$toast.success(response.message)
-        context.dispatch('getTasks', 1)
+        context.dispatch('fetchTasks', 1)
       })
       .catch((error) => {
         this.$toast.error(error.response.data.message)
@@ -98,8 +101,8 @@ export const actions = {
     return this.$axios
       .$patch('/api/projects/' + task.project_id + '/tasks/' + task.id, task)
       .then((response) => {
-        context.commit('updateTask', response.task)
-        context.dispatch('getTask', [
+        context.commit('UPDATE_TASK', response.task)
+        context.dispatch('fetchTask', [
           response.task.project_id,
           response.task.id
         ])
@@ -114,35 +117,7 @@ export const actions = {
     return this.$axios
       .$delete('/api/projects/' + task.project_id + '/tasks/' + task.id)
       .then((response) => {
-        context.commit('trashTask', task)
-        this.$toast.show('Task was trashed.')
-      })
-      .catch((error) => {
-        this.$toast.error(error.response)
-      })
-  },
-  restoreTask(context, task) {
-    return this.$axios
-      .$patch(
-        '/api/projects/' + task.project_id + '/tasks/' + task.id + '/restore'
-      )
-      .then((response) => {
-        this.$toast.show(response.message)
-      })
-      .catch((error) => {
-        this.$toast.error(error.response)
-      })
-  },
-  deleteTask(context, task) {
-    return this.$axios
-      .$delete(
-        '/api/projects/' +
-          task.project_id +
-          '/tasks/' +
-          task.id +
-          '/forcedelete'
-      )
-      .then((response) => {
+        context.commit('TRASH_TASK', task)
         this.$toast.show(response.message)
       })
       .catch((error) => {
@@ -156,7 +131,7 @@ export const actions = {
         task
       )
       .then((response) => {
-        context.commit('updateTask', response.task)
+        context.commit('UPDATE_TASK', response.task)
         if (response.task.completed_at) {
           this.$toast.success(response.message)
         } else {
@@ -175,7 +150,7 @@ export const actions = {
         task
       )
       .then((response) => {
-        context.commit('updateTask', response.task)
+        context.commit('UPDATE_TASK', response.task)
         if (response.task.billed_at) {
           this.$toast.success(response.message)
         } else {
@@ -187,8 +162,8 @@ export const actions = {
         return error.response.data.errors
       })
   },
-  getTaskActivity(context, params) {
-    return this.$axios
+  async fetchTaskActivity(context, params) {
+    return await this.$axios
       .$get(
         '/api/projects/' +
           params[0] +
@@ -198,8 +173,8 @@ export const actions = {
           params[2]
       )
       .then((response) => {
-        context.commit('setTaskActivity', response.data)
-        context.commit('setTaskMeta', response.meta)
+        context.commit('SET_TASK_ACTIVITY', response.data)
+        context.commit('SET_TASK_ACTIVITY_META', response.meta)
       })
       .catch((error) => {
         this.$toast.error(error.response.data.message)
@@ -214,16 +189,13 @@ export const getters = {
   getTasks: (state) => {
     return state.tasks
   },
-  getMeta: (state) => {
-    return state.meta
-  },
-  getAllTrashedTasks: (state) => {
-    return state.trashedTasks
+  getTasksMeta: (state) => {
+    return state.tasksMeta
   },
   getTaskActivity: (state) => {
     return state.taskActivity
   },
-  getTaskMeta: (state) => {
-    return state.taskMeta
+  getTaskActivityMeta: (state) => {
+    return state.taskActivityMeta
   }
 }

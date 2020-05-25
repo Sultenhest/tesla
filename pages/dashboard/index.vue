@@ -116,14 +116,14 @@ export default {
     ]),
     lineData() {
       return {
-        labels: Object.keys(this.getRawData.billed_at), // ['11', '12', '13', '14', '16', '17', '18', '19', '20', '21'],
+        labels: Object.keys(this.getRawData.billed_at),
         datasets: [
           {
             label: 'Billed Tasks',
             backgroundColor: 'rgba(44, 122, 123, .2)',
             pointBackgroundColor: '#2c7a7b',
             borderColor: '#2c7a7b',
-            data: Object.values(this.getRawData.billed_at) // [67, 106, 84, 73, 71, 73, 77, 82, 91, 68]
+            data: Object.values(this.getRawData.billed_at)
           },
           {
             label: 'Completed Tasks',

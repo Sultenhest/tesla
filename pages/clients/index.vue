@@ -9,7 +9,7 @@
         </button>
       </template>
       <Table :cols="['Client Name', 'Projects']">
-        <ClientsList :clients="getAllClients" />
+        <ClientsList :clients="getClients" />
       </Table>
       <div class="card-footer">
         <p class="text-sm text-center text-gray-700">
@@ -38,10 +38,10 @@ export default {
     ClientsList
   },
   fetch({ store, params }) {
-    store.dispatch('clients/getClients')
+    store.dispatch('clients/fetchClients')
   },
   computed: {
-    ...mapGetters('clients', ['getAllClients'])
+    ...mapGetters('clients', ['getClients'])
   }
 }
 </script>

@@ -71,20 +71,18 @@ export default {
     }
   },
   methods: {
-    async toggleCompleted() {
-      await this.$store
-        .dispatch('tasks/toggleCompleted', this.task)
-        .then(() => {
-          this.refreshProject()
-        })
-    },
-    async toggleBilled() {
-      await this.$store.dispatch('tasks/toggleBilled', this.task).then(() => {
+    toggleCompleted() {
+      this.$store.dispatch('tasks/toggleCompleted', this.task).then(() => {
         this.refreshProject()
       })
     },
-    async refreshProject() {
-      await this.$store.dispatch('projects/getProject', this.task.project_id)
+    toggleBilled() {
+      this.$store.dispatch('tasks/toggleBilled', this.task).then(() => {
+        this.refreshProject()
+      })
+    },
+    refreshProject() {
+      this.$store.dispatch('projects/fetchProject', this.task.project_id)
     }
   }
 }

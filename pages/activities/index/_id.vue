@@ -11,8 +11,8 @@ export default {
   components: {
     ActivityTableBody
   },
-  async fetch({ store, params, query }) {
-    await store.dispatch('activities/getActivities', query.page)
+  fetch({ store, query }) {
+    store.dispatch('activities/fetchActivities', query.page)
   },
   data() {
     return {

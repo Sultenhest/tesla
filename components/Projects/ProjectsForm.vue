@@ -6,7 +6,7 @@
         v-model="form.client_id"
         label="name"
         :reduce="(client) => client.id"
-        :options="getAllClients"
+        :options="getClients"
       ></v-select>
     </div>
     <InputField
@@ -60,10 +60,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('clients', ['getAllClients'])
+    ...mapGetters('clients', ['getClients'])
   },
   created() {
-    this.$store.dispatch('clients/getClients')
+    this.$store.dispatch('clients/fetchClients')
   },
   methods: {
     async postProjectForm() {

@@ -34,8 +34,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 import InputField from '~/components/UI/Form/InputField.vue'
 
 export default {
@@ -68,34 +66,24 @@ export default {
           }
     }
   },
-  computed: {
-    ...mapGetters('projects', ['getAllProjects'])
-  },
-  created() {
-    this.$store.dispatch('projects/getProjects')
-  },
   methods: {
-    async postTaskForm() {
+    postTaskForm() {
       if (this.task) {
-        await this.$store
-          .dispatch('tasks/updateTask', this.form)
-          .then((response) => {
-            if (response) {
-              this.errors = response
-            } else {
-              this.clearForm('edit-task')
-            }
-          })
+        this.$store.dispatch('tasks/updateTask', this.form).then((response) => {
+          if (response) {
+            this.errors = response
+          } else {
+            this.clearForm('edit-task')
+          }
+        })
       } else {
-        await this.$store
-          .dispatch('tasks/addTask', this.form)
-          .then((response) => {
-            if (response) {
-              this.errors = response
-            } else {
-              this.clearForm('new-task')
-            }
-          })
+        this.$store.dispatch('tasks/addTask', this.form).then((response) => {
+          if (response) {
+            this.errors = response
+          } else {
+            this.clearForm('new-task')
+          }
+        })
       }
     },
     clearForm(modalName) {

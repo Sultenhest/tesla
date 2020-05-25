@@ -9,7 +9,7 @@
         </button>
       </template>
       <Table :cols="['Project Title', 'Tasks']">
-        <ProjectsList :projects="getAllProjects" />
+        <ProjectsList :projects="getProjects" />
       </Table>
       <div class="card-footer flex flex-col">
         <button
@@ -20,7 +20,8 @@
           Load more
         </button>
         <p class="text-sm text-center text-gray-700">
-          Showing 1 to {{ getMeta.to }} of {{ getMeta.total }} results
+          Showing 1 to {{ getProjectsMeta.to }} of
+          {{ getProjectsMeta.total }} results
         </p>
       </div>
     </Card>
@@ -42,7 +43,7 @@ export default {
     ProjectsList
   },
   fetch({ store }) {
-    store.dispatch('projects/getProjects', 1)
+    store.dispatch('projects/fetchProjects', { page: 1 })
   },
   data() {
     return {
@@ -50,18 +51,19 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('projects', ['getAllProjects', 'getMeta']),
+    ...mapGetters('projects', ['getProjects', 'getProjectsMeta']),
     currentPageIsLastPage() {
-      return this.getMeta.current_page === this.getMeta.last_page
+      return (
+        this.getProjectsMeta.current_page === this.getProjectsMeta.last_page
+      )
     }
   },
   methods: {
     loadMore() {
       if (!this.currentPageIsLastPage) {
-        this.$store.dispatch(
-          'projects/getProjects',
-          this.getMeta.current_page + 1
-        )
+        this.$store.dispatch('projects/fetchProjects', {
+          page: this.getProjectsMeta.current_page + 1
+        })
       }
     }
   }

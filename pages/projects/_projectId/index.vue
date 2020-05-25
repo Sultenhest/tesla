@@ -69,7 +69,7 @@
         </button>
       </template>
       <Table :cols="['Task Title', '']">
-        <TasksList :tasks="recentProjects" :with-project-link="false" />
+        <TasksList :tasks="recentTasks" :with-project-link="false" />
       </Table>
       <div class="center-content">
         <nuxt-link :to="projectTasksLink" class="flex text-teal-700">
@@ -100,12 +100,14 @@ export default {
     TasksModal,
     TasksList
   },
-  async fetch({ store, params }) {
-    await store.dispatch('projects/getProject', params.projectId)
+  fetch({ store, params }) {
+    store.dispatch('projects/fetchProject', params.projectId)
+    store.dispatch('tasks/fetchTasks', { page: 1, project: params.projectId })
   },
   computed: {
     ...mapGetters({
       getCurrentProject: 'projects/getCurrentProject',
+      getCurrentTasks: 'tasks/getTasks',
       getCurrentClient: 'clients/getCurrentClient'
     }),
     hasClient() {
@@ -114,18 +116,22 @@ export default {
     projectClientLink() {
       return '/clients/' + this.getCurrentProject.client_id
     },
-    recentProjects() {
-      const tasksClones = [...this.getCurrentProject.tasks]
-      return tasksClones.splice(0, 3)
+    recentTasks() {
+      /*
+      const tasksClones = [...this.getCurrentTasks]
+      return tasksClones
+      */
+      return this.getCurrentTasks
     },
     projectTasksLink() {
       return '/projects/' + this.getCurrentProject.id + '/tasks'
     }
   },
   methods: {
-    async refreshProject() {
-      await this.$store.dispatch(
-        'projects/getProject',
+    refreshProject() {
+      this.$store.dispatch('projects/fetchProject', this.getCurrentProject.id)
+      this.$store.dispatch(
+        'projects/fetchProjectTasks',
         this.getCurrentProject.id
       )
     }

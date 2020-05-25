@@ -24,12 +24,12 @@ export default {
     }
   },
   methods: {
-    async restore() {
-      await this.$store.dispatch('clients/restoreClient', this.client)
+    restore() {
+      this.$store.dispatch('clients/restoreClient', this.client)
       this.$router.back()
     },
-    async forceDelete() {
-      await this.$swal({
+    forceDelete() {
+      this.$swal({
         title: 'Are you sure you want to PERMANENTLY DELETE this client?',
         icon: 'warning',
         showCancelButton: true,

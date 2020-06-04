@@ -30,11 +30,8 @@ export const mutations = {
     state.projects[projectIndex] = updatedProject
     state.currentProject = updatedProject
   },
-  TRASH_PROJECT(state, project) {
-    const index = state.projects.indexOf(project)
-    if (index > -1) {
-      state.projects.splice(index, 1)
-    }
+  TRASH_PROJECT(state, { project }) {
+    state.projects.splice(state.projects.indexOf(project), 1)
   },
   SET_PROJECT_ACTIVITY(state, activities) {
     state.projectActivity = activities

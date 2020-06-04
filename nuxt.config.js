@@ -34,7 +34,7 @@ export default {
    ** color: '#2C7A7B',
    ** height: '5px'
    */
-  loading: false,
+  loading: { color: '#2c7a7b', height: '5px' },
   /*
    ** Global CSS
    */

@@ -16,15 +16,18 @@ export default {
   props: {
     green: {
       type: Number,
-      required: true
+      required: true,
+      default: 0
     },
     red: {
       type: Number,
-      required: true
+      required: true,
+      default: 0
     },
     total: {
       type: Number,
-      required: true
+      required: true,
+      default: 0
     },
     linkText: {
       type: String,

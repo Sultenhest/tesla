@@ -32,7 +32,7 @@ export const mutations = {
     state.clients[clientIndex] = updatedClient
     state.currentClient = updatedClient
   },
-  TRASH_CLIENT(state, client) {
+  TRASH_CLIENT(state, { client }) {
     const index = state.clients.indexOf(client)
     if (index > -1) {
       state.trashedClients.push(client)

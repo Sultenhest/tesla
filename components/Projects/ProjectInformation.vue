@@ -32,12 +32,12 @@
 
     <div class="flex">
       <div class="w-1/3 p-3">
-        <small class="text-sm text-gray-700">Unbilled Hours</small>
-        <h4 class="text-xl mt-3">44h 50m</h4>
+        <small class="text-sm text-gray-700"></small>
+        <h4 class="text-xl mt-3"></h4>
       </div>
       <div class="w-1/3 p-3">
-        <small class="text-sm text-gray-700">Total Hours spent</small>
-        <h4 class="text-xl mt-3">4h 30m</h4>
+        <small class="text-sm text-gray-700"></small>
+        <h4 class="text-xl mt-3"></h4>
       </div>
       <div class="w-1/3 p-3">
         <small class="text-sm text-gray-700"></small>

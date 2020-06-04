@@ -28,16 +28,11 @@ export const mutations = {
     const taskIndex = state.tasks.findIndex(
       (task) => task.id === updatedTask.id
     )
-    // state.tasks[taskIndex] = updatedTask
     Vue.set(state.tasks, taskIndex, updatedTask)
     state.currentTask = updatedTask
   },
-  TRASH_TASK(state, task) {
-    const index = state.tasks.indexOf(task)
-    if (index > -1) {
-      state.trashedTasks.push(task)
-      state.tasks.splice(index, 1)
-    }
+  TRASH_TASK(state, { task }) {
+    state.tasks.splice(state.tasks.indexOf(task), 1)
   },
   SET_TASK_ACTIVITY(state, activities) {
     state.taskActivity = activities

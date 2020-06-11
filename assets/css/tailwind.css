@@ -2,6 +2,15 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import '~assets/css/select';
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.4s;
+}
+
+.page-enter,
+.page-leave-active {
+  opacity: 0;
+}
 /* purgecss end ignore */
 @import 'tailwindcss/utilities';
 
@@ -11,16 +20,6 @@
 
 .mt-05 {
   margin-top: 0.15rem !important;
-}
-
-.page-enter-active,
-.page-leave-active {
-  transition: opacity 0.4s;
-}
-
-.page-enter,
-.page-leave-active {
-  opacity: 0;
 }
 
 html,

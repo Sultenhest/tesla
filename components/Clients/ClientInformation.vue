@@ -59,8 +59,9 @@ export default {
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.value) {
-          this.$store.dispatch('clients/trashClient', client)
-          this.$router.push('/clients/trashed')
+          this.$store
+            .dispatch('clients/trashClient', client)
+            .then(() => this.$router.push('/clients/trashed'))
         }
       })
     }

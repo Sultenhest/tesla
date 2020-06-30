@@ -93,8 +93,9 @@ export default {
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.value) {
-          this.$store.dispatch('projects/trashProject', project)
-          this.$router.push('/projects')
+          this.$store
+            .dispatch('projects/trashProject', project)
+            .then(() => this.$router.push('/projects'))
         }
       })
     }

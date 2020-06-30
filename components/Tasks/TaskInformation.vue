@@ -77,8 +77,9 @@ export default {
         confirmButtonText: 'Yes'
       }).then((result) => {
         if (result.value) {
-          this.$store.dispatch('tasks/trashTask', task)
-          this.$router.push('/tasks')
+          this.$store
+            .dispatch('tasks/trashTask', task)
+            .then(() => this.$router.push('/tasks'))
         }
       })
     }

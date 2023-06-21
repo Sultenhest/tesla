@@ -20,7 +20,7 @@
     "@nuxtjs/toast": "^3.3.0",
     "chart.js": "^2.9.3",
     "js-cookie": "^2.2.1",
-    "nuxt": "^2.0.0",
+    "nuxt": "^3.4.3",
     "nuxt-svgicon": "^1.2.7",
     "nuxt-vue-select": "^0.1.4",
     "v-tooltip": "^2.0.3",
